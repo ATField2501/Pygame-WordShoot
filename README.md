@@ -1,6 +1,5 @@
 # Pygame-WordShoot
-Jeu Vidéo de dactylographie devellopé avec la bibliothèque pygame
-en dèvelloppement.
+Jeu Vidéo de dactylographie en dèvelloppement s'appuyant sur la bibliothèque pygame.
 
 auteur: cagliostro <atfield2501@gmail.com>
 
