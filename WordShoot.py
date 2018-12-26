@@ -155,9 +155,7 @@ class Game():
         ### LOGs
         print "le mot est: {}".format(mot)
         print "la lettre n°: {} est: {}".format(index , lettre)
-        print "voivi l'artefact: {}".format(artefact)
-
-        son_vitesse(score)           
+        print "voici l'artefact: {}".format(artefact)
 
         destruct = 0
         max=1
@@ -519,7 +517,7 @@ class Game():
                         score1=obj.score
                         max = 455     # On termine la boucle
 
-
+                son_vitesse(score)  # Appel de la procédure son_vitesse         
 
         pygame.display.flip() # Rafraichissement
 
