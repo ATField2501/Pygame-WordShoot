@@ -166,11 +166,9 @@ class Game():
             fenetre.blit(text, (aaaa,max))   # affichage text tombant  
             max +=1   
 
-
-
-            obj1= Vitesse()
-            vitesse = obj1.vitesse
-            score=obj1.score
+            obj1= Vitesse()  # Instance de la class Vitesse pour controle de la vitesse en fonction du score
+            vitesse = obj1.vitesse # Affectation de la variable d'instance vitesse
+            score=obj1.score  # Affectation de la variable d'instance score
 
             if max ==445:    # Son de fin de chute
                 loose.play() 
