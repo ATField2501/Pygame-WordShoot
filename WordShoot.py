@@ -1,12 +1,7 @@
 #!/usr/bin/python2
 # -*- coding: utf8 
-
-                  ###################################
-                  # auteur: <atfield2501@gmail.com> #
-                  #         word shoot              #
-                  #        Licence gpl              #
-                  ###################################
-
+# auteur: <atfield2501@gmail.com>
+# word shoot
 
 import random
 import pygame
@@ -157,6 +152,8 @@ class Game():
         print "la lettre n°: {} est: {}".format(index , lettre)
         print "voici l'artefact: {}".format(artefact)
 
+#        son_vitesse(score)  # Appel de la procédure son_vitesse         
+
         destruct = 0
         max=1
         while max < 455 and destruct == 0:
@@ -168,11 +165,21 @@ class Game():
             vitesse = obj1.vitesse # Affectation de la variable d'instance vitesse
             score=obj1.score  # Affectation de la variable d'instance score
 
+
+            # Petite vérifications
             if max ==445:    # Son de fin de chute
                 loose.play() 
 
             if max == 455: # Reinitialisation de l'index
                 sujet.reinit()
+
+
+            sujet.alteration() # Appel de la methode alteration de la class Lettre
+            sample2=sujet.sample2
+            text1 = font.render(sample2,2,( 255, 0, 0 ))
+            fenetre.blit(text1, (aaaa,max))
+
+
 
             simbad = ""
             for index,e in enumerate(artefact):
