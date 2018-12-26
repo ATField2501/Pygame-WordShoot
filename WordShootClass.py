@@ -47,7 +47,7 @@ class Mot(Lecture):
         Mot.mot = random.choice(Lecture.tableau) ######### Super methode random
         Mot.mot = Mot.mot.strip() # suppresion des characteres de fin de lignes(\n)
         Mot.maximum = len(Mot.mot) 
-
+        
 
 class Lettre(Mot):
     """
@@ -60,12 +60,16 @@ class Lettre(Mot):
         if Lettre.index == Mot.maximum:
             Lettre.index= -1
             self.victoire=True
-
         self.lettre = Mot.mot[Lettre.index]# Valeur contenue dans la liste mot à l'index deffinie affécté à la var d'instance lettre 
 
     def reinit(self):
         """ Methode de réinitialisation de l'index """
         Lettre.index = -1
+
+    def alteration(self):
+        """  Methode d'alteration du mot à trouver. Split la chaine pour colorier en rouge la première partie """
+        self.sample1 = Mot.mot[Lettre.index:]
+        self.sample2 = Mot.mot[:Lettre.index]
 
 class Construction(Lettre):  ### Super héritage pour récuperer facilement l'index de la lettre
     """
