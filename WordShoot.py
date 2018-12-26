@@ -139,8 +139,8 @@ class Game():
         artefact = objA.artefact # on affect l'attribut artefact de la class Construction à la variable artefact
 
 
-        sujet = Lettre()
-        lettre = sujet.lettre
+        sujet = Lettre() # Enfin, on cree une instance de la class lettre, l'objet sera le charactère à trouver de la chaine mot
+        lettre = sujet.lettre # Affectation
 
         index = Lettre.index +1 # pour log
 
