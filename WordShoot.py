@@ -4,6 +4,7 @@
                                ###########################
                                #       WordShoot         #
                                #   auteur: cagliostro    #
+                               # <atfield2501@gmail.com> #
                                #      Licence GPL        #
                                ###########################
 
