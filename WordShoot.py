@@ -1,7 +1,11 @@
 #!/usr/bin/python2
 # -*- coding: utf8 
-# auteur: <atfield2501@gmail.com>
-# word shoot
+
+                               ###########################
+                               #       WordShoot         #
+                               #   auteur: cagliostro    #
+                               #      Licence GPL        #
+                               ###########################
 
 import random
 import pygame
