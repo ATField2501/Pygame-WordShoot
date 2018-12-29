@@ -81,6 +81,7 @@ class Construction(Lettre):  ### Super héritage pour récuperer facilement l'in
         for i in mot:
             self.artefact += '*'  # Construction de la liste 'artefact'
     def tetris(self ,lettre):
+        """ Methode reconstruisant artefact en substituant les asterix par la lettre trouvée"""
         self.artefact[Lettre.index] = lettre       
 
 
