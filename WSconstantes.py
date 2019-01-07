@@ -4,9 +4,9 @@
 titre_fenetre="                                                     * Caglio Word Shooting *"
 
 # Images du jeu
-intro="Caglio-Wshoot_images/intro01.png"
-ecran1="Caglio-Wshoot_images/ecran1.png"
-ecran_jeu="Caglio-Wshoot_images/linux2.jpg"
+intro="Caglio-WShoot_images/intro01.png"
+ecran1="Caglio-WShoot_images/ecran1.png"
+ecran_jeu="Caglio-WShoot_images/linux2.jpg"
 
 # Musiques du jeu
 music1="WorldShoot-Musik/atfield05.ogg"

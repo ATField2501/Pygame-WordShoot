@@ -29,6 +29,7 @@ pygame.key.set_repeat(400, 30)
 #pygame.draw.rect(fenetre, (180, 20, 150), (0, 0, 2000 , 1100 ))
 #pygame.display.flip()
 intrologo= pygame.image.load(intro).convert()
+ecran1=pygame.image.load(ecran1).convert()
 neo = pygame.image.load(ecran_jeu).convert()
 #fond.fill((0,0,0)) # Remplissage avec du noir
 
