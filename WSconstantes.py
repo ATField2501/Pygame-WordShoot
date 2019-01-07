@@ -5,6 +5,7 @@ titre_fenetre="                                                     * Caglio Wor
 
 # Images du jeu
 intro="Caglio-Wshoot_images/intro01.png"
+ecran1="Caglio-Wshoot_images/ecran1.png"
 ecran_jeu="Caglio-Wshoot_images/linux2.jpg"
 
 # Musiques du jeu

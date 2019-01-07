@@ -118,15 +118,46 @@ class Game():
     
     obj = Lecture() # Lecture du fichier
 
+    obj=Selecteur() # Première instance sans parametre 
+    selection=obj.selecteur
+
 
     # Démarage de la musique de fond
 #    pygame.mixer.music.set_volume(0.5) #Met le volume à 0.5 (moitié)
 #    pygame.mixer.music.play()
-
+    c=1
     continuer = 1
     while continuer:
         #Limitation de vitesse de la boucle
         pygame.time.Clock().tick(30) # 30 fps
+
+        ##### Ecran Principale
+        while c == 1:        
+            fenetre.blit(ecran1,(0,0)) ## Ecran de depart
+
+            select=font.render(selection,2,( 80, 241, 0 ))
+            fenetre.blit(select,(362,390)) ## premier mot du tableau
+
+            index = 0
+            pygame.display.flip()
+            for event in pygame.event.get(): 
+                if event.type == KEYDOWN:
+                    if event.key == K_RETURN:
+                        click.play()
+                        time.sleep(1)
+                        c=0
+                    if event.key == K_DOWN:
+                        index += 1
+                        obj=Selecteur(index) # Instance de la class Selecteur avec 'index' en paramètre
+                        selection=obj.selecteur
+
+                    if event.key == K_UP:
+                        index -= 1
+                        obj=Selecteur(index) # Instance de la class Selecteur avec 'index' en paramètre
+                        selection=obj.selecteur
+
+
+#        if selection == tableau[0]:                        ## Flemme d'indenter, ferait plus tard
 
         ########### instances du module WordShootClass
         obj = Mot() # on cree une instance de la class Mot
