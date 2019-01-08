@@ -148,15 +148,13 @@ class Game():
                         time.sleep(1)
                         c=0
                     if event.key == K_DOWN:
-                        index += 1
-                        obj=Selecteur(index) # Instance de la class Selecteur avec 'index' en paramètre
+                        obj.deplace_moins() # Appel de la methode deplace_moins de la class Selecteur
+                        obj=Selecteur() # Instance de la class Selecteur 
                         selection=obj.selecteur
-
                     if event.key == K_UP:
-                        index -= 1
-                        obj=Selecteur(index) # Instance de la class Selecteur avec 'index' en paramètre
+                        obj.deplace_plus() # Appel de la methode deplace_plus de la class Selecteur
+                        obj=Selecteur() # Instance de la class Selecteur
                         selection=obj.selecteur
-
 
 #        if selection == tableau[0]:                        ## Flemme d'indenter, ferait plus tard
 
