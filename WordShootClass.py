@@ -106,17 +106,25 @@ class Vitesse(Score):
         elif Score.score >= 600:
             self.vitesse = 300  
 
+
 class Selecteur():
     """
     Class utilisée pour selectionner l'entrée utilisateur au menu principale.
     """
     tableau=['Start','Scores','Credits']
-    def __init__(self,index = 0):
-        if index > 2:   ## En fonction du nombre d'éléments du tableau
-            index = 0
-        if index < 0:
-            index = 2
-        self.selecteur = Selecteur.tableau[index]
+    index = 0
+    def __init__(self):
+        if Selecteur.index > 2:   ## En fonction du nombre d'éléments du tableau
+            Selecteur.index = 0
+        if Selecteur.index < 0:
+            Selecteur.index = 2
+        self.selecteur = Selecteur.tableau[Selecteur.index]
+    def deplace_plus(self):
+        """ Methode de modification positive de l'index du selecteur  """
+        Selecteur.index += 1
+    def deplace_moins(self):
+        """ Methode de modification négative de l'index du selecteur  """
+        Selecteur.index -= 1
 
 
 
