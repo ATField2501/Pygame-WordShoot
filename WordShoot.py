@@ -11,6 +11,7 @@
 import random
 import pygame
 import time
+import sys
 from pygame.locals import *
 from WSconstantes import *
 from WordShootClass import *
@@ -64,6 +65,7 @@ zero_neuf = pygame.mixer.Sound("WorldShoot-Musik/zero_9.ogg")
 niveau_fini = pygame.mixer.Sound("WorldShoot-Musik/niveau_fini.ogg")
 
 ligne='___________________________________________________________________________'
+tableau=['Start','Scores','Credits']
 
 ########### fonctions et pocédures
 def son_vitesse(score):
@@ -132,438 +134,488 @@ class Game():
         #Limitation de vitesse de la boucle
         pygame.time.Clock().tick(30) # 30 fps
 
+
+        obj=Selecteur() # Première instance sans parametre 
+#    obj.reinit()
+        selection=obj.selecteur
         ##### Ecran Principale
-        while c == 1:        
+        c = 1
+        while c == 1:      
             fenetre.blit(ecran1,(0,0)) ## Ecran de depart
 
             select=font.render(selection,2,( 80, 241, 0 ))
             fenetre.blit(select,(362,390)) ## premier mot du tableau
 
-            index = 0
             pygame.display.flip()
             for event in pygame.event.get(): 
                 if event.type == KEYDOWN:
                     if event.key == K_RETURN:
                         click.play()
+                        c= 0
+                    if event.key == K_ESCAPE:
+                        bipp.play()
                         time.sleep(1)
-                        c=0
+                        sys.exit(0)
                     if event.key == K_DOWN:
+                        bipp.play()
                         obj.deplace_moins() # Appel de la methode deplace_moins de la class Selecteur
                         obj=Selecteur() # Instance de la class Selecteur 
                         selection=obj.selecteur
                     if event.key == K_UP:
+                        bipp.play()
                         obj.deplace_plus() # Appel de la methode deplace_plus de la class Selecteur
                         obj=Selecteur() # Instance de la class Selecteur
                         selection=obj.selecteur
 
-#        if selection == tableau[0]:                        ## Flemme d'indenter, ferait plus tard
-
-        ########### instances du module WordShootClass
-        obj = Mot() # on cree une instance de la class Mot
-        mot = obj.mot # on affecte l'attribut 'mot' de la class Mot à la variable mot
-
-        obj1= Vitesse() # on cree une instance de la class Vitesse
-        vitesse = obj1.vitesse  # on affecte l'attribut vitesse de la class Vitesse à la variable vitesse
-
-        objA = Construction(mot) # on cree une instance de la class Construction en lui passant le parametre mot 
-        artefact = objA.artefact # on affect l'attribut artefact de la class Construction à la variable artefact
 
 
-        sujet = Lettre() # Enfin, on cree une instance de la class lettre, l'objet sera le charactère à trouver de la chaine mot
-        lettre = sujet.lettre # Affectation
+        if selection == tableau[0]:                     
+            aleph = 1
+            while aleph == 1:
 
-        index = Lettre.index +1 # pour log
+                ########### instances du module WordShootClass
+                obj = Mot() # on cree une instance de la class Mot
+                mot = obj.mot # on affecte l'attribut 'mot' de la class Mot à la variable mot
 
+                obj1= Vitesse() # on cree une instance de la class Vitesse
+                vitesse = obj1.vitesse  # on affecte l'attribut vitesse de la class Vitesse à la variable vitesse
 
-
-        ########### Construction fenetres
-        text = font.render(mot,2,( 80, 241, 0 ))
-        aaaa=random.randint(1,720)   # On tire au hasard le point d'apparition du mot sur l'axe horizontale
-        fenetre.blit(text, (aaaa,1)) 
-        sCore = font.render(score1,2,( 80, 241, 0 ))
-
-        ### LOGs
-        print "le mot est: {}".format(mot)
-        print "la lettre n°: {} est: {}".format(index , lettre)
-        print "voici l'artefact: {}".format(artefact)
-
-#        son_vitesse(score)  # Appel de la procédure son_vitesse         
-
-        destruct = 0
-        max=1
-        while max < 455 and destruct == 0:
-            pygame.time.Clock().tick(vitesse)
-            fenetre.blit(text, (aaaa,max))   # affichage text tombant  
-            max +=1   
-
-            obj1= Vitesse()  # Instance de la class Vitesse pour controle de la vitesse en fonction du score
-            vitesse = obj1.vitesse # Affectation de la variable d'instance vitesse
-            score=obj1.score  # Affectation de la variable d'instance score
+                objA = Construction(mot) # on cree une instance de la class Construction en lui passant le parametre mot 
+                artefact = objA.artefact # on affect l'attribut artefact de la class Construction à la variable artefact
 
 
-            # Petite vérifications
-            if max ==445:    # Son de fin de chute
-                loose.play() 
+                sujet = Lettre() # Enfin, on cree une instance de la class lettre, l'objet sera le charactère à trouver de la chaine mot
+                lettre = sujet.lettre # Affectation
 
-            if max == 455: # Reinitialisation de l'index
-                sujet.reinit()
-
-
-            sujet.alteration() # Appel de la methode alteration de la class Lettre
-            sample2=sujet.sample2
-            text1 = font.render(sample2,2,( 255, 0, 0 ))
-            fenetre.blit(text1, (aaaa,max))
+                index = Lettre.index +1 # pour log
 
 
 
-            simbad = ""
-            for index,e in enumerate(artefact):
-                simbad += e
-            ping = font2.render(simbad,22,( 240, 240, 4 )) # Affichage chaine de charactère contenue dans la liste 'artefact"
+                ########### Construction fenetres
+                text = font.render(mot,2,( 80, 241, 0 ))
+                aaaa=random.randint(1,720)   # On tire au hasard le point d'apparition du mot sur l'axe horizontale
+                fenetre.blit(text, (aaaa,1)) 
+                sCore = font.render(score1,2,( 80, 241, 0 ))
 
-            pygame.display.flip() # Rafraichissement
-            fenetre.blit(neo, (0,0))
-            fenetre.blit(ligne1, (0,450))
-            fenetre.blit(ping, (350,500))     
-            fenetre.blit(sCore, (700,550))
+                ### LOGs
+                print "le mot est: {}".format(mot)
+                print "la lettre n°: {} est: {}".format(index , lettre)
+                print "voici l'artefact: {}".format(artefact)
 
+        #        son_vitesse(score)  # Appel de la procédure son_vitesse         
+
+                destruct = 0
+                max=1
+                while max < 455 and destruct == 0:
+                    pygame.time.Clock().tick(vitesse)
+                    fenetre.blit(text, (aaaa,max))   # affichage text tombant  
+                    max +=1   
+
+                    obj1= Vitesse()  # Instance de la class Vitesse pour controle de la vitesse en fonction du score
+                    vitesse = obj1.vitesse # Affectation de la variable d'instance vitesse
+                    score=obj1.score  # Affectation de la variable d'instance score
+
+
+                    # Petite vérifications
+                    if max ==445:    # Son de fin de chute
+                        loose.play() 
+
+                    if max == 455: # Reinitialisation de l'index
+                        sujet.reinit()
+
+
+                    sujet.alteration() # Appel de la methode alteration de la class Lettre
+                    sample2=sujet.sample2
+                    text1 = font.render(sample2,2,( 255, 0, 0 ))
+                    fenetre.blit(text1, (aaaa,max))
+
+
+
+                    simbad = ""
+                    for index,e in enumerate(artefact):
+                        simbad += e
+                    ping = font2.render(simbad,22,( 240, 240, 4 )) # Affichage chaine de charactère contenue dans la liste 'artefact"
+
+                    pygame.display.flip() # Rafraichissement
+                    fenetre.blit(neo, (0,0))
+                    fenetre.blit(ligne1, (0,450))
+                    fenetre.blit(ping, (350,500))     
+                    fenetre.blit(sCore, (700,550))
+
+
+                    for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
+
+
+                        if event.type == QUIT:     #Si un de ces événements est de type QUIT
+                            continuer = 0 
+                            destruct = 0
+
+                        if event.type == KEYDOWN: # Si un de ces éléments est de type clavier
+                            if event.key == K_ESCAPE:
+                                bipp.play()
+                                sujet.reinit() # Reinitialisation de l'index pour detruire complètement le sujet
+                                destruct = 0
+                                max = 455
+                                aleph = 0
+
+
+                            if event.key == K_a:
+                                if 'a' == lettre:
+                                    print '** UP **'
+                                    objA.tetris(lettre)  # appel de la methode tetris de la class Construction qui modifie la liste artefact
+                                    sujet = Lettre()     # On re-instancie l'objet sujet pour passer à la lettre suivante
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1  # indice uniquement pour les logs...
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_b:
+                                if 'b' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_c:
+                                if 'c' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_d:
+                                if 'd' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_e:
+                                if 'e' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_f:
+                                if 'f' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_g:
+                                if 'g' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_h:
+                                if 'h' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+          
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_i:
+                                if 'i' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_j:
+                                if 'j' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_k:
+                                if 'k' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+         
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_l:
+                                if 'l' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+
+                                    print '** DOWN **'
+
+                            if event.key == K_m:
+                                if 'm' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_n:
+                                if 'n' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1  
+         
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_o:
+                                if 'o' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_p:
+                                if 'p' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_q:
+                                if 'q' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+             
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_r:
+                                if 'r' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+              
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_s:
+                                if 's' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+               
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_t:
+                                if 't' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+                       
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_u:
+                                if 'u' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+                        
+                                    print '** DOWN **'
+
+                            if event.key == K_v:
+                                if 'v' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+                  
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_w:
+                                if 'w' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+              
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_x:
+                                if 'x' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+                        
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_y:
+                                if 'y' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+                    
+                                else:
+                                    print '** DOWN **'
+
+                            if event.key == K_z:
+                                if 'z' == lettre:
+                                    print '** UP **'
+                                    click.play() 
+                                    objA.tetris(lettre) 
+                                    sujet = Lettre()  
+                                    lettre = sujet.lettre 
+                                    index = Lettre.index + 1   
+         
+                                else:
+                                    print '** DOWN **'
+
+
+                            if sujet.victoire == True:
+                                print '** VICTORY !! **'
+                                excelent.play() 
+                                obj= Score()  # On refait une instance pour incrémenter le score
+                                score1=obj.score
+                                max = 455     # On termine la boucle
+
+                        son_vitesse(score)  # Appel de la procédure son_vitesse         
+
+                pygame.display.flip() # Rafraichissement
+
+
+        # Menu Scores
+        if selection == tableau[1]:
+            # Création d'un rectangle noir pour le fond
+            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+            pygame.display.flip()
 
             for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
-
-
-                if event.type == QUIT:     #Si un de ces événements est de type QUIT
-                    continuer = 0 
-                    destruct = 0
-
-                if event.type == KEYDOWN: # Si un de ces éléments est de type clavier
+                if event.type == KEYDOWN: 
                     if event.key == K_ESCAPE:
                         bipp.play()
-                        continuer = 0
-                        destruct = 0
-                        max = 455
+                        break
 
 
-                    if event.key == K_a:
-                        if 'a' == lettre:
-                            print '** UP **'
-                            objA.tetris(lettre)  # appel de la methode tetris de la class Construction qui modifie la liste artefact
-                            sujet = Lettre()     # On re-instancie l'objet sujet pour passer à la lettre suivante
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1  # indice uniquement pour les logs...
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_b:
-                        if 'b' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_c:
-                        if 'c' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_d:
-                        if 'd' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_e:
-                        if 'e' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_f:
-                        if 'f' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_g:
-                        if 'g' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_h:
-                        if 'h' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-  
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_i:
-                        if 'i' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_j:
-                        if 'j' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_k:
-                        if 'k' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
- 
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_l:
-                        if 'l' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-
-                            print '** DOWN **'
-
-                    if event.key == K_m:
-                        if 'm' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_n:
-                        if 'n' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1  
- 
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_o:
-                        if 'o' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_p:
-                        if 'p' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_q:
-                        if 'q' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-     
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_r:
-                        if 'r' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-      
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_s:
-                        if 's' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-       
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_t:
-                        if 't' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-               
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_u:
-                        if 'u' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-                
-                            print '** DOWN **'
-
-                    if event.key == K_v:
-                        if 'v' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-          
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_w:
-                        if 'w' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-      
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_x:
-                        if 'x' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-                
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_y:
-                        if 'y' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
-            
-                        else:
-                            print '** DOWN **'
-
-                    if event.key == K_z:
-                        if 'z' == lettre:
-                            print '** UP **'
-                            click.play() 
-                            objA.tetris(lettre) 
-                            sujet = Lettre()  
-                            lettre = sujet.lettre 
-                            index = Lettre.index + 1   
- 
-                        else:
-                            print '** DOWN **'
-
-
-                    if sujet.victoire == True:
-                        print '** VICTORY !! **'
-                        excelent.play() 
-                        obj= Score()  # On refait une instance pour incrémenter le score
-                        score1=obj.score
-                        max = 455     # On termine la boucle
-
-                son_vitesse(score)  # Appel de la procédure son_vitesse         
-
-        pygame.display.flip() # Rafraichissement
-
-
+        # Menu Crédits
+        if selection == tableau[2]:
+            # Création d'un rectangle noir pour le fond
+            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+            pygame.display.flip()
+            ether=[]
+            with open("Caglio_credits.txt", "r") as fichier:
+                for ligne in fichier:
+                    ether.append(ligne)
+                    long= len(ether)
+                    max = 1
+                    for index, i  in enumerate(ether):
+                        yin = i.strip()
+                        credit = font.render(yin,2,( 80, 241, 0 ))
+                        fenetre.blit(credit, (125,max)) 
+                        pygame.display.flip() # Rafraichissement
+                        max +=35
+                        time.sleep(0.1)
+                    for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
+                        if event.type == KEYDOWN: 
+                            if event.key == K_ESCAPE:
+                                bipp.play()
+                                break
 
 
 
