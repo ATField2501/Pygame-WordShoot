@@ -18,6 +18,21 @@ umi_no_koto = "WorldShoot-Musik/Umi_no_Koto.wav"
 baleine = "WorldShoot-Musik/Baleine01.ogg"
 son01 = "WorldShoot-Musik/excelent0001.ogg"
 son02 = "WorldShoot-Musik/loose.ogg"
-
-
+bip = "WorldShoot-Musik/beep03.ogg"
+bipp = "WorldShoot-Musik/beep01.ogg"
+click = "WorldShoot-Musik/click01.wav"
 zero_un = "WorldShoot-Musik/zero_1.ogg"
+zero_deux = "WorldShoot-Musik/zero_2.ogg"
+zero_trois = "WorldShoot-Musik/zero_3.ogg"
+zero_quatre = "WorldShoot-Musik/zero_4.ogg"
+zero_cinq = "WorldShoot-Musik/zero_5.ogg"
+zero_six = "WorldShoot-Musik/zero_6.ogg"
+zero_sept = "WorldShoot-Musik/zero_7.ogg"
+zero_huit = "WorldShoot-Musik/zero_8.ogg"
+zero_neuf = "WorldShoot-Musik/zero_9.ogg"
+niveau_fini = "WorldShoot-Musik/niveau_fini.ogg"
+
+ligne='___________________________________________________________________________'
+
+
+
