@@ -16,6 +16,7 @@ from pygame.locals import *
 from WSconstantes import *
 from WordShootClass import *
 
+
 ################################ Initialisation de la bibliothèque Pygame
 pygame.init()
 
@@ -63,9 +64,6 @@ zero_sept = pygame.mixer.Sound(zero_sept)
 zero_huit = pygame.mixer.Sound(zero_huit)
 zero_neuf = pygame.mixer.Sound(zero_neuf)
 niveau_fini = pygame.mixer.Sound(niveau_fini)
-
-ligne='___________________________________________________________________________'
-tableau=['Start','Scores','Credits']
 
 ########### fonctions et pocédures
 def son_vitesse(score):
