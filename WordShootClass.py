@@ -29,7 +29,7 @@ class Lecture():
     tableau=[]
     def __init__(self, tableau = []):
         self.tableau = tableau
-        with open("base_text/WS_informatique.txt", "r") as fichier:
+        with open(path+"base_text/WS_informatique.txt", "r") as fichier:
             for ligne in fichier:
                 self.tableau.append(ligne)
                 Lecture.tableau= self.tableau
