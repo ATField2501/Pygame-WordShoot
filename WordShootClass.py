@@ -110,15 +110,20 @@ class Vitesse(Score):
 class Vie_Joueur():
     vie_joueur=3
     def __init__(self):
-        self.vue_sur_vie_joueur=['* '*Vie_Joueur.vie_joueur]
+        self.vue_sur_vie_joueur='* '*Vie_Joueur.vie_joueur
+        
     def add_vie(self):
         """ Ajoute une vie au total du joueur"""
         Vie_Joueur.vie_joueur += 1
-        self.vue_sur_vie_joueur=['* '*Vie_Joueur.vie_joueur]     
-    def enlev_vie(self):
+        self.vue_sur_vie_joueur='* '*Vie_Joueur.vie_joueur     
+    def enlev_vie(self, destruct):
         """ Enlève une vie au total du joueur"""
         Vie_Joueur.vie_joueur -= 1
-        self.vue_sur_vie_joueur=['* '*Vie_Joueur.vie_joueur]
+        if Vie_Joueur.vie_joueur <= 0:
+            self.vue_sur_vie_joueur=loose
+            destruct = 1
+        else:    
+            self.vue_sur_vie_joueur='* '*Vie_Joueur.vie_joueur
 
 
 

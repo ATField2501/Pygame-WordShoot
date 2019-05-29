@@ -39,4 +39,7 @@ ligne='_________________________________________________________________________
 tableau=['Start','Scores','Credits']
 
 vie_symbole=u"\u262F"
+loose=" You Loose T.T"
+
+
 

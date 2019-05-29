@@ -117,6 +117,7 @@ class Game():
     obj= Selecteur() # Première instance sans parametre 
     selection= obj.selecteur
 
+    supra= Vie_Joueur()
 
     # Démarage de la musique de fond
 #    pygame.mixer.music.set_volume(0.5) #Met le volume à 0.5 (moitié)
@@ -185,7 +186,7 @@ class Game():
                 fenetre.blit(text, (aaaa,1))
                 objet.score_forme()
                 sCore = font.render(str(objet.score_en_forme),2,( 80, 241, 0 ))
-                supra= Vie_Joueur()
+                    
                 vie = font2.render(str(supra.vue_sur_vie_joueur),2,( 120, 94, 246 ))
 
 
@@ -209,7 +210,7 @@ class Game():
                         loose.play() 
               #          objet.score_moins()
                         objet.score_forme()
-                        supra.enlev_vie()
+                        supra.enlev_vie(destruct)
                     if max == 455: # Reinitialisation de l'index
                         sujet.reinit()
 
