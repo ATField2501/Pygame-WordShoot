@@ -66,10 +66,11 @@ zero_neuf = pygame.mixer.Sound(zero_neuf)
 niveau_fini = pygame.mixer.Sound(niveau_fini)
 
 ########### fonctions et pocédures
-def son_vitesse(score):
+def son_vitesse(score, supra):
     if score == 100:
         print ' -- 0.1 --'
         zero_un.play()
+        supra.add_vie()
     elif score == 200:
         print ' -- 0.2 --'
         zero_deux.play()
@@ -105,20 +106,14 @@ class Game():
     font2=pygame.font.Font(None, 55)
 
     ############################# Debut prog
-
     fenetre.blit(intrologo, (0,0))
     pygame.display.flip()
     bal.play()
     time.sleep(3)
-
     ligne1= font.render(ligne,2,( 251, 8, 8 )) # Ligne de fin de chute des mots
-
     objet=Score() # Construction du score
-#    score1= Score.score
     score= Score.score
-    
     obj= Lecture() # Lecture du fichier
-
     obj= Selecteur() # Première instance sans parametre 
     selection= obj.selecteur
 
@@ -173,9 +168,7 @@ class Game():
                 obj = Mot() # on cree une instance de la class Mot
                 mot = obj.mot # on affecte l'attribut 'mot' de la class Mot à la variable mot
 
-                obj1= Vitesse() # on cree une instance de la class Vitesse
-                vitesse = obj1.vitesse  # on affecte l'attribut vitesse de la class Vitesse à la variable vitesse
-
+           #     obje_V=Vitesse() # on cree une instance de la class Vitesse
                 objA = Construction(mot) # on cree une instance de la class Construction en lui passant le parametre mot 
                 artefact = objA.artefact # on affect l'attribut artefact de la class Construction à la variable artefact
 
@@ -186,38 +179,37 @@ class Game():
                 index = Lettre.index +1 # pour log
 
 
-
                 ########### Construction fenetres
                 text = font.render(mot,2,( 80, 241, 0 ))
                 aaaa=random.randint(1,720)   # On tire au hasard le point d'apparition du mot sur l'axe horizontale
                 fenetre.blit(text, (aaaa,1))
                 objet.score_forme()
                 sCore = font.render(str(objet.score_en_forme),2,( 80, 241, 0 ))
+                supra= Vie_Joueur()
+                vie = font2.render(str(supra.vue_sur_vie_joueur),2,( 120, 94, 246 ))
+
 
                 ### LOGs
                 print "le mot est: {}".format(mot)
                 print "la lettre n°: {} est: {}".format(index , lettre)
                 print "voici l'artefact: {}".format(artefact)
 
-        #        son_vitesse(score)  # Appel de la procédure son_vitesse         
-
                 destruct = 0
                 max=1
                 while max < 455 and destruct == 0:
-                    pygame.time.Clock().tick(vitesse)
+                    obje_V=Vitesse() 
+                    pygame.time.Clock().tick(obje_V.vitesse)
                     fenetre.blit(text, (aaaa,max))   # affichage text tombant  
                     max +=1   
 
-                    obj1= Vitesse()  # Instance de la class Vitesse pour controle de la vitesse en fonction du score
-                    vitesse = obj1.vitesse # Affectation de la variable d'instance vitesse
-                    score=obj1.score  # Affectation de la variable d'instance score
-
+                    score=Score.score  # Affectation de la variable d'instance score
 
                     # Petite vérifications
                     if max ==445:    # Son de fin de chute
                         loose.play() 
-                        objet.score_moins()
+              #          objet.score_moins()
                         objet.score_forme()
+                        supra.enlev_vie()
                     if max == 455: # Reinitialisation de l'index
                         sujet.reinit()
 
@@ -239,8 +231,8 @@ class Game():
                     fenetre.blit(ligne1, (0,450))
                     fenetre.blit(ping, (350,500))     
                     fenetre.blit(sCore, (700,550))
-
-
+                    fenetre.blit(vie, (50,550))
+         
                     for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
 
 
@@ -573,7 +565,7 @@ class Game():
                                 objet.score_forme() # je le remet en forme string
                                 max = 455     # On termine la boucle
 
-                        son_vitesse(score)  # Appel de la procédure son_vitesse         
+                son_vitesse(score, supra)  # Appel de la procédure son_vitesse         
 
                 pygame.display.flip() # Rafraichissement
 

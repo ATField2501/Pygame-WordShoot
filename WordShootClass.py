@@ -90,22 +90,37 @@ class Vitesse(Score):
     """
     Class renvoyant un indice de vitesse en fonction du score ^(;,,;)^ et ia ia Cthulhu...
     """
-    vitesse=40
     def __init__(self):
+        
         if Score.score < 100:
-            self.vitesse = Vitesse.vitesse        
-        elif Score.score >= 100:
-            self.vitesse = 80
-        elif Score.score >= 200:
-            self.vitesse = 125 
-        elif Score.score >= 300:
-            self.vitesse = 150 
-        elif Score.score >= 400:
-            self.vitesse = 200 
-        elif Score.score >= 500:
-            self.vitesse = 250      
-        elif Score.score >= 600:
-            self.vitesse = 300  
+            self.vitesse= 40
+        if Score.score >= 100:
+             self.vitesse = 60
+        if Score.score >= 200:
+            self.vitesse = 70
+        if Score.score >= 300:
+            self.vitesse = 80 
+        if Score.score >= 400:
+            self.vitesse = 90 
+        if Score.score >= 500:
+            self.vitesse = 100      
+        if Score.score >= 600:
+            self.vitesse = 110  
+        
+class Vie_Joueur():
+    vie_joueur=3
+    def __init__(self):
+        self.vue_sur_vie_joueur=['* '*Vie_Joueur.vie_joueur]
+    def add_vie(self):
+        """ Ajoute une vie au total du joueur"""
+        Vie_Joueur.vie_joueur += 1
+        self.vue_sur_vie_joueur=['* '*Vie_Joueur.vie_joueur]     
+    def enlev_vie(self):
+        """ Enlève une vie au total du joueur"""
+        Vie_Joueur.vie_joueur -= 1
+        self.vue_sur_vie_joueur=['* '*Vie_Joueur.vie_joueur]
+
+
 
 
 class Selecteur():

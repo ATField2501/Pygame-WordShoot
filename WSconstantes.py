@@ -38,5 +38,5 @@ niveau_fini = path+"WorldShoot-Musik/niveau_fini.ogg"
 ligne='___________________________________________________________________________'
 tableau=['Start','Scores','Credits']
 
-
+vie_symbole=u"\u262F"
 
