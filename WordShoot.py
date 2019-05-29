@@ -104,7 +104,7 @@ class Game():
     font=pygame.font.Font(None, 29) # Initialise police de charactère
     font2=pygame.font.Font(None, 55)
 
-############################# Debut prog
+    ############################# Debut prog
 
     fenetre.blit(intrologo, (0,0))
     pygame.display.flip()
@@ -113,26 +113,24 @@ class Game():
 
     ligne1= font.render(ligne,2,( 251, 8, 8 )) # Ligne de fin de chute des mots
 
-    obj= Score() # Construction du score
-    score1=obj.score
-    score=Score.score
+    objet=Score() # Construction du score
+#    score1= Score.score
+    score= Score.score
     
-    obj = Lecture() # Lecture du fichier
+    obj= Lecture() # Lecture du fichier
 
-    obj=Selecteur() # Première instance sans parametre 
-    selection=obj.selecteur
+    obj= Selecteur() # Première instance sans parametre 
+    selection= obj.selecteur
 
 
     # Démarage de la musique de fond
 #    pygame.mixer.music.set_volume(0.5) #Met le volume à 0.5 (moitié)
 #    pygame.mixer.music.play()
-    c=1
-    continuer = 1
+    c= 1
+    continuer= 1
     while continuer:
         #Limitation de vitesse de la boucle
         pygame.time.Clock().tick(30) # 30 fps
-
-
         obj=Selecteur() # Première instance sans parametre 
 #    obj.reinit()
         selection=obj.selecteur
@@ -192,8 +190,9 @@ class Game():
                 ########### Construction fenetres
                 text = font.render(mot,2,( 80, 241, 0 ))
                 aaaa=random.randint(1,720)   # On tire au hasard le point d'apparition du mot sur l'axe horizontale
-                fenetre.blit(text, (aaaa,1)) 
-                sCore = font.render(score1,2,( 80, 241, 0 ))
+                fenetre.blit(text, (aaaa,1))
+                objet.score_forme()
+                sCore = font.render(str(objet.score_en_forme),2,( 80, 241, 0 ))
 
                 ### LOGs
                 print "le mot est: {}".format(mot)
@@ -217,7 +216,8 @@ class Game():
                     # Petite vérifications
                     if max ==445:    # Son de fin de chute
                         loose.play() 
-
+                        objet.score_moins()
+                        objet.score_forme()
                     if max == 455: # Reinitialisation de l'index
                         sujet.reinit()
 
@@ -569,8 +569,8 @@ class Game():
                             if sujet.victoire == True:
                                 print '** VICTORY !! **'
                                 excelent.play() 
-                                obj= Score()  # On refait une instance pour incrémenter le score
-                                score1=obj.score
+                                objet.score_plus() # incrémente le score
+                                objet.score_forme() # je le remet en forme string
                                 max = 455     # On termine la boucle
 
                         son_vitesse(score)  # Appel de la procédure son_vitesse         
@@ -597,7 +597,7 @@ class Game():
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             pygame.display.flip()
             ether=[]
-            with open("Caglio_credits.txt", "r") as fichier:
+            with open(path+"Caglio_credits.txt", "r") as fichier:
                 for ligne in fichier:
                     ether.append(ligne)
                     long= len(ether)

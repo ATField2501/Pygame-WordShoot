@@ -13,14 +13,15 @@ class Score():
     """
     Class construisant une chaine de charactère pour afficher le score du joueur
     """
-    score= -10
+    score= 0
     def __init__(self):
+        """ """
+    def score_forme(self):
+        self.score_en_forme= str(Score.score) + 'Pts'
+    def score_plus(self):
         Score.score += 10
-        self.score= str(Score.score) + 'Pts'
-
-    
-
-
+    def score_moins(self):
+        Score.score -= 10
 
 class Lecture():
     """
