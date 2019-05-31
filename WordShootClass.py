@@ -120,7 +120,7 @@ class Vie_Joueur():
         """ Enlève une vie au total du joueur"""
         Vie_Joueur.vie_joueur -= 1
         if Vie_Joueur.vie_joueur <= 0:
-            self.vue_sur_vie_joueur=loose
+            self.vue_sur_vie_joueur=looser
             sauvegarde = True
             return sauvegarde
         else:    

@@ -183,8 +183,6 @@ class Game():
                 sCore = font.render(str(objet.score_en_forme),2,( 80, 241, 0 ))
                     
                 vie = font2.render(str(supra.vue_sur_vie_joueur),2,( 120, 94, 246 ))
-
-
                 ### LOGs
                 print "le mot est: {}".format(mot)
                 print "la lettre n°: {} est: {}".format(index , lettre)
@@ -207,13 +205,9 @@ class Game():
                         sauvegarde = supra.enlev_vie()
                         sujet.reinit()
 
-                    if sauvegarde == True:
-                        # Création d'un rectangle noir pour le fond
-                         pygame.draw.rect(fenetre, (0, 0 , 0), (0, 0, 2000 , 1100 ))
-                         pygame.display.flip()
-
-                        # aleph = True
-                        # destruct = True
+ 
+                    
+    
 
 
                     sujet.alteration() # Appel de la methode alteration de la class Lettre
@@ -570,6 +564,21 @@ class Game():
                 son_vitesse(score, supra)  # Appel de la procédure son_vitesse         
 
                 pygame.display.flip() # Rafraichissement
+
+                if sauvegarde == True:
+                    nb=0
+                    while nb <= 4:
+                        time.sleep(1)
+                        nb+=1
+                        truc="You Loose T.T" 
+                        ecran_sauvegarde=font2.render(truc,2,(80,241,0))
+                        fenetre.blit(ecran_sauvegarde,(255+nb,255+nb))
+                        # Création d'un rectangle noir pour le fond
+                 #        pygame.draw.rect(fenetre, (0, 0 , 0), (0, 0, 2000 , 1100 ))
+                        pygame.display.flip()
+                        aleph = True
+                        destruct=True
+                        maxx=445
 
 
         # Menu Scores

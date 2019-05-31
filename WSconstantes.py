@@ -1,3 +1,4 @@
+# -*- coding: utf8
 """ Constantes du jeu Word Shooting """
 
 
@@ -40,7 +41,9 @@ tableau=['Start','Scores','Credits']
 sauvegarde= False
 aleph = False
 vie_symbole=u"\u262F"
-loose=" You Loose T.T"
-
+looser=" You Loose T.T"
+## Coordonnées
+x=255
+y=255
 
 
