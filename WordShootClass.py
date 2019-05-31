@@ -116,12 +116,13 @@ class Vie_Joueur():
         """ Ajoute une vie au total du joueur"""
         Vie_Joueur.vie_joueur += 1
         self.vue_sur_vie_joueur='* '*Vie_Joueur.vie_joueur     
-    def enlev_vie(self, destruct):
+    def enlev_vie(self):
         """ Enlève une vie au total du joueur"""
         Vie_Joueur.vie_joueur -= 1
         if Vie_Joueur.vie_joueur <= 0:
             self.vue_sur_vie_joueur=loose
-            destruct = 1
+            sauvegarde = True
+            return sauvegarde
         else:    
             self.vue_sur_vie_joueur='* '*Vie_Joueur.vie_joueur
 

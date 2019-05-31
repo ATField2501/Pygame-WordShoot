@@ -27,9 +27,6 @@ size, x, y = (0,0), 800, 600
 # Pour fonction appui long
 pygame.key.set_repeat(400, 30)
 
-# Création d'un rectangle noir pour le fond
-#pygame.draw.rect(fenetre, (180, 20, 150), (0, 0, 2000 , 1100 ))
-#pygame.display.flip()
 intrologo= pygame.image.load(intro).convert()
 ecran1=pygame.image.load(ecran1).convert()
 neo = pygame.image.load(ecran_jeu).convert()
@@ -123,7 +120,7 @@ class Game():
 #    pygame.mixer.music.set_volume(0.5) #Met le volume à 0.5 (moitié)
 #    pygame.mixer.music.play()
     c= 1
-    continuer= 1
+    continuer= True
     while continuer:
         #Limitation de vitesse de la boucle
         pygame.time.Clock().tick(30) # 30 fps
@@ -131,8 +128,8 @@ class Game():
 #    obj.reinit()
         selection=obj.selecteur
         ##### Ecran Principale
-        c = 1
-        while c == 1:      
+        c = True
+        while c:      
             fenetre.blit(ecran1,(0,0)) ## Ecran de depart
 
             select=font.render(selection,2,( 80, 241, 0 ))
@@ -143,7 +140,7 @@ class Game():
                 if event.type == KEYDOWN:
                     if event.key == K_RETURN:
                         click.play()
-                        c= 0
+                        c= False
                     if event.key == K_ESCAPE:
                         bipp.play()
                         time.sleep(1)
@@ -162,9 +159,7 @@ class Game():
 
 
         if selection == tableau[0]:                     
-            aleph = 1
-            while aleph == 1:
-
+            while aleph == False:
                 ########### instances du module WordShootClass
                 obj = Mot() # on cree une instance de la class Mot
                 mot = obj.mot # on affecte l'attribut 'mot' de la class Mot à la variable mot
@@ -195,9 +190,9 @@ class Game():
                 print "la lettre n°: {} est: {}".format(index , lettre)
                 print "voici l'artefact: {}".format(artefact)
 
-                destruct = 0
+                destruct = False
                 max=1
-                while max < 455 and destruct == 0:
+                while max < 455 and destruct == False:
                     obje_V=Vitesse() 
                     pygame.time.Clock().tick(obje_V.vitesse)
                     fenetre.blit(text, (aaaa,max))   # affichage text tombant  
@@ -208,11 +203,17 @@ class Game():
                     # Petite vérifications
                     if max ==445:    # Son de fin de chute
                         loose.play() 
-              #          objet.score_moins()
                         objet.score_forme()
-                        supra.enlev_vie(destruct)
-                    if max == 455: # Reinitialisation de l'index
+                        sauvegarde = supra.enlev_vie()
                         sujet.reinit()
+
+                    if sauvegarde == True:
+                        # Création d'un rectangle noir pour le fond
+                         pygame.draw.rect(fenetre, (0, 0 , 0), (0, 0, 2000 , 1100 ))
+                         pygame.display.flip()
+
+                        # aleph = True
+                        # destruct = True
 
 
                     sujet.alteration() # Appel de la methode alteration de la class Lettre
@@ -238,16 +239,16 @@ class Game():
 
 
                         if event.type == QUIT:     #Si un de ces événements est de type QUIT
-                            continuer = 0 
-                            destruct = 0
+                            continuer = False
+                            destruct = True
 
                         if event.type == KEYDOWN: # Si un de ces éléments est de type clavier
                             if event.key == K_ESCAPE:
                                 bipp.play()
                                 sujet.reinit() # Reinitialisation de l'index pour detruire complètement le sujet
-                                destruct = 0
+                                destruct = True
                                 max = 455
-                                aleph = 0
+                                aleph = True
 
 
                             if event.key == K_a:

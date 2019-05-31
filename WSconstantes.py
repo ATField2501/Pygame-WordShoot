@@ -37,7 +37,8 @@ niveau_fini = path+"WorldShoot-Musik/niveau_fini.ogg"
 
 ligne='___________________________________________________________________________'
 tableau=['Start','Scores','Credits']
-
+sauvegarde= False
+aleph = False
 vie_symbole=u"\u262F"
 loose=" You Loose T.T"
 
