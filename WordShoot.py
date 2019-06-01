@@ -198,6 +198,11 @@ class Game():
 
                     score=Score.score  # Affectation de la variable d'instance score
 
+                    sujet.alteration() # Appel de la methode alteration de la class Lettre
+                    sample2=sujet.sample2
+                    text1 = font.render(sample2,2,( 255, 0, 0 ))
+                    fenetre.blit(text1, (aaaa,max))
+
                     # Petite vérifications
                     if max ==445:    # Son de fin de chute
                         loose.play() 
@@ -205,21 +210,8 @@ class Game():
                         sauvegarde = supra.enlev_vie()
                         sujet.reinit()
 
- 
-                    
-    
-
-
-                    sujet.alteration() # Appel de la methode alteration de la class Lettre
-                    sample2=sujet.sample2
-                    text1 = font.render(sample2,2,( 255, 0, 0 ))
-                    fenetre.blit(text1, (aaaa,max))
-
-
-
-                    simbad = ""
-                    for index,e in enumerate(artefact):
-                        simbad += e
+                 
+                    simbad= ''.join(artefact)
                     ping = font2.render(simbad,22,( 240, 240, 4 )) # Affichage chaine de charactère contenue dans la liste 'artefact"
 
                     pygame.display.flip() # Rafraichissement
@@ -558,6 +550,7 @@ class Game():
                                 print '** VICTORY !! **'
                                 excelent.play() 
                                 objet.score_plus() # incrémente le score
+                                
                                 objet.score_forme() # je le remet en forme string
                                 max = 455     # On termine la boucle
 
@@ -573,25 +566,41 @@ class Game():
                         truc="You Loose T.T" 
                         ecran_sauvegarde=font2.render(truc,2,(80,241,0))
                         fenetre.blit(ecran_sauvegarde,(255+nb,255+nb))
+                        
                         # Création d'un rectangle noir pour le fond
                  #        pygame.draw.rect(fenetre, (0, 0 , 0), (0, 0, 2000 , 1100 ))
                         pygame.display.flip()
+                        # Vérification si le score est un reccord
+                        #*****
+                        # Si oui on demande de rentrer un nickname
+                        #*****
+                        # et on ecris le tous ^^
+                        nickname='code2501'
+                        objet.ecriture_score(nickname)               
                         aleph = True
                         destruct=True
-                        maxx=445
-
-
+                        max=445
+        
         # Menu Scores
         if selection == tableau[1]:
             # Création d'un rectangle noir pour le fond
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             pygame.display.flip()
-
-            for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
-                if event.type == KEYDOWN: 
-                    if event.key == K_ESCAPE:
-                        bipp.play()
-                        break
+            ecran_reccords=objet.lecture_score()
+            babylone=ecran_reccords[0]
+            zygurate=ecran_reccords[1]
+            nerve=babylone+'  --> '+str(zygurate)+'Pts'
+            nervure=font.render(nerve,2,(125,125,0))
+            durandale = True
+            while durandale:
+                fenetre.blit(nervure,(255,255))
+                pygame.display.flip()
+                time.sleep(1)
+                for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
+                    if event.type == KEYDOWN: 
+                        if event.key == K_ESCAPE:
+                            bipp.play()
+                            durandale = False
 
 
         # Menu Crédits

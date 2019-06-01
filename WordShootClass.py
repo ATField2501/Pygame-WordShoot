@@ -2,6 +2,7 @@
 # -*- coding: utf8 
 # auteur: <atfield2501@gmail.com>
 
+import pickle
 import random 
 from WSconstantes import *
 
@@ -22,6 +23,12 @@ class Score():
         Score.score += 10
     def score_moins(self):
         Score.score -= 10
+    def ecriture_score(self, nickname):
+        mnemo=(nickname+': ',Score.score)
+        pickle.dump(mnemo,open('/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/shadows', 'wb'))
+    def lecture_score(self):
+         ecran_reccords = pickle.load(open('/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/shadows', 'rb'))
+         return ecran_reccords
 
 class Lecture():
     """
