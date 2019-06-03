@@ -8,6 +8,7 @@
                                #      Licence GPL        #
                                ###########################
 
+import string
 import random
 import pygame
 import time
@@ -570,17 +571,47 @@ class Game():
                         # Création d'un rectangle noir pour le fond
                  #        pygame.draw.rect(fenetre, (0, 0 , 0), (0, 0, 2000 , 1100 ))
                         pygame.display.flip()
-                        # Vérification si le score est un reccord
-                        #*****
-                        # Si oui on demande de rentrer un nickname
-                        #*****
-                        # et on ecris le tous ^^
-                        nickname='code2501'
-                        objet.ecriture_score(nickname)               
-                        aleph = True
-                        destruct=True
-                        max=445
-        
+                    # Vérification si le score est un reccord
+                    #*****
+                    # Si oui on demande de rentrer un nickname
+                    bidule="Nouveau Reccord"
+                    trucmuche="Nickname:"
+                    ecran_chouette=font2.render(bidule,2,(80,241,0))
+                    ecran_cool=font.render(trucmuche,2,(80,241,0))
+                    fenetre.blit(ecran_chouette,(225,55))
+                    pygame.display.flip()
+                    time.sleep(1)
+                    fenetre.blit(ecran_cool,(225,400))
+                    pygame.display.flip()
+                    selection_romaine = list(string.ascii_lowercase)  
+                    selection_romaine= ' '.join(selection_romaine)
+                    anaconda=True
+                    while anaconda:
+                        selectL=font.render(str(selection_romaine),2,(80,241,0))
+                        fenetre.blit(selectL,(100,350))        
+                        pygame.display.flip()
+                        time.sleep(3)
+     
+                        for event in pygame.event.get(): 
+                            if event.type == KEYDOWN:
+                                if event.key == K_RETURN:
+                                    click.play()
+                                    anaconda = False
+                                if event.key == K_ESCAPE:
+                                    bipp.play()
+                                    sys.exit(0)
+                                if event.key == K_LEFT:
+                                    bipp.play()
+                                if event.key == K_RIGHT:
+                                    bipp.play()
+                        
+                    # et on ecris le tous ^^
+                    nickname='code2501'
+                    objet.ecriture_score(nickname)               
+                    aleph = True
+                    destruct=True
+                    max=445
+    
         # Menu Scores
         if selection == tableau[1]:
             # Création d'un rectangle noir pour le fond
@@ -595,7 +626,6 @@ class Game():
             while durandale:
                 fenetre.blit(nervure,(255,255))
                 pygame.display.flip()
-                time.sleep(1)
                 for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
                     if event.type == KEYDOWN: 
                         if event.key == K_ESCAPE:

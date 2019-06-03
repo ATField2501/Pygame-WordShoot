@@ -2,6 +2,7 @@
 # -*- coding: utf8 
 # auteur: <atfield2501@gmail.com>
 
+import base64
 import pickle
 import random 
 from WSconstantes import *
@@ -24,11 +25,24 @@ class Score():
     def score_moins(self):
         Score.score -= 10
     def ecriture_score(self, nickname):
-        mnemo=(nickname+': ',Score.score)
-        pickle.dump(mnemo,open('/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/shadows', 'wb'))
+        mnemo={}
+        # Encodage en B64
+        nickname= base64.b64encode(nickname)
+        score_encode=base64.b64encode(str(Score.score))
+        mnemo[nickname+': ']=score_encode 
+        pickle.dump(mnemo ,open('/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/shadows','ab'))
+
     def lecture_score(self):
-         ecran_reccords = pickle.load(open('/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/shadows', 'rb'))
-         return ecran_reccords
+         vrac = pickle.load(open('/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/shadows', 'rb'))
+         for keys,values in vrac.items():
+             ecran_reccords=[]
+             a_keys=base64.b64decode(str(keys))
+             b_values=base64.b64decode(str(values))
+             ecran_reccords.append(base64.b64decode(keys)+': '+base64.b64decode(values)+'Pts')
+
+             return ecran_reccords
+
+
 
 class Lecture():
     """

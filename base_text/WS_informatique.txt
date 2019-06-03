@@ -41,8 +41,8 @@ regex
 fizzbuzz
 sudo
 except
-True
-False
+true
+false
 shebang
 coding
 nmap
