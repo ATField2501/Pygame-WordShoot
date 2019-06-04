@@ -1,6 +1,8 @@
 #!/usr/bin/python2
-# -*- coding: utf8 
+# coding: utf8 
 # auteur: <atfield2501@gmail.com>
+
+""" Module de Pygame-Wordshoot - cagliostro - """
 
 import base64
 import pickle
@@ -8,12 +10,11 @@ import random
 from WSconstantes import *
 
 
-########### Class
-
 
 class Score():
     """
     Class construisant une chaine de charactère pour afficher le score du joueur
+    Et tenant à jour la page des reccords
     """
     score= 0
     def __init__(self):
@@ -24,23 +25,36 @@ class Score():
         Score.score += 10
     def score_moins(self):
         Score.score -= 10
-    def ecriture_score(self, nickname):
-        mnemo={}
+    def ecriture_score(self, nickname='none'):
+        try: 
+            self.mnemo=pickle.load(open('/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/shadows','rb'))
+        except IOError:
+            nnn= 1
+            mnemo={}
+            while nnn <= 10:
+                mnemo[nnn]=nnn
+                self.mnemo=mnemo
+                nnn += 1
+            pass
         # Encodage en B64
-        nickname= base64.b64encode(nickname)
-        score_encode=base64.b64encode(str(Score.score))
-        mnemo[nickname+': ']=score_encode 
-        pickle.dump(mnemo ,open('/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/shadows','ab'))
+#        nickname= base64.b64encode(nickname)
+#        score_encode=base64.b64encode(str(Score.score))
+#        self.mnemo[nickname+': ']=score_encode 
+        pickle.dump(self.mnemo,open('/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/shadows','wb'))
 
     def lecture_score(self):
-         vrac = pickle.load(open('/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/shadows', 'rb'))
-         for keys,values in vrac.items():
-             ecran_reccords=[]
-             a_keys=base64.b64decode(str(keys))
-             b_values=base64.b64decode(str(values))
-             ecran_reccords.append(base64.b64decode(keys)+': '+base64.b64decode(values)+'Pts')
+        try:
+            vrac = pickle.load(open('/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/shadows','rb'))
+        except IOError:
+            self.ecriture_score()
+        ecran_reccords=[]
+        for keys,values in vrac.items(): 
+#            a_keys=base64.b64decode(str(keys))
+#            b_values=base64.b64decode(str(values))
+#            ecran_reccords.append(base64.b64decode(keys)+': '+base64.b64decode(values)+'Pts')
+            ecran_reccords.append(str(keys)+': '+str(values)+'Pts')
 
-             return ecran_reccords
+        return ecran_reccords
 
 
 
