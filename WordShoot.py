@@ -174,7 +174,7 @@ class Game():
                         formalite = False
 
                     if event.type == KEYDOWN: # Si un de ces éléments est de type clavier
-                        if event.key == K_ESCAPE:
+                        if event.key == K_RETURN:
                             formalite = False
                             long_nickname=12
 
@@ -399,10 +399,10 @@ class Game():
                     pygame.display.flip() # Rafraichissement
                     fenetre.blit(neo, (0,0))
                     fenetre.blit(ligne1, (0,450))
-                    fenetre.blit(ping, (350,500))     
+                    fenetre.blit(nick, (350,500))     
                     fenetre.blit(sCore, (700,550))
                     fenetre.blit(vie, (50,550))
-                    fenetre.blit(nick,(325,550))
+                    fenetre.blit(ping,(325,550))
                     for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
 
 
@@ -752,18 +752,17 @@ class Game():
                         # Création d'un rectangle noir pour le fond
                  #        pygame.draw.rect(fenetre, (0, 0 , 0), (0, 0, 2000 , 1100 ))
                         pygame.display.flip()
+
+                    nickname = nickname[:1]                     
+                    nickname=''.join(nickname)
+                       
                     # Vérification si le score est un reccord
-                    #*****
-                    # Si oui on l'enregistre
-                    bidule="Nouveau Reccord"
+                    bidule=objet.verif_reccord(nickname)
                     ecran_chouette=font2.render(bidule,2,(80,241,0))
                     fenetre.blit(ecran_chouette,(255,400))
                     pygame.display.flip()
                     time.sleep(1)
-                    nickname = nickname[:1]                     
-                    nickname=''.join(nickname)
-                    # et on ecris le tous ^^
-                    objet.ecriture_score(nickname)               
+                                
                     aleph = True
                     destruct=True
                     max=445
@@ -786,46 +785,66 @@ class Game():
             babylone1='5 -  '+ecran_reccords[4]
             zygurate1='6 -  '+ecran_reccords[5]
             persepolis1='7 -  '+ecran_reccords[6]
-#            armageddon1='8 -  '+ecran_reccords[7]
+            armageddon1='8 -  '+ecran_reccords[7]
             nervure5=font.render(babylone1,2,(250,250,0))
             nervure6=font.render(zygurate1,2,(250,250,0))
             nervure7=font.render(persepolis1,2,(250,250,0))
-#            nervure8=font.render(armageddon1,2,(250,250,0))
-
+            nervure8=font.render(armageddon1,2,(250,250,0))
+            persepolis11='9 -  '+ecran_reccords[6]
+            armageddon11='10 -  '+ecran_reccords[7]
+            nervure9=font.render(persepolis11,2,(250,250,0))
+            nervure10=font.render(armageddon11,2,(250,250,0))
+            like=25 
             durandale = True
             while durandale:
-                fenetre.blit(nervure1,(155,25))
+                fenetre.blit(nervure1,(155,like))
                 pygame.display.flip()
                 time.sleep(0.4)
+                like += 35
 #                click.play()
-                fenetre.blit(nervure2,(155,45))
+                fenetre.blit(nervure2,(155,like))
                 pygame.display.flip()
                 time.sleep(0.4)
+                like += 35
 #                click.play()
-                fenetre.blit(nervure3,(155,65))
+                fenetre.blit(nervure3,(155,like))
                 pygame.display.flip()
                 time.sleep(0.4)
+                like += 35
 #                click.play()
-                fenetre.blit(nervure4,(155,85))
+                fenetre.blit(nervure4,(155,like))
                 pygame.display.flip()
                 time.sleep(0.4)
+                like += 35
  #               click.play()
-                fenetre.blit(nervure5,(155,105))
+                fenetre.blit(nervure5,(155,like))
                 pygame.display.flip()
                 time.sleep(0.4)
+                like += 35
 #                click.play()
-                fenetre.blit(nervure6,(155,125))
+                fenetre.blit(nervure6,(155,like))
                 pygame.display.flip()
                 time.sleep(0.4)
+                like += 35
 #                click.play()
-                fenetre.blit(nervure7,(155,145))
+                fenetre.blit(nervure7,(155,like))
                 pygame.display.flip()
                 time.sleep(0.4)
+                like += 35
 #                click.play()
-#                fenetre.blit(nervure8,(155,156))
-#                pygame.display.flip()
-#                time.sleep(0.4)
+                fenetre.blit(nervure8,(155,like))
+                pygame.display.flip()
+                time.sleep(0.4)
+                like += 35
 #                click.play()
+                fenetre.blit(nervure9,(155,like))
+                pygame.display.flip()
+                time.sleep(0.4)
+                like += 35
+                fenetre.blit(nervure10,(155,like))
+                pygame.display.flip()
+                time.sleep(10)
+                durandale = False                
 
                 for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
                     if event.type == KEYDOWN: 

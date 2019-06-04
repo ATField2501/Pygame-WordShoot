@@ -25,9 +25,9 @@ class Score():
         Score.score += 10
     def score_moins(self):
         Score.score -= 10
-    def ecriture_score(self, nickname='none'):
-        try: 
-            self.mnemo=pickle.load(open('/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/shadows','rb'))
+    def verif_reccord(self , nickname):
+        try:
+            self.mnemo=pickle.load(open(path_shadows,'rb'))
         except IOError:
             nnn= 1
             mnemo={}
@@ -35,20 +35,32 @@ class Score():
                 mnemo[nnn]=nnn
                 self.mnemo=mnemo
                 nnn += 1
-            pass
-        # Encodage en B64
+            pickle.dump(self.mnemo,open(path_shadows,'wb'))
+        
+        ## Je verifis si le score est plus grand qu'une valeur du dico    
+        for value in self.mnemo.values():
+            if Score.score > int(value):
+                bidule=self.ecriture_score(nickname)
+            else:
+                bidule='Aucun reccord'
+                return bidule
+        return bidule
+    def ecriture_score(self, nickname, bidule='Nouveau Reccord'):
+        self.mnemo=pickle.load(open(path_shadows,'rb'))
+         # Encodage en B64
 #        nickname= base64.b64encode(nickname)
 #        score_encode=base64.b64encode(str(Score.score))
-#        self.mnemo[nickname+': ']=score_encode 
-        pickle.dump(self.mnemo,open('/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/shadows','wb'))
+        self.mnemo[nickname+': ']=Score.score
+        pickle.dump(self.mnemo,open(path_shadows,'wb'))
+        return bidule
 
     def lecture_score(self):
         try:
-            vrac = pickle.load(open('/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/shadows','rb'))
+            self.vrac = pickle.load(open(path_shadows,'rb'))
         except IOError:
             self.ecriture_score()
         ecran_reccords=[]
-        for keys,values in vrac.items(): 
+        for keys,values in self.vrac.items(): 
 #            a_keys=base64.b64decode(str(keys))
 #            b_values=base64.b64decode(str(values))
 #            ecran_reccords.append(base64.b64decode(keys)+': '+base64.b64decode(values)+'Pts')
@@ -115,7 +127,7 @@ class Construction(Lettre):  ### Super héritage pour récuperer facilement l'in
     def __init__(self, mot):
         self.artefact = []
         for i in mot:
-            self.artefact += '*'  # Construction de la liste 'artefact'
+            self.artefact += '_'  # Construction de la liste 'artefact'
     def tetris(self ,lettre):
         """ Methode reconstruisant artefact en substituant les asterix par la lettre trouvée"""
         self.artefact[Lettre.index] = lettre       

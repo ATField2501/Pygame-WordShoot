@@ -3,7 +3,7 @@
 
 
 path='/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/'
-
+path_shadows='/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/shadows'
 
 titre_fenetre="                   * Caglio Word Shooting *"
 
