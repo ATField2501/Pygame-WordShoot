@@ -1,5 +1,5 @@
 #!/usr/bin/python2
-# -*- coding: utf8 
+# coding: utf8 
 
                                ###########################
                                #       WordShoot         #
@@ -8,6 +8,7 @@
                                #      Licence GPL        #
                                ###########################
 
+import string
 import random
 import pygame
 import time
@@ -27,9 +28,6 @@ size, x, y = (0,0), 800, 600
 # Pour fonction appui long
 pygame.key.set_repeat(400, 30)
 
-# Création d'un rectangle noir pour le fond
-#pygame.draw.rect(fenetre, (180, 20, 150), (0, 0, 2000 , 1100 ))
-#pygame.display.flip()
 intrologo= pygame.image.load(intro).convert()
 ecran1=pygame.image.load(ecran1).convert()
 neo = pygame.image.load(ecran_jeu).convert()
@@ -66,10 +64,11 @@ zero_neuf = pygame.mixer.Sound(zero_neuf)
 niveau_fini = pygame.mixer.Sound(niveau_fini)
 
 ########### fonctions et pocédures
-def son_vitesse(score):
+def son_vitesse(score, supra):
     if score == 100:
         print ' -- 0.1 --'
         zero_un.play()
+        supra.add_vie()
     elif score == 200:
         print ' -- 0.2 --'
         zero_deux.play()
@@ -105,29 +104,24 @@ class Game():
     font2=pygame.font.Font(None, 55)
 
     ############################# Debut prog
-
     fenetre.blit(intrologo, (0,0))
     pygame.display.flip()
     bal.play()
     time.sleep(3)
-
     ligne1= font.render(ligne,2,( 251, 8, 8 )) # Ligne de fin de chute des mots
-
     objet=Score() # Construction du score
-#    score1= Score.score
     score= Score.score
-    
     obj= Lecture() # Lecture du fichier
-
     obj= Selecteur() # Première instance sans parametre 
     selection= obj.selecteur
 
+    supra= Vie_Joueur()
 
     # Démarage de la musique de fond
 #    pygame.mixer.music.set_volume(0.5) #Met le volume à 0.5 (moitié)
 #    pygame.mixer.music.play()
     c= 1
-    continuer= 1
+    continuer= True
     while continuer:
         #Limitation de vitesse de la boucle
         pygame.time.Clock().tick(30) # 30 fps
@@ -135,8 +129,8 @@ class Game():
 #    obj.reinit()
         selection=obj.selecteur
         ##### Ecran Principale
-        c = 1
-        while c == 1:      
+        c = True
+        while c:      
             fenetre.blit(ecran1,(0,0)) ## Ecran de depart
 
             select=font.render(selection,2,( 80, 241, 0 ))
@@ -147,7 +141,7 @@ class Game():
                 if event.type == KEYDOWN:
                     if event.key == K_RETURN:
                         click.play()
-                        c= 0
+                        c= False
                     if event.key == K_ESCAPE:
                         bipp.play()
                         time.sleep(1)
@@ -165,27 +159,203 @@ class Game():
 
 
 
-        if selection == tableau[0]:                     
-            aleph = 1
-            while aleph == 1:
+        if selection == tableau[0]:      
+            ### Entrée du nom du joueur
+            nickname= ['nickname: ']
+            stone= font.render(''.join(nickname),2,(80,241,0))
+            fenetre.blit(stone,(50,550))
+            pygame.display.flip()
+            
+            long_nickname=0
+            while formalite == True and long_nickname < 12: # je limite la longueur du nickname 9
+                for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
+                                            
+                    if event.type == QUIT:     #Si un de ces événements est de type QUIT
+                        formalite = False
 
-                ########### instances du module WordShootClass
+                    if event.type == KEYDOWN: # Si un de ces éléments est de type clavier
+                        if event.key == K_RETURN:
+                            formalite = False
+                            long_nickname=12
+
+                        if event.key == K_a:
+                            nickname.append('a')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                 
+                            long_nickname += 1 
+                        if event.key == K_b:
+                            nickname.append('b')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1 
+                        if event.key == K_c:
+                            nickname.append('c')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                 
+                            long_nickname += 1 
+                        if event.key == K_d:
+                            nickname.append('d')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1 
+                        if event.key == K_e:
+                            nickname.append('e')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip() 
+                            long_nickname += 1 
+                        if event.key == K_f:
+                            nickname.append('f')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1 
+                        if event.key == K_g:
+                            nickname.append('g')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1                 
+
+                        if event.key == K_h:
+                            nickname.append('h')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1 
+                        if event.key == K_i:
+                            nickname.append('i')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1                 
+
+                        if event.key == K_j:
+                            nickname.append('j')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1 
+                        if event.key == K_k:
+                            nickname.append('k')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1                 
+
+                        if event.key == K_l:
+                            nickname.append('l')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1 
+                        if event.key == K_m:
+                            nickname.append('m')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1                 
+
+                        if event.key == K_n:
+                            nickname.append('n')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1 
+                        if event.key == K_o:
+                            nickname.append('o')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1                            
+
+                        if event.key == K_p:
+                            nickname.append('p')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1 
+                        if event.key == K_q:
+                            nickname.append('q')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1                 
+
+                        if event.key == K_r:
+                            nickname.append('r')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+
+                        if event.key == K_s:
+                            nickname.append('s')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1                 
+
+                        if event.key == K_t:
+                            nickname.append('t')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1 
+                        if event.key == K_u:
+                            nickname.append('u')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1                 
+
+                        if event.key == K_v:
+                            nickname.append('v')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1 
+                        if event.key == K_w:
+                            nickname.append('w')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1                 
+
+                        if event.key == K_x:
+                            nickname.append('x')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1 
+                        if event.key == K_y:
+                            nickname.append('y')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1                
+
+                        if event.key == K_z:
+                            nickname.append('z')
+                            stone= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone,(50,550))
+                            pygame.display.flip()
+                            long_nickname += 1
+
+            while aleph == False:
                 obj = Mot() # on cree une instance de la class Mot
                 mot = obj.mot # on affecte l'attribut 'mot' de la class Mot à la variable mot
-
-                obj1= Vitesse() # on cree une instance de la class Vitesse
-                vitesse = obj1.vitesse  # on affecte l'attribut vitesse de la class Vitesse à la variable vitesse
-
+           #     obje_V=Vitesse() # on cree une instance de la class Vitesse
                 objA = Construction(mot) # on cree une instance de la class Construction en lui passant le parametre mot 
                 artefact = objA.artefact # on affect l'attribut artefact de la class Construction à la variable artefact
-
-
                 sujet = Lettre() # Enfin, on cree une instance de la class lettre, l'objet sera le charactère à trouver de la chaine mot
                 lettre = sujet.lettre # Affectation
-
                 index = Lettre.index +1 # pour log
-
-
 
                 ########### Construction fenetres
                 text = font.render(mot,2,( 80, 241, 0 ))
@@ -193,68 +363,60 @@ class Game():
                 fenetre.blit(text, (aaaa,1))
                 objet.score_forme()
                 sCore = font.render(str(objet.score_en_forme),2,( 80, 241, 0 ))
-
+                nick = font.render(str(''.join(nickname[1:])),2,(255,162,0))    
+                vie = font2.render(str(supra.vue_sur_vie_joueur),2,( 120, 94, 246 ))
                 ### LOGs
                 print "le mot est: {}".format(mot)
                 print "la lettre n°: {} est: {}".format(index , lettre)
                 print "voici l'artefact: {}".format(artefact)
 
-        #        son_vitesse(score)  # Appel de la procédure son_vitesse         
-
-                destruct = 0
+                destruct = False
                 max=1
-                while max < 455 and destruct == 0:
-                    pygame.time.Clock().tick(vitesse)
+                while max < 455 and destruct == False:
+                    obje_V=Vitesse() 
+                    pygame.time.Clock().tick(obje_V.vitesse)
                     fenetre.blit(text, (aaaa,max))   # affichage text tombant  
                     max +=1   
 
-                    obj1= Vitesse()  # Instance de la class Vitesse pour controle de la vitesse en fonction du score
-                    vitesse = obj1.vitesse # Affectation de la variable d'instance vitesse
-                    score=obj1.score  # Affectation de la variable d'instance score
-
-
-                    # Petite vérifications
-                    if max ==445:    # Son de fin de chute
-                        loose.play() 
-                        objet.score_moins()
-                        objet.score_forme()
-                    if max == 455: # Reinitialisation de l'index
-                        sujet.reinit()
-
+                    score=Score.score  # Affectation de la variable d'instance score
 
                     sujet.alteration() # Appel de la methode alteration de la class Lettre
                     sample2=sujet.sample2
                     text1 = font.render(sample2,2,( 255, 0, 0 ))
                     fenetre.blit(text1, (aaaa,max))
+                    
+                    # Petite vérifications
+                    if max ==445:    # Son de fin de chute
+                        loose.play() 
+                        objet.score_forme()
+                        sauvegarde = supra.enlev_vie()
+                        sujet.reinit()
 
-
-
-                    simbad = ""
-                    for index,e in enumerate(artefact):
-                        simbad += e
+                 
+                    simbad= ''.join(artefact)
                     ping = font2.render(simbad,22,( 240, 240, 4 )) # Affichage chaine de charactère contenue dans la liste 'artefact"
 
                     pygame.display.flip() # Rafraichissement
                     fenetre.blit(neo, (0,0))
                     fenetre.blit(ligne1, (0,450))
-                    fenetre.blit(ping, (350,500))     
+                    fenetre.blit(nick, (350,500))     
                     fenetre.blit(sCore, (700,550))
-
-
+                    fenetre.blit(vie, (50,550))
+                    fenetre.blit(ping,(325,550))
                     for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
 
 
                         if event.type == QUIT:     #Si un de ces événements est de type QUIT
-                            continuer = 0 
-                            destruct = 0
+                            continuer = False
+                            destruct = True
 
                         if event.type == KEYDOWN: # Si un de ces éléments est de type clavier
                             if event.key == K_ESCAPE:
                                 bipp.play()
                                 sujet.reinit() # Reinitialisation de l'index pour detruire complètement le sujet
-                                destruct = 0
+                                destruct = True
                                 max = 455
-                                aleph = 0
+                                aleph = True
 
 
                             if event.key == K_a:
@@ -570,25 +732,125 @@ class Game():
                                 print '** VICTORY !! **'
                                 excelent.play() 
                                 objet.score_plus() # incrémente le score
+                                
                                 objet.score_forme() # je le remet en forme string
                                 max = 455     # On termine la boucle
 
-                        son_vitesse(score)  # Appel de la procédure son_vitesse         
+                son_vitesse(score, supra)  # Appel de la procédure son_vitesse         
 
                 pygame.display.flip() # Rafraichissement
 
+                if sauvegarde == True:
+                    nb=0
+                    while nb <= 4:
+                        time.sleep(1)
+                        nb+=1
+                        truc="You Loose T.T" 
+                        ecran_sauvegarde=font2.render(truc,2,(80,241,0))
+                        fenetre.blit(ecran_sauvegarde,(255+nb,255+nb))
+                        
+                        # Création d'un rectangle noir pour le fond
+                 #        pygame.draw.rect(fenetre, (0, 0 , 0), (0, 0, 2000 , 1100 ))
+                        pygame.display.flip()
 
+                    nickname = nickname[:1]                     
+                    nickname=''.join(nickname)
+                       
+                    # Vérification si le score est un reccord
+                    bidule=objet.verif_reccord(nickname)
+                    ecran_chouette=font2.render(bidule,2,(80,241,0))
+                    fenetre.blit(ecran_chouette,(255,400))
+                    pygame.display.flip()
+                    time.sleep(1)
+                                
+                    aleph = True
+                    destruct=True
+                    max=445
+                    selection = tableau[1]      
+    
         # Menu Scores
         if selection == tableau[1]:
             # Création d'un rectangle noir pour le fond
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             pygame.display.flip()
+            ecran_reccords=objet.lecture_score()
+            babylone='1 -  '+ecran_reccords[0]
+            zygurate='2 -  '+ecran_reccords[1]
+            persepolis='3 -  '+ecran_reccords[2]
+            armageddon='4 -  '+ecran_reccords[3]
+            nervure1=font.render(babylone,2,(250,250,0))
+            nervure2=font.render(zygurate,2,(250,250,0))
+            nervure3=font.render(persepolis,2,(250,250,0))
+            nervure4=font.render(armageddon,2,(250,250,0))
+            babylone1='5 -  '+ecran_reccords[4]
+            zygurate1='6 -  '+ecran_reccords[5]
+            persepolis1='7 -  '+ecran_reccords[6]
+            armageddon1='8 -  '+ecran_reccords[7]
+            nervure5=font.render(babylone1,2,(250,250,0))
+            nervure6=font.render(zygurate1,2,(250,250,0))
+            nervure7=font.render(persepolis1,2,(250,250,0))
+            nervure8=font.render(armageddon1,2,(250,250,0))
+            persepolis11='9 -  '+ecran_reccords[6]
+            armageddon11='10 -  '+ecran_reccords[7]
+            nervure9=font.render(persepolis11,2,(250,250,0))
+            nervure10=font.render(armageddon11,2,(250,250,0))
+            like=25 
+            durandale = True
+            while durandale:
+                fenetre.blit(nervure1,(155,like))
+                pygame.display.flip()
+                time.sleep(0.4)
+                like += 35
+#                click.play()
+                fenetre.blit(nervure2,(155,like))
+                pygame.display.flip()
+                time.sleep(0.4)
+                like += 35
+#                click.play()
+                fenetre.blit(nervure3,(155,like))
+                pygame.display.flip()
+                time.sleep(0.4)
+                like += 35
+#                click.play()
+                fenetre.blit(nervure4,(155,like))
+                pygame.display.flip()
+                time.sleep(0.4)
+                like += 35
+ #               click.play()
+                fenetre.blit(nervure5,(155,like))
+                pygame.display.flip()
+                time.sleep(0.4)
+                like += 35
+#                click.play()
+                fenetre.blit(nervure6,(155,like))
+                pygame.display.flip()
+                time.sleep(0.4)
+                like += 35
+#                click.play()
+                fenetre.blit(nervure7,(155,like))
+                pygame.display.flip()
+                time.sleep(0.4)
+                like += 35
+#                click.play()
+                fenetre.blit(nervure8,(155,like))
+                pygame.display.flip()
+                time.sleep(0.4)
+                like += 35
+#                click.play()
+                fenetre.blit(nervure9,(155,like))
+                pygame.display.flip()
+                time.sleep(0.4)
+                like += 35
+                fenetre.blit(nervure10,(155,like))
+                pygame.display.flip()
+                time.sleep(10)
+                durandale = False                
 
-            for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
-                if event.type == KEYDOWN: 
-                    if event.key == K_ESCAPE:
-                        bipp.play()
-                        break
+                for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
+                    if event.type == KEYDOWN: 
+                        if event.key == K_ESCAPE:
+                            bipp.play()
+                            durandale = False
 
 
         # Menu Crédits

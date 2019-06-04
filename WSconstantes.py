@@ -1,8 +1,9 @@
+# -*- coding: utf8
 """ Constantes du jeu Word Shooting """
 
 
 path='/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/'
-
+path_shadows='/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/shadows'
 
 titre_fenetre="                   * Caglio Word Shooting *"
 
@@ -37,6 +38,13 @@ niveau_fini = path+"WorldShoot-Musik/niveau_fini.ogg"
 
 ligne='___________________________________________________________________________'
 tableau=['Start','Scores','Credits']
-
+sauvegarde= False
+formalite = True
+aleph = False
+vie_symbole=u"\u262F"
+looser=" You Loose T.T"
+## Coordonnées
+x=255
+y=255
 
 
