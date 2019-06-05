@@ -25,34 +25,37 @@ class Score():
         Score.score += 10
     def score_moins(self):
         Score.score -= 10
-    def verif_reccord(self , nickname='Néant'):
-        nickname=nickname
+    def verif_reccord(self , nickname='Neant'):
+        self.nickname=nickname
         try:
             self.mnemo=pickle.load(open(path_shadows,'rb'))
         except IOError:
             nnn= 1
             mnemo={}
             while nnn <= 10:
-                mnemo[nnn]=(nickname,0)
+                mnemo[nnn]=(self.nickname,0)
                 nnn += 1
             self.mnemo=mnemo
             pickle.dump(self.mnemo,open(path_shadows,'wb'))
-        
+    
         ## Je verifie si le score est plus grand qu'une valeur du dico    
         for keys,value in self.mnemo.items():
+            victory=False
             if Score.score > value[1]:
-                bidule=self.ecriture_score(nickname, keys)
-            else:
+                bidule=self.ecriture_score(self.nickname, keys)
+                victory=True
+            if victory == False:
                 bidule='Aucun reccord'
-                return bidule
+            elif victory == True:
+                bidule='Nouveau Reccord'
         return bidule
 
-    def ecriture_score(self, nickname, keys, bidule='Nouveau Reccord'):
+    def ecriture_score(self, nickname , keys):
         self.mnemo=pickle.load(open(path_shadows,'rb'))
-        self.mnemo[keys]=(nickname,Score.score)
-#        self.mnemo[value]=self.mnemo[nickname]
+        for i,e in enumerate(self.mnemo):
+            self.mnemo[i]=(self.nickname,Score.score)
+            break
         pickle.dump(self.mnemo,open(path_shadows,'wb'))
-        return bidule
 
     def lecture_score(self):
         try:
@@ -62,12 +65,12 @@ class Score():
                 ecran_reccords.append(str(keys)+' - '+str(values)+'Pts')
             return ecran_reccords
         except IOError:
-            self.verif_reccord()
-#            self.lecture_score()
-
+            ecran_reccords=self.verif_reccord()
+            return ecran_reccords
 class Lecture():
     """
-    Class lisant un fichier pour en extraire les lignes et les incorporer à la liste 'tableau'
+    Class lisant un fichier pour en extraire les lignes 
+    et les incorporer à la liste 'tableau'
     """
     tableau=[]
     def __init__(self, tableau = []):

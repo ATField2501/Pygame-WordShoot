@@ -363,7 +363,8 @@ class Game():
 
                 ########### Construction fenetres
                 text = font.render(mot,2,( 80, 241, 0 ))
-                aaaa=random.randint(1,720)   # On tire au hasard le point d'apparition du mot sur l'axe horizontale
+                # On tire au hasard le point d'apparition du mot sur l'axe horizontale
+                aaaa=random.randint(1,720)  
                 fenetre.blit(text, (aaaa,1))
                 objet.score_forme()
                 sCore = font.render(str(objet.score_en_forme),2,( 80, 241, 0 ))
@@ -381,10 +382,10 @@ class Game():
                     pygame.time.Clock().tick(obje_V.vitesse)
                     fenetre.blit(text, (aaaa,max))   # affichage text tombant  
                     max +=1   
-
-                    score=Score.score  # Affectation de la variable d'instance score
-
-                    sujet.alteration() # Appel de la methode alteration de la class Lettre
+                    # Affectation de la variable d'instance score
+                    score=Score.score 
+                    # Appel de la methode alteration de la class Lettre
+                    sujet.alteration() 
                     sample2=sujet.sample2
                     text1 = font.render(sample2,2,( 255, 0, 0 ))
                     fenetre.blit(text1, (aaaa,max))
@@ -396,10 +397,9 @@ class Game():
                         sauvegarde = supra.enlev_vie()
                         sujet.reinit()
 
-                 
+                    # Affichage chaine de charactère contenue dans la liste 'artefact"
                     simbad= ''.join(artefact)
-                    ping = font2.render(simbad,22,( 240, 240, 4 )) # Affichage chaine de charactère contenue dans la liste 'artefact"
-
+                    ping = font2.render(simbad,22,( 240, 240, 4 )) 
                     pygame.display.flip() # Rafraichissement
                     fenetre.blit(neo, (0,0))
                     fenetre.blit(ligne1, (0,450))
@@ -407,17 +407,18 @@ class Game():
                     fenetre.blit(sCore, (700,550))
                     fenetre.blit(vie, (50,550))
                     fenetre.blit(ping,(325,550))
-                    for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
-
-
-                        if event.type == QUIT:     #Si un de ces événements est de type QUIT
+                    #On parcours la liste de tous les événements reçus
+                    for event in pygame.event.get():   
+                        #Si un de ces événements est de type QUIT
+                        if event.type == QUIT:        
                             continuer = False
                             destruct = True
-
-                        if event.type == KEYDOWN: # Si un de ces éléments est de type clavier
+                        # Si un de ces éléments est de type clavier
+                        if event.type == KEYDOWN:       
                             if event.key == K_ESCAPE:
                                 bipp.play()
-                                sujet.reinit() # Reinitialisation de l'index pour detruire complètement le sujet
+                                # Reinitialisation de l'index pour detruire complètement le sujet
+                                sujet.reinit()
                                 destruct = True
                                 max = 455
                                 aleph = True
@@ -426,8 +427,10 @@ class Game():
                             if event.key == K_a:
                                 if 'a' == lettre:
                                     print '** UP **'
-                                    objA.tetris(lettre)  # appel de la methode tetris de la class Construction qui modifie la liste artefact
-                                    sujet = Lettre()     # On re-instancie l'objet sujet pour passer à la lettre suivante
+                                    # appel de la methode tetris qui modifie la liste artefact
+                                    objA.tetris(lettre)
+                                    # On re-instancie l'objet sujet pour passer à la lettre suivante
+                                    sujet = Lettre()    
                                     lettre = sujet.lettre 
                                     index = Lettre.index + 1  # indice uniquement pour les logs...
                                 else:
@@ -765,12 +768,12 @@ class Game():
                     ecran_chouette=font2.render(bidule,2,(80,241,0))
                     fenetre.blit(ecran_chouette,(255,400))
                     pygame.display.flip()
-                    time.sleep(1)
+                    time.sleep(3)
                                 
                     aleph = True
                     destruct=True
                     max=445
-                    selection = tableau[1]      
+#                    selection = tableau[1]      
     
         # Menu Scores
         if selection == tableau[1]:
@@ -780,21 +783,23 @@ class Game():
             ecran_reccords=objet.lecture_score()
             babylone=ecran_reccords
             like=25
-            for e in babylone:
-                nervure=font.render(e,2,(250,250,0))
-                fenetre.blit(nervure,(155,like))
-                pygame.display.flip()   
-                time.sleep(0.4)
-                like += 35        
-            time.sleep(5)
-    
-            for event in pygame.event.get():   
-                if event.type == KEYDOWN: 
-                    if event.key == K_ESCAPE:
-                        bipp.play()
-                        durandale = False
-
-
+            try:
+                for e in babylone:
+                    nervure=font.render(e,2,(250,250,0))
+                    fenetre.blit(nervure,(155,like))
+                    pygame.display.flip()   
+                    time.sleep(0.4)
+                    like += 35        
+                time.sleep(5)
+        
+                for event in pygame.event.get():   
+                    if event.type == KEYDOWN: 
+                        if event.key == K_ESCAPE:
+                            bipp.play()
+                            durandale = False
+            except TypeError:
+                pass
+             
         # Menu Crédits
         if selection == tableau[2]:
             # Création d'un rectangle noir pour le fond
