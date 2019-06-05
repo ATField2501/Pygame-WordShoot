@@ -4,7 +4,7 @@
 
 """ Module de Pygame-Wordshoot - cagliostro - """
 
-import base64
+
 import pickle
 import random 
 from WSconstantes import *
@@ -25,50 +25,45 @@ class Score():
         Score.score += 10
     def score_moins(self):
         Score.score -= 10
-    def verif_reccord(self , nickname):
+    def verif_reccord(self , nickname='Néant'):
+        nickname=nickname
         try:
             self.mnemo=pickle.load(open(path_shadows,'rb'))
         except IOError:
             nnn= 1
             mnemo={}
             while nnn <= 10:
-                mnemo[nnn]=nnn
-                self.mnemo=mnemo
+                mnemo[nnn]=(nickname,0)
                 nnn += 1
+            self.mnemo=mnemo
             pickle.dump(self.mnemo,open(path_shadows,'wb'))
         
-        ## Je verifis si le score est plus grand qu'une valeur du dico    
-        for value in self.mnemo.values():
-            if Score.score > int(value):
-                bidule=self.ecriture_score(nickname)
+        ## Je verifie si le score est plus grand qu'une valeur du dico    
+        for keys,value in self.mnemo.items():
+            if Score.score > value[1]:
+                bidule=self.ecriture_score(nickname, keys)
             else:
                 bidule='Aucun reccord'
                 return bidule
         return bidule
-    def ecriture_score(self, nickname, bidule='Nouveau Reccord'):
+
+    def ecriture_score(self, nickname, keys, bidule='Nouveau Reccord'):
         self.mnemo=pickle.load(open(path_shadows,'rb'))
-         # Encodage en B64
-#        nickname= base64.b64encode(nickname)
-#        score_encode=base64.b64encode(str(Score.score))
-        self.mnemo[nickname+': ']=Score.score
+        self.mnemo[keys]=(nickname,Score.score)
+#        self.mnemo[value]=self.mnemo[nickname]
         pickle.dump(self.mnemo,open(path_shadows,'wb'))
         return bidule
 
     def lecture_score(self):
         try:
             self.vrac = pickle.load(open(path_shadows,'rb'))
+            ecran_reccords=[]
+            for keys,values in self.vrac.items(): 
+                ecran_reccords.append(str(keys)+' - '+str(values)+'Pts')
+            return ecran_reccords
         except IOError:
-            self.ecriture_score()
-        ecran_reccords=[]
-        for keys,values in self.vrac.items(): 
-#            a_keys=base64.b64decode(str(keys))
-#            b_values=base64.b64decode(str(values))
-#            ecran_reccords.append(base64.b64decode(keys)+': '+base64.b64decode(values)+'Pts')
-            ecran_reccords.append(str(keys)+': '+str(values)+'Pts')
-
-        return ecran_reccords
-
-
+            self.verif_reccord()
+#            self.lecture_score()
 
 class Lecture():
     """

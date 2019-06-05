@@ -348,12 +348,16 @@ class Game():
                             long_nickname += 1
 
             while aleph == False:
-                obj = Mot() # on cree une instance de la class Mot
-                mot = obj.mot # on affecte l'attribut 'mot' de la class Mot à la variable mot
-           #     obje_V=Vitesse() # on cree une instance de la class Vitesse
-                objA = Construction(mot) # on cree une instance de la class Construction en lui passant le parametre mot 
-                artefact = objA.artefact # on affect l'attribut artefact de la class Construction à la variable artefact
-                sujet = Lettre() # Enfin, on cree une instance de la class lettre, l'objet sera le charactère à trouver de la chaine mot
+                # on cree une instance de la class Mot
+                obj = Mot()
+                # on affecte l'attribut 'mot' de la class Mot à la variable mot
+                mot = obj.mot           
+                # on cree une instance en passant en parametre mot 
+                objA = Construction(mot)
+                # on affect l'attribut artefact à la variable artefact
+                artefact = objA.artefact    
+                # on cree une instance, l'objet sera le charactère à trouver 
+                sujet = Lettre()      
                 lettre = sujet.lettre # Affectation
                 index = Lettre.index +1 # pour log
 
@@ -774,83 +778,21 @@ class Game():
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             pygame.display.flip()
             ecran_reccords=objet.lecture_score()
-            babylone='1 -  '+ecran_reccords[0]
-            zygurate='2 -  '+ecran_reccords[1]
-            persepolis='3 -  '+ecran_reccords[2]
-            armageddon='4 -  '+ecran_reccords[3]
-            nervure1=font.render(babylone,2,(250,250,0))
-            nervure2=font.render(zygurate,2,(250,250,0))
-            nervure3=font.render(persepolis,2,(250,250,0))
-            nervure4=font.render(armageddon,2,(250,250,0))
-            babylone1='5 -  '+ecran_reccords[4]
-            zygurate1='6 -  '+ecran_reccords[5]
-            persepolis1='7 -  '+ecran_reccords[6]
-            armageddon1='8 -  '+ecran_reccords[7]
-            nervure5=font.render(babylone1,2,(250,250,0))
-            nervure6=font.render(zygurate1,2,(250,250,0))
-            nervure7=font.render(persepolis1,2,(250,250,0))
-            nervure8=font.render(armageddon1,2,(250,250,0))
-            persepolis11='9 -  '+ecran_reccords[6]
-            armageddon11='10 -  '+ecran_reccords[7]
-            nervure9=font.render(persepolis11,2,(250,250,0))
-            nervure10=font.render(armageddon11,2,(250,250,0))
-            like=25 
-            durandale = True
-            while durandale:
-                fenetre.blit(nervure1,(155,like))
-                pygame.display.flip()
+            babylone=ecran_reccords
+            like=25
+            for e in babylone:
+                nervure=font.render(e,2,(250,250,0))
+                fenetre.blit(nervure,(155,like))
+                pygame.display.flip()   
                 time.sleep(0.4)
-                like += 35
-#                click.play()
-                fenetre.blit(nervure2,(155,like))
-                pygame.display.flip()
-                time.sleep(0.4)
-                like += 35
-#                click.play()
-                fenetre.blit(nervure3,(155,like))
-                pygame.display.flip()
-                time.sleep(0.4)
-                like += 35
-#                click.play()
-                fenetre.blit(nervure4,(155,like))
-                pygame.display.flip()
-                time.sleep(0.4)
-                like += 35
- #               click.play()
-                fenetre.blit(nervure5,(155,like))
-                pygame.display.flip()
-                time.sleep(0.4)
-                like += 35
-#                click.play()
-                fenetre.blit(nervure6,(155,like))
-                pygame.display.flip()
-                time.sleep(0.4)
-                like += 35
-#                click.play()
-                fenetre.blit(nervure7,(155,like))
-                pygame.display.flip()
-                time.sleep(0.4)
-                like += 35
-#                click.play()
-                fenetre.blit(nervure8,(155,like))
-                pygame.display.flip()
-                time.sleep(0.4)
-                like += 35
-#                click.play()
-                fenetre.blit(nervure9,(155,like))
-                pygame.display.flip()
-                time.sleep(0.4)
-                like += 35
-                fenetre.blit(nervure10,(155,like))
-                pygame.display.flip()
-                time.sleep(10)
-                durandale = False                
-
-                for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
-                    if event.type == KEYDOWN: 
-                        if event.key == K_ESCAPE:
-                            bipp.play()
-                            durandale = False
+                like += 35        
+            time.sleep(5)
+    
+            for event in pygame.event.get():   
+                if event.type == KEYDOWN: 
+                    if event.key == K_ESCAPE:
+                        bipp.play()
+                        durandale = False
 
 
         # Menu Crédits
