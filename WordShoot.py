@@ -754,7 +754,7 @@ class Game():
                         nb+=1
                         truc="You Loose T.T" 
                         ecran_sauvegarde=font2.render(truc,2,(80,241,0))
-                        fenetre.blit(ecran_sauvegarde,(255+nb,255+nb))
+                        fenetre.blit(ecran_sauvegarde,(255+nb,35+nb))
                         
                         # Création d'un rectangle noir pour le fond
                  #        pygame.draw.rect(fenetre, (0, 0 , 0), (0, 0, 2000 , 1100 ))
@@ -822,15 +822,15 @@ class Game():
                     for index, i  in enumerate(ether):
                         yin = i.strip()
                         credit = font.render(yin,2,( 80, 241, 0 ))
-                        fenetre.blit(credit, (125,max)) 
+                        fenetre.blit(credit, (325-long,max)) 
                         pygame.display.flip() # Rafraichissement
                         max +=35
                         time.sleep(0.1)
-                    for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
-                        if event.type == KEYDOWN: 
-                            if event.key == K_ESCAPE:
-                                bipp.play()
-                                break
+                        for event in pygame.event.get():
+                            if event.type == KEYDOWN: 
+                                if event.key == K_ESCAPE:
+                                    bipp.play()
+                                    break
             formalite = True
             aleph = False
             sauvegarde == False
