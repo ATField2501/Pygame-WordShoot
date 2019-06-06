@@ -112,21 +112,20 @@ class Game():
     objet=Score() # Construction du score
     score= Score.score
     obj= Lecture() # Lecture du fichier
-    obj= Selecteur() # Première instance sans parametre 
+    obj= Selecteur() # Initialisation de l'index du selecteur 
     selection= obj.selecteur
-
-    supra= Vie_Joueur()
 
     # Démarage de la musique de fond
 #    pygame.mixer.music.set_volume(0.5) #Met le volume à 0.5 (moitié)
 #    pygame.mixer.music.play()
-    c= 1
+
     continuer= True
     while continuer:
+        # Initialisation du capital de points de vie
+        supra= Vie_Joueur()
         #Limitation de vitesse de la boucle
         pygame.time.Clock().tick(30) # 30 fps
         obj=Selecteur() # Première instance sans parametre 
-#    obj.reinit()
         selection=obj.selecteur
         ##### Ecran Principale
         c = True
@@ -148,13 +147,13 @@ class Game():
                         sys.exit(0)
                     if event.key == K_DOWN:
                         bipp.play()
-                        obj.deplace_moins() # Appel de la methode deplace_moins de la class Selecteur
-                        obj=Selecteur() # Instance de la class Selecteur 
+                        obj.deplace_moins() 
+                        obj=Selecteur()  
                         selection=obj.selecteur
                     if event.key == K_UP:
                         bipp.play()
-                        obj.deplace_plus() # Appel de la methode deplace_plus de la class Selecteur
-                        obj=Selecteur() # Instance de la class Selecteur
+                        obj.deplace_plus() 
+                        obj=Selecteur() 
                         selection=obj.selecteur
 
 
@@ -167,13 +166,14 @@ class Game():
             pygame.display.flip()
             
             long_nickname=0
-            while formalite == True and long_nickname < 12: # je limite la longueur du nickname 9
-                for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
-                                            
-                    if event.type == QUIT:     #Si un de ces événements est de type QUIT
+            # je limite la longueur du nickname 12
+            while formalite == True and long_nickname < 12:
+                for event in pygame.event.get():
+                    # Si un de ces événements est de type QUIT
+                    if event.type == QUIT:     
                         formalite = False
-
-                    if event.type == KEYDOWN: # Si un de ces éléments est de type clavier
+                    # Si un de ces éléments est de type clavier
+                    if event.type == KEYDOWN:
                         if event.key == K_RETURN:
                             formalite = False
                             long_nickname=12
@@ -346,20 +346,27 @@ class Game():
                             fenetre.blit(stone,(50,550))
                             pygame.display.flip()
                             long_nickname += 1
-
+            
+            
+            aleph = False
             while aleph == False:
-                obj = Mot() # on cree une instance de la class Mot
-                mot = obj.mot # on affecte l'attribut 'mot' de la class Mot à la variable mot
-           #     obje_V=Vitesse() # on cree une instance de la class Vitesse
-                objA = Construction(mot) # on cree une instance de la class Construction en lui passant le parametre mot 
-                artefact = objA.artefact # on affect l'attribut artefact de la class Construction à la variable artefact
-                sujet = Lettre() # Enfin, on cree une instance de la class lettre, l'objet sera le charactère à trouver de la chaine mot
+                # on cree une instance de la class Mot
+                obj = Mot()
+                # on affecte l'attribut 'mot' de la class Mot à la variable mot
+                mot = obj.mot           
+                # on cree une instance en passant en parametre mot 
+                objA = Construction(mot)
+                # on affect l'attribut artefact à la variable artefact
+                artefact = objA.artefact    
+                # on cree une instance, l'objet sera le charactère à trouver 
+                sujet = Lettre()      
                 lettre = sujet.lettre # Affectation
                 index = Lettre.index +1 # pour log
 
                 ########### Construction fenetres
                 text = font.render(mot,2,( 80, 241, 0 ))
-                aaaa=random.randint(1,720)   # On tire au hasard le point d'apparition du mot sur l'axe horizontale
+                # On tire au hasard le point d'apparition du mot sur l'axe horizontale
+                aaaa=random.randint(1,720)  
                 fenetre.blit(text, (aaaa,1))
                 objet.score_forme()
                 sCore = font.render(str(objet.score_en_forme),2,( 80, 241, 0 ))
@@ -377,10 +384,10 @@ class Game():
                     pygame.time.Clock().tick(obje_V.vitesse)
                     fenetre.blit(text, (aaaa,max))   # affichage text tombant  
                     max +=1   
-
-                    score=Score.score  # Affectation de la variable d'instance score
-
-                    sujet.alteration() # Appel de la methode alteration de la class Lettre
+                    # Affectation de la variable d'instance score
+                    score=Score.score 
+                    # Appel de la methode alteration de la class Lettre
+                    sujet.alteration() 
                     sample2=sujet.sample2
                     text1 = font.render(sample2,2,( 255, 0, 0 ))
                     fenetre.blit(text1, (aaaa,max))
@@ -392,10 +399,9 @@ class Game():
                         sauvegarde = supra.enlev_vie()
                         sujet.reinit()
 
-                 
+                    # Affichage chaine de charactère contenue dans la liste 'artefact"
                     simbad= ''.join(artefact)
-                    ping = font2.render(simbad,22,( 240, 240, 4 )) # Affichage chaine de charactère contenue dans la liste 'artefact"
-
+                    ping = font2.render(simbad,22,( 240, 240, 4 )) 
                     pygame.display.flip() # Rafraichissement
                     fenetre.blit(neo, (0,0))
                     fenetre.blit(ligne1, (0,450))
@@ -403,17 +409,18 @@ class Game():
                     fenetre.blit(sCore, (700,550))
                     fenetre.blit(vie, (50,550))
                     fenetre.blit(ping,(325,550))
-                    for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
-
-
-                        if event.type == QUIT:     #Si un de ces événements est de type QUIT
+                    #On parcours la liste de tous les événements reçus
+                    for event in pygame.event.get():   
+                        #Si un de ces événements est de type QUIT
+                        if event.type == QUIT:        
                             continuer = False
                             destruct = True
-
-                        if event.type == KEYDOWN: # Si un de ces éléments est de type clavier
+                        # Si un de ces éléments est de type clavier
+                        if event.type == KEYDOWN:       
                             if event.key == K_ESCAPE:
                                 bipp.play()
-                                sujet.reinit() # Reinitialisation de l'index pour detruire complètement le sujet
+                                # Reinitialisation de l'index pour detruire complètement le sujet
+                                sujet.reinit()
                                 destruct = True
                                 max = 455
                                 aleph = True
@@ -422,8 +429,10 @@ class Game():
                             if event.key == K_a:
                                 if 'a' == lettre:
                                     print '** UP **'
-                                    objA.tetris(lettre)  # appel de la methode tetris de la class Construction qui modifie la liste artefact
-                                    sujet = Lettre()     # On re-instancie l'objet sujet pour passer à la lettre suivante
+                                    # appel de la methode tetris qui modifie la liste artefact
+                                    objA.tetris(lettre)
+                                    # On re-instancie l'objet sujet pour passer à la lettre suivante
+                                    sujet = Lettre()    
                                     lettre = sujet.lettre 
                                     index = Lettre.index + 1  # indice uniquement pour les logs...
                                 else:
@@ -731,13 +740,11 @@ class Game():
                             if sujet.victoire == True:
                                 print '** VICTORY !! **'
                                 excelent.play() 
-                                objet.score_plus() # incrémente le score
-                                
+                                objet.score_plus() # incrémente le score 
                                 objet.score_forme() # je le remet en forme string
                                 max = 455     # On termine la boucle
 
                 son_vitesse(score, supra)  # Appel de la procédure son_vitesse         
-
                 pygame.display.flip() # Rafraichissement
 
                 if sauvegarde == True:
@@ -761,96 +768,44 @@ class Game():
                     ecran_chouette=font2.render(bidule,2,(80,241,0))
                     fenetre.blit(ecran_chouette,(255,400))
                     pygame.display.flip()
-                    time.sleep(1)
-                                
+                    time.sleep(3)
+                    formalite = True                   
+                    
+#                    destruct=True
+                    sauvegarde = False
+                    continuer = True
+                    supra.reinit_vie()
                     aleph = True
-                    destruct=True
-                    max=445
-                    selection = tableau[1]      
-    
+        
         # Menu Scores
         if selection == tableau[1]:
             # Création d'un rectangle noir pour le fond
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             pygame.display.flip()
             ecran_reccords=objet.lecture_score()
-            babylone='1 -  '+ecran_reccords[0]
-            zygurate='2 -  '+ecran_reccords[1]
-            persepolis='3 -  '+ecran_reccords[2]
-            armageddon='4 -  '+ecran_reccords[3]
-            nervure1=font.render(babylone,2,(250,250,0))
-            nervure2=font.render(zygurate,2,(250,250,0))
-            nervure3=font.render(persepolis,2,(250,250,0))
-            nervure4=font.render(armageddon,2,(250,250,0))
-            babylone1='5 -  '+ecran_reccords[4]
-            zygurate1='6 -  '+ecran_reccords[5]
-            persepolis1='7 -  '+ecran_reccords[6]
-            armageddon1='8 -  '+ecran_reccords[7]
-            nervure5=font.render(babylone1,2,(250,250,0))
-            nervure6=font.render(zygurate1,2,(250,250,0))
-            nervure7=font.render(persepolis1,2,(250,250,0))
-            nervure8=font.render(armageddon1,2,(250,250,0))
-            persepolis11='9 -  '+ecran_reccords[6]
-            armageddon11='10 -  '+ecran_reccords[7]
-            nervure9=font.render(persepolis11,2,(250,250,0))
-            nervure10=font.render(armageddon11,2,(250,250,0))
-            like=25 
-            durandale = True
-            while durandale:
-                fenetre.blit(nervure1,(155,like))
-                pygame.display.flip()
-                time.sleep(0.4)
-                like += 35
-#                click.play()
-                fenetre.blit(nervure2,(155,like))
-                pygame.display.flip()
-                time.sleep(0.4)
-                like += 35
-#                click.play()
-                fenetre.blit(nervure3,(155,like))
-                pygame.display.flip()
-                time.sleep(0.4)
-                like += 35
-#                click.play()
-                fenetre.blit(nervure4,(155,like))
-                pygame.display.flip()
-                time.sleep(0.4)
-                like += 35
- #               click.play()
-                fenetre.blit(nervure5,(155,like))
-                pygame.display.flip()
-                time.sleep(0.4)
-                like += 35
-#                click.play()
-                fenetre.blit(nervure6,(155,like))
-                pygame.display.flip()
-                time.sleep(0.4)
-                like += 35
-#                click.play()
-                fenetre.blit(nervure7,(155,like))
-                pygame.display.flip()
-                time.sleep(0.4)
-                like += 35
-#                click.play()
-                fenetre.blit(nervure8,(155,like))
-                pygame.display.flip()
-                time.sleep(0.4)
-                like += 35
-#                click.play()
-                fenetre.blit(nervure9,(155,like))
-                pygame.display.flip()
-                time.sleep(0.4)
-                like += 35
-                fenetre.blit(nervure10,(155,like))
-                pygame.display.flip()
-                time.sleep(10)
-                durandale = False                
-
-                for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
+            babylone=ecran_reccords
+            like=25
+            try:
+                for e in babylone:
+                    nervure=font.render(e,2,(250,250,0))
+                    fenetre.blit(nervure,(155,like))
+                    pygame.display.flip()   
+                    time.sleep(0.4)
+                    like += 35        
+                time.sleep(5)
+        
+                for event in pygame.event.get():   
                     if event.type == KEYDOWN: 
                         if event.key == K_ESCAPE:
                             bipp.play()
-                            durandale = False
+                            
+            except TypeError:
+                pass
+            formalite = True
+            aleph = False
+            sauvegarde = False
+            continuer = True
+            supra.reinit_vie()
 
 
         # Menu Crédits
@@ -876,6 +831,9 @@ class Game():
                             if event.key == K_ESCAPE:
                                 bipp.play()
                                 break
+            formalite = True
+            aleph = False
+            sauvegarde == False
 
 
 

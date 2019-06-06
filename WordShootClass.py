@@ -4,7 +4,7 @@
 
 """ Module de Pygame-Wordshoot - cagliostro - """
 
-import base64
+
 import pickle
 import random 
 from WSconstantes import *
@@ -25,54 +25,54 @@ class Score():
         Score.score += 10
     def score_moins(self):
         Score.score -= 10
-    def verif_reccord(self , nickname):
+    def verif_reccord(self , nickname='Neant'):
+        self.nickname=nickname
         try:
             self.mnemo=pickle.load(open(path_shadows,'rb'))
         except IOError:
             nnn= 1
             mnemo={}
             while nnn <= 10:
-                mnemo[nnn]=nnn
-                self.mnemo=mnemo
+                mnemo[nnn]=(self.nickname,0)
                 nnn += 1
+            self.mnemo=mnemo
             pickle.dump(self.mnemo,open(path_shadows,'wb'))
-        
-        ## Je verifis si le score est plus grand qu'une valeur du dico    
-        for value in self.mnemo.values():
-            if Score.score > int(value):
-                bidule=self.ecriture_score(nickname)
-            else:
+    
+        ## Je verifie si le score est plus grand qu'une valeur du dico    
+        for keys,value in self.mnemo.items():
+            victory=False
+            if Score.score > value[1]:
+                self.ecriture_score(self.nickname, keys)
+                victory=True
+            if victory == False:
                 bidule='Aucun reccord'
-                return bidule
+            elif victory == True:
+                bidule='Nouveau Reccord'
         return bidule
-    def ecriture_score(self, nickname, bidule='Nouveau Reccord'):
+
+    def ecriture_score(self, nickname , keys):
         self.mnemo=pickle.load(open(path_shadows,'rb'))
-         # Encodage en B64
-#        nickname= base64.b64encode(nickname)
-#        score_encode=base64.b64encode(str(Score.score))
-        self.mnemo[nickname+': ']=Score.score
+        for i,e in enumerate(self.mnemo):
+            self.mnemo[i]=(self.nickname,Score.score)
+            break
         pickle.dump(self.mnemo,open(path_shadows,'wb'))
-        return bidule
 
     def lecture_score(self):
         try:
             self.vrac = pickle.load(open(path_shadows,'rb'))
+            ecran_reccords=[]
+            for keys,values in self.vrac.items(): 
+                ecran_reccords.append(str(keys)+' - '+str(values)+'Pts')
+            return ecran_reccords
         except IOError:
-            self.ecriture_score()
-        ecran_reccords=[]
-        for keys,values in self.vrac.items(): 
-#            a_keys=base64.b64decode(str(keys))
-#            b_values=base64.b64decode(str(values))
-#            ecran_reccords.append(base64.b64decode(keys)+': '+base64.b64decode(values)+'Pts')
-            ecran_reccords.append(str(keys)+': '+str(values)+'Pts')
-
-        return ecran_reccords
-
+            ecran_reccords=self.verif_reccord()
+            return ecran_reccords
 
 
 class Lecture():
     """
-    Class lisant un fichier pour en extraire les lignes et les incorporer à la liste 'tableau'
+    Class lisant un fichier pour en extraire les lignes 
+    et les incorporer à la liste 'tableau'
     """
     tableau=[]
     def __init__(self, tableau = []):
@@ -97,19 +97,21 @@ class Mot(Lecture):
         Mot.maximum = len(Mot.mot) 
         
 
+
 class Lettre(Mot):
     """
     Class renvoyant un objet construit sur le mot à trouver et représentant la lettre à trouver (dans le bon ordre) 
     """ 
-    index= -1                               # index a -1 pour demarrer à zéro lors de l'instanciation de l'objet
-    def __init__(self):                     # appel de la méthode constructeur
-        self.victoire = False               # initialisation de la variable d'instance victoire à false
+    # index a -1 pour demarrer à zéro 
+    index= -1                               
+    def __init__(self):                     
+        self.victoire = False               
         Lettre.index += 1
         if Lettre.index == Mot.maximum:
             Lettre.index= -1
             self.victoire=True
-        self.lettre = Mot.mot[Lettre.index]# Valeur contenue dans la liste mot à l'index deffinie affécté à la var d'instance lettre 
-
+        # Valeur contenue dans la liste mot à l'index deffinie 
+        self.lettre = Mot.mot[Lettre.index]
     def reinit(self):
         """ Methode de réinitialisation de l'index """
         Lettre.index = -1
@@ -119,7 +121,7 @@ class Lettre(Mot):
         self.sample1 = Mot.mot[Lettre.index:]
         self.sample2 = Mot.mot[:Lettre.index]
 
-class Construction(Lettre):  ### Super héritage pour récuperer facilement l'index de la lettre
+class Construction(Lettre): # Super héritage pour récuperer facilement l'index de la lettre
     """
     Class dont le role est de construire une chaine 'artefact' identique à la chaine 'mot' mais dont les charactères sont remplacés par des asterix (*)
     Et aussi de restituer les lettre à 'artefact' pour reconstruire le mot proposé par le joueur.
@@ -153,7 +155,10 @@ class Vitesse(Score):
             self.vitesse = 100      
         if Score.score >= 600:
             self.vitesse = 110  
-        
+       
+
+
+
 class Vie_Joueur():
     vie_joueur=3
     def __init__(self):
@@ -172,7 +177,9 @@ class Vie_Joueur():
             return sauvegarde
         else:    
             self.vue_sur_vie_joueur='* '*Vie_Joueur.vie_joueur
-
+    def reinit_vie(self):
+        """ Réinitialise le nombre de vie """
+        Vie_Joueur.vie_joueur=3
 
 
 
@@ -183,7 +190,8 @@ class Selecteur():
     tableau=['Start','Scores','Credits']
     index = 0
     def __init__(self):
-        if Selecteur.index > 2:   ## En fonction du nombre d'éléments du tableau
+        # En fonction du nombre d'éléments du tableau
+        if Selecteur.index > 2:   
             Selecteur.index = 0
         if Selecteur.index < 0:
             Selecteur.index = 2
