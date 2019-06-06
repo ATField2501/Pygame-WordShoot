@@ -112,21 +112,20 @@ class Game():
     objet=Score() # Construction du score
     score= Score.score
     obj= Lecture() # Lecture du fichier
-    obj= Selecteur() # Première instance sans parametre 
+    obj= Selecteur() # Initialisation de l'index du selecteur 
     selection= obj.selecteur
-
-    supra= Vie_Joueur()
 
     # Démarage de la musique de fond
 #    pygame.mixer.music.set_volume(0.5) #Met le volume à 0.5 (moitié)
 #    pygame.mixer.music.play()
-    c= 1
+
     continuer= True
     while continuer:
+        # Initialisation du capital de points de vie
+        supra= Vie_Joueur()
         #Limitation de vitesse de la boucle
         pygame.time.Clock().tick(30) # 30 fps
         obj=Selecteur() # Première instance sans parametre 
-#    obj.reinit()
         selection=obj.selecteur
         ##### Ecran Principale
         c = True
@@ -148,13 +147,13 @@ class Game():
                         sys.exit(0)
                     if event.key == K_DOWN:
                         bipp.play()
-                        obj.deplace_moins() # Appel de la methode deplace_moins de la class Selecteur
-                        obj=Selecteur() # Instance de la class Selecteur 
+                        obj.deplace_moins() 
+                        obj=Selecteur()  
                         selection=obj.selecteur
                     if event.key == K_UP:
                         bipp.play()
-                        obj.deplace_plus() # Appel de la methode deplace_plus de la class Selecteur
-                        obj=Selecteur() # Instance de la class Selecteur
+                        obj.deplace_plus() 
+                        obj=Selecteur() 
                         selection=obj.selecteur
 
 
@@ -167,13 +166,14 @@ class Game():
             pygame.display.flip()
             
             long_nickname=0
-            while formalite == True and long_nickname < 12: # je limite la longueur du nickname 9
-                for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
-                                            
-                    if event.type == QUIT:     #Si un de ces événements est de type QUIT
+            # je limite la longueur du nickname 12
+            while formalite == True and long_nickname < 12:
+                for event in pygame.event.get():
+                    # Si un de ces événements est de type QUIT
+                    if event.type == QUIT:     
                         formalite = False
-
-                    if event.type == KEYDOWN: # Si un de ces éléments est de type clavier
+                    # Si un de ces éléments est de type clavier
+                    if event.type == KEYDOWN:
                         if event.key == K_RETURN:
                             formalite = False
                             long_nickname=12
@@ -346,7 +346,9 @@ class Game():
                             fenetre.blit(stone,(50,550))
                             pygame.display.flip()
                             long_nickname += 1
-
+            
+            
+            aleph = False
             while aleph == False:
                 # on cree une instance de la class Mot
                 obj = Mot()
@@ -738,13 +740,11 @@ class Game():
                             if sujet.victoire == True:
                                 print '** VICTORY !! **'
                                 excelent.play() 
-                                objet.score_plus() # incrémente le score
-                                
+                                objet.score_plus() # incrémente le score 
                                 objet.score_forme() # je le remet en forme string
                                 max = 455     # On termine la boucle
 
                 son_vitesse(score, supra)  # Appel de la procédure son_vitesse         
-
                 pygame.display.flip() # Rafraichissement
 
                 if sauvegarde == True:
@@ -769,12 +769,14 @@ class Game():
                     fenetre.blit(ecran_chouette,(255,400))
                     pygame.display.flip()
                     time.sleep(3)
-                                
+                    formalite = True                   
+                    
+#                    destruct=True
+                    sauvegarde = False
+                    continuer = True
+                    supra.reinit_vie()
                     aleph = True
-                    destruct=True
-                    max=445
-#                    selection = tableau[1]      
-    
+        
         # Menu Scores
         if selection == tableau[1]:
             # Création d'un rectangle noir pour le fond
@@ -796,10 +798,16 @@ class Game():
                     if event.type == KEYDOWN: 
                         if event.key == K_ESCAPE:
                             bipp.play()
-                            durandale = False
+                            
             except TypeError:
                 pass
-             
+            formalite = True
+            aleph = False
+            sauvegarde = False
+            continuer = True
+            supra.reinit_vie()
+
+
         # Menu Crédits
         if selection == tableau[2]:
             # Création d'un rectangle noir pour le fond
@@ -823,6 +831,9 @@ class Game():
                             if event.key == K_ESCAPE:
                                 bipp.play()
                                 break
+            formalite = True
+            aleph = False
+            sauvegarde == False
 
 
 

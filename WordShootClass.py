@@ -42,7 +42,7 @@ class Score():
         for keys,value in self.mnemo.items():
             victory=False
             if Score.score > value[1]:
-                bidule=self.ecriture_score(self.nickname, keys)
+                self.ecriture_score(self.nickname, keys)
                 victory=True
             if victory == False:
                 bidule='Aucun reccord'
@@ -67,6 +67,8 @@ class Score():
         except IOError:
             ecran_reccords=self.verif_reccord()
             return ecran_reccords
+
+
 class Lecture():
     """
     Class lisant un fichier pour en extraire les lignes 
@@ -95,19 +97,21 @@ class Mot(Lecture):
         Mot.maximum = len(Mot.mot) 
         
 
+
 class Lettre(Mot):
     """
     Class renvoyant un objet construit sur le mot à trouver et représentant la lettre à trouver (dans le bon ordre) 
     """ 
-    index= -1                               # index a -1 pour demarrer à zéro lors de l'instanciation de l'objet
-    def __init__(self):                     # appel de la méthode constructeur
-        self.victoire = False               # initialisation de la variable d'instance victoire à false
+    # index a -1 pour demarrer à zéro 
+    index= -1                               
+    def __init__(self):                     
+        self.victoire = False               
         Lettre.index += 1
         if Lettre.index == Mot.maximum:
             Lettre.index= -1
             self.victoire=True
-        self.lettre = Mot.mot[Lettre.index]# Valeur contenue dans la liste mot à l'index deffinie affécté à la var d'instance lettre 
-
+        # Valeur contenue dans la liste mot à l'index deffinie 
+        self.lettre = Mot.mot[Lettre.index]
     def reinit(self):
         """ Methode de réinitialisation de l'index """
         Lettre.index = -1
@@ -117,7 +121,7 @@ class Lettre(Mot):
         self.sample1 = Mot.mot[Lettre.index:]
         self.sample2 = Mot.mot[:Lettre.index]
 
-class Construction(Lettre):  ### Super héritage pour récuperer facilement l'index de la lettre
+class Construction(Lettre): # Super héritage pour récuperer facilement l'index de la lettre
     """
     Class dont le role est de construire une chaine 'artefact' identique à la chaine 'mot' mais dont les charactères sont remplacés par des asterix (*)
     Et aussi de restituer les lettre à 'artefact' pour reconstruire le mot proposé par le joueur.
@@ -151,7 +155,10 @@ class Vitesse(Score):
             self.vitesse = 100      
         if Score.score >= 600:
             self.vitesse = 110  
-        
+       
+
+
+
 class Vie_Joueur():
     vie_joueur=3
     def __init__(self):
@@ -170,7 +177,9 @@ class Vie_Joueur():
             return sauvegarde
         else:    
             self.vue_sur_vie_joueur='* '*Vie_Joueur.vie_joueur
-
+    def reinit_vie(self):
+        """ Réinitialise le nombre de vie """
+        Vie_Joueur.vie_joueur=3
 
 
 
@@ -181,7 +190,8 @@ class Selecteur():
     tableau=['Start','Scores','Credits']
     index = 0
     def __init__(self):
-        if Selecteur.index > 2:   ## En fonction du nombre d'éléments du tableau
+        # En fonction du nombre d'éléments du tableau
+        if Selecteur.index > 2:   
             Selecteur.index = 0
         if Selecteur.index < 0:
             Selecteur.index = 2
