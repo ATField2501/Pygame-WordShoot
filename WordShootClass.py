@@ -18,55 +18,72 @@ class Score():
     """
     score= 0
     def __init__(self):
-        """ """
+        Score.score=0
     def score_forme(self):
         self.score_en_forme= str(Score.score) + 'Pts'
     def score_plus(self):
         Score.score += 10
     def score_moins(self):
         Score.score -= 10
-    def verif_reccord(self , nickname='Neant'):
-        self.nickname=nickname
+    def verif_reccord(self , nicknamu='Neant'):
         try:
             self.mnemo=pickle.load(open(path_shadows,'rb'))
+        # Si pas de fichier pickle    
         except IOError:
             nnn= 1
             mnemo={}
             while nnn <= 10:
-                mnemo[nnn]=(self.nickname,0)
+                mnemo[nnn]=0
                 nnn += 1
             self.mnemo=mnemo
             pickle.dump(self.mnemo,open(path_shadows,'wb'))
-    
+            pass
+
         ## Je verifie si le score est plus grand qu'une valeur du dico    
         for keys,value in self.mnemo.items():
             victory=False
-            if Score.score > value[1]:
-                self.ecriture_score(self.nickname, keys)
+            if Score.score > int(value):
+                self.ecriture_score(nicknamu, keys)
                 victory=True
-            if victory == False:
-                bidule='Aucun reccord'
-            elif victory == True:
-                bidule='Nouveau Reccord'
+                break
+        if victory == False:
+            bidule='Aucun reccord'
+        elif victory == True:
+            bidule='Nouveau Reccord'
         return bidule
 
-    def ecriture_score(self, nickname , keys):
+    def ecriture_score(self, nicknamu , keys):
         self.mnemo=pickle.load(open(path_shadows,'rb'))
-        for i,e in enumerate(self.mnemo):
-            self.mnemo[i]=(self.nickname,Score.score)
-            break
+        print(self.mnemo)
+        # insertion du nouveau reccord
+        self.mnemo[nicknamu]=Score.score
+        try:
+            self.mnemo.pop(keys)
+
+        except KeyError:
+            pass
+        print(self.mnemo)
         pickle.dump(self.mnemo,open(path_shadows,'wb'))
+
 
     def lecture_score(self):
         try:
             self.vrac = pickle.load(open(path_shadows,'rb'))
+            blitz=sorted(self.vrac.values(),reverse=True)
             ecran_reccords=[]
-            for keys,values in self.vrac.items(): 
-                ecran_reccords.append(str(keys)+' - '+str(values)+'Pts')
-            return ecran_reccords
+#### snippet MrGecko 
+            f = lambda dico : sorted(self.vrac.items(),lambda a,b: cmp(a[1],b[1]),reverse=True)
+####################   
+            tmp=f(self.vrac)  
+            nb=1
+            for e in tmp: 
+                ecran_reccords.append(str(nb)+' '+str(e[0])+' - '+str(e[1])+'Pts')
+                nb +=1
+            print(ecran_reccords)
+#            print(tmp)
         except IOError:
             ecran_reccords=self.verif_reccord()
-            return ecran_reccords
+        return ecran_reccords
 
 
 class Lecture():
@@ -142,9 +159,9 @@ class Vitesse(Score):
     def __init__(self):
         
         if Score.score < 100:
-            self.vitesse= 40
+            self.vitesse= 60
         if Score.score >= 100:
-             self.vitesse = 60
+             self.vitesse = 70
         if Score.score >= 200:
             self.vitesse = 70
         if Score.score >= 300:

@@ -759,18 +759,18 @@ class Game():
                         # Création d'un rectangle noir pour le fond
                  #        pygame.draw.rect(fenetre, (0, 0 , 0), (0, 0, 2000 , 1100 ))
                         pygame.display.flip()
-
-                    nickname = nickname[:1]                     
-                    nickname=''.join(nickname)
+                 
+                    nicknamu=''.join(nickname[1:])
                        
                     # Vérification si le score est un reccord
-                    bidule=objet.verif_reccord(nickname)
+                    bidule=objet.verif_reccord(nicknamu)
                     ecran_chouette=font2.render(bidule,2,(80,241,0))
                     fenetre.blit(ecran_chouette,(255,400))
                     pygame.display.flip()
                     time.sleep(3)
                     formalite = True                   
-                    
+                    objet=Score() # Construction du score
+                   
 #                    destruct=True
                     sauvegarde = False
                     continuer = True
