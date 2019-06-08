@@ -88,7 +88,7 @@ class Score():
             nb=1
             # je n'affiche que les dix premiers résultats
             for e in tmp: 
-                ecran_reccords.append(str(nb)+' '+str(e[0])+' - '+str(e[1])+'Pts')
+                ecran_reccords.append(str(nb)+' - '+str(e[0])+' - '+str(e[1])+' Pts')
                 nb +=1
                 if nb == 11:
                     break

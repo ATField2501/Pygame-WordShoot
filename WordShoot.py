@@ -175,14 +175,19 @@ class Game():
                     # Si un de ces éléments est de type clavier
                     if event.type == KEYDOWN:
                         if event.key == K_RETURN:
-                            formalite = False
                             long_nickname=12
                         if event.key == K_BACKSPACE:
-                            tmp=nickname.split()
-                            del tmp[-1]
-                            nickname=''.join(tmp)
-                       #     nickname= tmp.split() 
-                            long_nickname -= 1
+                            try:
+                                del nickname[-1]
+                                long_nickname -= 1
+                            except  IndexError:
+                                long_nickname=0
+                                pass
+                            fenetre.blit(ecran1,(0,0)) ## Ecran de depart
+                            stone22= font.render(''.join(nickname),2,(80,241,0))
+                            fenetre.blit(stone22,(50,550))
+                            pygame.display.flip()
+ 
                         if event.key == K_a:
                             nickname.append('a')
                             stone= font.render(''.join(nickname),2,(80,241,0))
