@@ -57,11 +57,11 @@ class Score():
         print(self.mnemo)
         # insertion du nouveau reccord
         self.mnemo[nicknamu]=Score.score
-        try:
-            self.mnemo.pop(keys)
-
-        except KeyError:
-            pass
+#        try:
+#            self.mnemo.pop(keys)
+#
+#        except KeyError:
+#            pass
         print(self.mnemo)
         pickle.dump(self.mnemo,open(path_shadows,'wb'))
 
@@ -70,15 +70,19 @@ class Score():
         try:
             self.vrac = pickle.load(open(path_shadows,'rb'))
             blitz=sorted(self.vrac.values(),reverse=True)
+            print(self.vrac)
             ecran_reccords=[]
-#### snippet MrGecko 
+            #### snippet MrGecko (tri un dico par valeurs en mode reverse) 
             f = lambda dico : sorted(self.vrac.items(),lambda a,b: cmp(a[1],b[1]),reverse=True)
-####################   
+            ####################   
             tmp=f(self.vrac)  
             nb=1
+            # je n'affiche que les dix premiers résultats
             for e in tmp: 
                 ecran_reccords.append(str(nb)+' '+str(e[0])+' - '+str(e[1])+'Pts')
                 nb +=1
+                if nb == 11:
+                    break
             print(ecran_reccords)
 #            print(tmp)
         except IOError:

@@ -177,7 +177,12 @@ class Game():
                         if event.key == K_RETURN:
                             formalite = False
                             long_nickname=12
-
+                        if event.key == K_BACKSPACE:
+                            tmp=nickname.split()
+                            del tmp[-1]
+                            nickname=''.join(tmp)
+                       #     nickname= tmp.split() 
+                            long_nickname -= 1
                         if event.key == K_a:
                             nickname.append('a')
                             stone= font.render(''.join(nickname),2,(80,241,0))
