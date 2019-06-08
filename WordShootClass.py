@@ -41,11 +41,21 @@ class Score():
 
         ## Je verifie si le score est plus grand qu'une valeur du dico    
         for keys,value in self.mnemo.items():
-            victory=False
-            if Score.score > int(value):
-                self.ecriture_score(nicknamu, keys)
-                victory=True
-                break
+            victory=False   
+            # j'ecris le score du joueur
+            self.ecriture_score(nicknamu, keys)
+        # je construis la liste des scores
+        self.vrac = pickle.load(open(path_shadows,'rb')) 
+        #### snippet MrGecko (tri un dico par valeurs en mode reverse) 
+        f = lambda dico : sorted(self.vrac.items(),lambda a,b: cmp(a[1],b[1]),reverse=True)
+        ####################   
+        tmp=f(self.vrac)  
+
+        # je verifis la présence d'un reccord
+        for i,e in tmp:
+            if e < Score.score:
+                victory = True
+
         if victory == False:
             bidule='Aucun reccord'
         elif victory == True:
@@ -69,7 +79,6 @@ class Score():
     def lecture_score(self):
         try:
             self.vrac = pickle.load(open(path_shadows,'rb'))
-            blitz=sorted(self.vrac.values(),reverse=True)
             print(self.vrac)
             ecran_reccords=[]
             #### snippet MrGecko (tri un dico par valeurs en mode reverse) 
@@ -119,6 +128,7 @@ class Mot(Lecture):
         
 
 
+
 class Lettre(Mot):
     """
     Class renvoyant un objet construit sur le mot à trouver et représentant la lettre à trouver (dans le bon ordre) 
@@ -138,49 +148,60 @@ class Lettre(Mot):
         Lettre.index = -1
 
     def alteration(self):
-        """  Methode d'alteration du mot à trouver. Split la chaine pour colorier en rouge la première partie """
+        """ Methode d'alteration du mot à trouver. 
+            Split la chaine pour colorier en rouge la première partie """
         self.sample1 = Mot.mot[Lettre.index:]
         self.sample2 = Mot.mot[:Lettre.index]
 
-class Construction(Lettre): # Super héritage pour récuperer facilement l'index de la lettre
-    """
-    Class dont le role est de construire une chaine 'artefact' identique à la chaine 'mot' mais dont les charactères sont remplacés par des asterix (*)
-    Et aussi de restituer les lettre à 'artefact' pour reconstruire le mot proposé par le joueur.
-    """
+
+
+
+class Construction(Lettre): # Super héritage pour récuperer l'index de la lettre
+    """ Class dont le role est de construire une chaine 'artefact' identique 
+        à la chaine 'mot' mais dont les charactères sont remplacés par des asterix (*)
+        Et aussi de restituer les lettre à 'artefact' pour reconstruire 
+        le mot proposé par le joueur."""
     def __init__(self, mot):
         self.artefact = []
         for i in mot:
             self.artefact += '_'  # Construction de la liste 'artefact'
     def tetris(self ,lettre):
-        """ Methode reconstruisant artefact en substituant les asterix par la lettre trouvée"""
+        """ Methode reconstruisant artefact en substituant 
+            les asterix par la lettre trouvée
+        """
         self.artefact[Lettre.index] = lettre       
+
+
 
 
 class Vitesse(Score):
     """
-    Class renvoyant un indice de vitesse en fonction du score ^(;,,;)^ et ia ia Cthulhu...
+    Class renvoyant un indice de vitesse en fonction du score 
+    ^(;,,;)^ et ia ia Cthulhu...
     """
     def __init__(self):
         
         if Score.score < 100:
             self.vitesse= 60
         if Score.score >= 100:
-             self.vitesse = 70
+             self.vitesse = 100
         if Score.score >= 200:
-            self.vitesse = 70
+            self.vitesse = 150
         if Score.score >= 300:
-            self.vitesse = 80 
+            self.vitesse = 160
         if Score.score >= 400:
-            self.vitesse = 90 
+            self.vitesse = 170 
         if Score.score >= 500:
-            self.vitesse = 100      
+            self.vitesse = 180      
         if Score.score >= 600:
-            self.vitesse = 110  
+            self.vitesse = 190  
        
 
 
 
+
 class Vie_Joueur():
+    """ Gestion des points de vie du joueur """
     vie_joueur=3
     def __init__(self):
         self.vue_sur_vie_joueur='* '*Vie_Joueur.vie_joueur
