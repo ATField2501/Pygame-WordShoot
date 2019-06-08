@@ -408,6 +408,7 @@ class Game():
                         objet.score_forme()
                         sauvegarde = supra.enlev_vie()
                         sujet.reinit()
+                        destruct = True
 
                     # Affichage chaine de charactère contenue dans la liste 'artefact"
                     simbad= ''.join(artefact)
@@ -827,12 +828,16 @@ class Game():
             with open(path+"Caglio_credits.txt", "r") as fichier:
                 for ligne in fichier:
                     ether.append(ligne)
-                    long= len(ether)
+                    long= len(ligne)
                     max = 1
-                    for index, i  in enumerate(ether):
+                    for index, i in enumerate(ether):
+                        B=random.randint(0,255)
+                        R=random.randint(0,255)
+                        G=random.randint(0,255)
                         yin = i.strip()
-                        credit = font.render(yin,2,( 80, 241, 0 ))
-                        fenetre.blit(credit, (325-long,max)) 
+                        credit = font.render(yin,2,( B, 255, G ))
+                        balthazar=155+long*10
+                        fenetre.blit(credit, (255,max)) 
                         pygame.display.flip() # Rafraichissement
                         max +=35
                         time.sleep(0.1)
