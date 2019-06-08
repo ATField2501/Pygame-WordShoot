@@ -68,13 +68,14 @@ def son_vitesse(score, supra):
     if score == 100:
         print ' -- 0.1 --'
         zero_un.play()
-        supra.add_vie()
     elif score == 200:
         print ' -- 0.2 --'
         zero_deux.play()
     elif score == 300:
         print ' -- 0.3 --'
         zero_trois.play()
+        supra.add_vie()
+
     elif score == 400:
         print ' -- 0.4 --'
         zero_quatre.play()

@@ -179,8 +179,7 @@ class Vitesse(Score):
     Class renvoyant un indice de vitesse en fonction du score 
     ^(;,,;)^ et ia ia Cthulhu...
     """
-    def __init__(self):
-        
+    def __init__(self): 
         if Score.score < 100:
             self.vitesse= 60
         if Score.score >= 100:
@@ -195,7 +194,7 @@ class Vitesse(Score):
             self.vitesse = 180      
         if Score.score >= 600:
             self.vitesse = 190  
-       
+
 
 
 
