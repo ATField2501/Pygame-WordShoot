@@ -177,22 +177,23 @@ class Construction(Lettre): # Super héritage pour récuperer l'index de la lett
 class Vitesse(Score):
     """ Class renvoyant un indice de vitesse en fonction du score 
                   ^(;,,;)^ et ia ia Cthulhu...                """
+    vitesse = 60
     def __init__(self): 
         if Score.score < 100:
-            self.vitesse= 60
+            Vitesse.vitesse= 60
         if Score.score >= 100:
-             self.vitesse = 100
+             Vitesse.vitesse = 100
         if Score.score >= 200:
-            self.vitesse = 150
+            Vitesse.vitesse = 150
         if Score.score >= 300:
-            self.vitesse = 200
+            Vitesse.vitesse = 200
         if Score.score >= 400:
-            self.vitesse = 250 
+            Vitesse.vitesse = 250 
         if Score.score >= 500:
-            self.vitesse = 300      
+            Vitesse.vitesse = 300      
         if Score.score >= 600:
-            self.vitesse = 350  
-
+            Vitesse.vitesse = 350  
+        self.vitesse = Vitesse.vitesse
 
 
 
@@ -226,14 +227,14 @@ class Selecteur():
     """
     Class utilisée pour selectionner l'entrée utilisateur au menu principale.
     """
-    tableau=['Start','Scores','Credits']
+    tableau=['  Start','Scores','Credits',' config','   quit']
     index = 0
     def __init__(self):
         # En fonction du nombre d'éléments du tableau
-        if Selecteur.index > 2:   
+        if Selecteur.index > 4:   
             Selecteur.index = 0
         if Selecteur.index < 0:
-            Selecteur.index = 2
+            Selecteur.index = 4
         self.selecteur = Selecteur.tableau[Selecteur.index]
     def deplace_plus(self):
         """ Methode de modification positive de l'index du selecteur  """

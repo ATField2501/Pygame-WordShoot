@@ -6,10 +6,11 @@ path='/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/'
 path_shadows='/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/shadows'
 
 titre_fenetre=' '*7+" * Caglio Word Shooting *"
+logo1='WorldShoot'
 
 # Images du jeu
 intro= path+"Caglio-WShoot_images/intro01.png"
-ecran1= path+"Caglio-WShoot_images/ecran1.png"
+ecran1= path+"Caglio-WShoot_images/ecran2.png"
 ecran_jeu= path+"Caglio-WShoot_images/linux2.jpg"
 
 # Musiques du jeu
@@ -37,7 +38,7 @@ zero_neuf = path+"WorldShoot-Musik/zero_9.ogg"
 niveau_fini = path+"WorldShoot-Musik/niveau_fini.ogg"
 
 ligne='___________________________________________________________________________'
-tableau=['Start','Scores','Credits']
+tableau=['  Start','Scores','Credits','config','quit']
 sauvegarde= False
 formalite = True
 aleph = False

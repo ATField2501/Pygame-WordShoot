@@ -68,41 +68,50 @@ def son_vitesse(score, supra):
     if score == 100:
         print ' -- 0.1 --'
         zero_un.play()
+    
     elif score == 200:
         print ' -- 0.2 --'
         zero_deux.play()
+    
     elif score == 300:
         print ' -- 0.3 --'
         zero_trois.play()
-        supra.add_vie()
-
+    
     elif score == 400:
         print ' -- 0.4 --'
         zero_quatre.play()
+    
     elif score == 500:
         print ' -- 0.5 --'
         zero_cinq.play()
+        supra.add_vie()
+    
     elif score == 600:
         print ' -- 0.6 --'
         zero_six.play()
+    
     elif score == 700:
         print ' -- 0.7 --'
         zero_sept.play()
+    
     elif score == 800:
         print ' -- 0.8 --'
         zero_huit.play()
+    
     elif score == 900:
         print ' -- 0.9 --'
         zero_neuf.play()
+        
     elif score == 1000:
         print ' -- Niveau Complété --'
         niveau_fini.play()
-
+        
 
 class Game():
-
+    """ Pygame - Worshoot - Classe Principale"""
     font=pygame.font.Font(None, 29) # Initialise police de charactère
     font2=pygame.font.Font(None, 55)
+    font3=pygame.font.Font('Horst___.ttf', 55)
 
     ############################# Debut prog
     fenetre.blit(intrologo, (0,0))
@@ -132,10 +141,10 @@ class Game():
         c = True
         while c:      
             fenetre.blit(ecran1,(0,0)) ## Ecran de depart
-
+            titre=font3.render(logo1,2,(241,255,68))
             select=font.render(selection,2,( 80, 241, 0 ))
             fenetre.blit(select,(362,390)) ## premier mot du tableau
-
+            fenetre.blit(titre,(200,300))
             pygame.display.flip()
             for event in pygame.event.get(): 
                 if event.type == KEYDOWN:
@@ -146,12 +155,12 @@ class Game():
                         bipp.play()
                         time.sleep(1)
                         sys.exit(0)
-                    if event.key == K_DOWN:
+                    if event.key == K_LEFT:
                         bipp.play()
                         obj.deplace_moins() 
                         obj=Selecteur()  
                         selection=obj.selecteur
-                    if event.key == K_UP:
+                    if event.key == K_RIGHT:
                         bipp.play()
                         obj.deplace_plus() 
                         obj=Selecteur() 
@@ -388,9 +397,11 @@ class Game():
                 print "la lettre n°: {} est: {}".format(index , lettre)
                 print "voici l'artefact: {}".format(artefact)
 
+        
                 destruct = False
                 max=1
                 while max < 455 and destruct == False:
+                   # son_vitesse(score, supra)  # Appel de la procédure son_vitesse 
                     obje_V=Vitesse() 
                     pygame.time.Clock().tick(obje_V.vitesse)
                     fenetre.blit(text, (aaaa,max))   # affichage text tombant  
@@ -400,8 +411,11 @@ class Game():
                     # Appel de la methode alteration de la class Lettre
                     sujet.alteration() 
                     sample2=sujet.sample2
+#                    sample1=sujet.sample1
                     text1 = font.render(sample2,2,( 255, 0, 0 ))
+#                    text2 = font.render(sample1,2,( 255, 0, 0 ))
                     fenetre.blit(text1, (aaaa,max))
+#                    fenetre.blit(text2, (aaaa,max))
                     
                     # Petite vérifications
                     if max ==453:    # Son de fin de chute
@@ -759,9 +773,10 @@ class Game():
                                 sample2=sujet.sample2
                                 text1 = font.render(sample2,2,( 255, 0, 0 ))
                                 fenetre.blit(text1, (aaaa,max))
+                                # Appel de la procédure son_vitesse 
+                                son_vitesse(score, supra)        
                                 max = 455     # On termine la boucle
-                  
-                son_vitesse(score, supra)  # Appel de la procédure son_vitesse         
+               
                 pygame.display.flip() # Rafraichissement
 
                 if sauvegarde == True:
@@ -830,33 +845,35 @@ class Game():
             # Création d'un rectangle noir pour le fond
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             pygame.display.flip()
-            ether=[]
-            with open(path+"Caglio_credits.txt", "r") as fichier:
-                for ligne in fichier:
-                    ether.append(ligne)
-                    long= len(ligne)
-                    max = 1
-                for index, i in enumerate(ether):
-                    B=random.randint(0,255)
-                    R=random.randint(0,255)
-                    G=random.randint(0,255)
-                    yin = i.strip()
-                    credit = font.render(yin,2,( B, 255, G ))
-                    balthazar=155+long*10
-                    fenetre.blit(credit, (55-long+max,max)) 
-                    pygame.display.flip() # Rafraichissement
-                    max +=35
-                    time.sleep(0.7)
-                    for event in pygame.event.get():
-                        if event.type == KEYDOWN: 
-                            if event.key == K_ESCAPE:
-                                bipp.play()
-                                break
-            formalite = True
-            aleph = False
-            sauvegarde == False
-
-
+            unedeplus= True
+            while unedeplus:
+                ether=[]
+                with open(path+"Caglio_credits.txt", "r") as fichier:
+                    for ligne in fichier:
+                        ether.append(ligne)
+                        max = 1
+                        
+                    for index, i in enumerate(ether):
+                        B=random.randint(0,255)
+                        R=random.randint(0,255)
+                        G=random.randint(0,255)
+                        yin = i.strip()
+                        credit = font.render(yin,2,( B, 255, G ))
+                        longg= len(ether[index])
+                        balthazar=400-(longg*5)
+                        fenetre.blit(credit, (balthazar,max)) 
+                        pygame.display.flip() # Rafraichissement
+                        max +=35
+                        time.sleep(0.1)
+                        for event in pygame.event.get():
+                            if event.type == KEYDOWN: 
+                                if event.key == K_ESCAPE:
+                                    bipp.play()
+                                    formalite = True
+                                    aleph = False
+                                    sauvegarde == False
+                                    unedeplus = False
+  
 
 if __name__ == '__main__':
     Game()

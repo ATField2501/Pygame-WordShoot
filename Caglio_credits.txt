@@ -1,15 +1,16 @@
-                        Cagliostro-Software
-                       *********************
-                             python2.7
-                              pygame
-                           *************
-                             ^(;,,,;)^
-                        *******************
-                       musique : cagliostro
-                        design : cagliostro
-                         prog  : cagliostro
-                          ****************
-                           ia ia Cthulhu
+* Cagliostro-Software *
 
-                          and gnu/linux !
-                        *******************
+* python2.7 *
+   
+* pygame *  
+      
+musique : cagliostro
+design : cagliostro
+prog  : cagliostro
+
+ia ia Cthulhu
+  
+and gnu/linux !
+
+^(;,;)^
+ 
