@@ -404,7 +404,7 @@ class Game():
                     fenetre.blit(text1, (aaaa,max))
                     
                     # Petite vérifications
-                    if max ==445:    # Son de fin de chute
+                    if max ==453:    # Son de fin de chute
                         loose.play() 
                         objet.score_forme()
                         sauvegarde = supra.enlev_vie()
@@ -748,14 +748,19 @@ class Game():
                                 else:
                                     print '** DOWN **'
 
-
+                            ### Test si le mot à été trouvé
                             if sujet.victoire == True:
                                 print '** VICTORY !! **'
                                 excelent.play() 
                                 objet.score_plus() # incrémente le score 
                                 objet.score_forme() # je le remet en forme string
+                                # Appel de la methode alteration de la class Lettre
+                                sujet.alteration(suprem=True)                                
+                                sample2=sujet.sample2
+                                text1 = font.render(sample2,2,( 255, 0, 0 ))
+                                fenetre.blit(text1, (aaaa,max))
                                 max = 455     # On termine la boucle
-
+                  
                 son_vitesse(score, supra)  # Appel de la procédure son_vitesse         
                 pygame.display.flip() # Rafraichissement
 
@@ -831,22 +836,22 @@ class Game():
                     ether.append(ligne)
                     long= len(ligne)
                     max = 1
-                    for index, i in enumerate(ether):
-                        B=random.randint(0,255)
-                        R=random.randint(0,255)
-                        G=random.randint(0,255)
-                        yin = i.strip()
-                        credit = font.render(yin,2,( B, 255, G ))
-                        balthazar=155+long*10
-                        fenetre.blit(credit, (255,max)) 
-                        pygame.display.flip() # Rafraichissement
-                        max +=35
-                        time.sleep(0.1)
-                        for event in pygame.event.get():
-                            if event.type == KEYDOWN: 
-                                if event.key == K_ESCAPE:
-                                    bipp.play()
-                                    break
+                for index, i in enumerate(ether):
+                    B=random.randint(0,255)
+                    R=random.randint(0,255)
+                    G=random.randint(0,255)
+                    yin = i.strip()
+                    credit = font.render(yin,2,( B, 255, G ))
+                    balthazar=155+long*10
+                    fenetre.blit(credit, (55-long+max,max)) 
+                    pygame.display.flip() # Rafraichissement
+                    max +=35
+                    time.sleep(0.7)
+                    for event in pygame.event.get():
+                        if event.type == KEYDOWN: 
+                            if event.key == K_ESCAPE:
+                                bipp.play()
+                                break
             formalite = True
             aleph = False
             sauvegarde == False

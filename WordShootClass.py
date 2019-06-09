@@ -130,9 +130,8 @@ class Mot(Lecture):
 
 
 class Lettre(Mot):
-    """
-    Class renvoyant un objet construit sur le mot à trouver et représentant la lettre à trouver (dans le bon ordre) 
-    """ 
+    """ Class renvoyant un objet construit sur le mot à trouver et 
+        représentant la lettre à trouver (dans le bon ordre) """ 
     # index a -1 pour demarrer à zéro 
     index= -1                               
     def __init__(self):                     
@@ -147,12 +146,14 @@ class Lettre(Mot):
         """ Methode de réinitialisation de l'index """
         Lettre.index = -1
 
-    def alteration(self):
+    def alteration(self, suprem=False):
         """ Methode d'alteration du mot à trouver. 
             Split la chaine pour colorier en rouge la première partie """
-        self.sample1 = Mot.mot[Lettre.index:]
-        self.sample2 = Mot.mot[:Lettre.index]
-
+        if suprem == True:
+            self.sample2 = Mot.mot
+        else:
+            self.sample1 = Mot.mot[Lettre.index:]
+            self.sample2 = Mot.mot[:Lettre.index]
 
 
 
@@ -167,18 +168,15 @@ class Construction(Lettre): # Super héritage pour récuperer l'index de la lett
             self.artefact += '_'  # Construction de la liste 'artefact'
     def tetris(self ,lettre):
         """ Methode reconstruisant artefact en substituant 
-            les asterix par la lettre trouvée
-        """
+            les asterix par la lettre trouvée """
         self.artefact[Lettre.index] = lettre       
 
 
 
 
 class Vitesse(Score):
-    """
-    Class renvoyant un indice de vitesse en fonction du score 
-    ^(;,,;)^ et ia ia Cthulhu...
-    """
+    """ Class renvoyant un indice de vitesse en fonction du score 
+                  ^(;,,;)^ et ia ia Cthulhu...                """
     def __init__(self): 
         if Score.score < 100:
             self.vitesse= 60
@@ -187,13 +185,13 @@ class Vitesse(Score):
         if Score.score >= 200:
             self.vitesse = 150
         if Score.score >= 300:
-            self.vitesse = 160
+            self.vitesse = 200
         if Score.score >= 400:
-            self.vitesse = 170 
+            self.vitesse = 250 
         if Score.score >= 500:
-            self.vitesse = 180      
+            self.vitesse = 300      
         if Score.score >= 600:
-            self.vitesse = 190  
+            self.vitesse = 350  
 
 
 
