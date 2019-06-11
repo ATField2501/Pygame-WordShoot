@@ -38,7 +38,7 @@ zero_neuf = path+"WorldShoot-Musik/zero_9.ogg"
 niveau_fini = path+"WorldShoot-Musik/niveau_fini.ogg"
 
 ligne='___________________________________________________________________________'
-tableau=['  Start','Scores','Credits','config','quit']
+
 sauvegarde= False
 formalite = True
 aleph = False

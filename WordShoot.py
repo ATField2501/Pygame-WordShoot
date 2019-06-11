@@ -112,6 +112,7 @@ class Game():
     font=pygame.font.Font(None, 29) # Initialise police de charactère
     font2=pygame.font.Font(None, 55)
     font3=pygame.font.Font('Horst___.ttf', 55)
+    font4=pygame.font.Font('Horst___.ttf', 56)
 
     ############################# Debut prog
     fenetre.blit(intrologo, (0,0))
@@ -133,8 +134,6 @@ class Game():
     while continuer:
         # Initialisation du capital de points de vie
         supra= Vie_Joueur()
-        #Limitation de vitesse de la boucle
-        pygame.time.Clock().tick(30) # 30 fps
         obj=Selecteur() # Première instance sans parametre 
         selection=obj.selecteur
         ##### Ecran Principale
@@ -142,10 +141,21 @@ class Game():
         while c:      
             fenetre.blit(ecran1,(0,0)) ## Ecran de depart
             titre=font3.render(logo1,2,(241,255,68))
+            titre2=font4.render(logo1,2,(241,255,68))
+
             select=font.render(selection,2,( 80, 241, 0 ))
             fenetre.blit(select,(362,390)) ## premier mot du tableau
             fenetre.blit(titre,(200,300))
             pygame.display.flip()
+            time.sleep(0.7)
+            fenetre.blit(ecran1,(0,0)) ## Ecran de depart
+            fenetre.blit(titre2,(200,300))
+            fenetre.blit(select,(362,390)) ## premier mot du tableau
+            pygame.display.flip()
+            time.sleep(0.7)
+
+   
+
             for event in pygame.event.get(): 
                 if event.type == KEYDOWN:
                     if event.key == K_RETURN:
@@ -168,7 +178,7 @@ class Game():
 
 
 
-        if selection == tableau[0]:      
+        if selection == obj.tableau[0]:      
             ### Entrée du nom du joueur
             nickname= ['nickname: ']
             stone= font.render(''.join(nickname),2,(80,241,0))
@@ -367,7 +377,7 @@ class Game():
                             pygame.display.flip()
                             long_nickname += 1
             
-            
+ 
             aleph = False
             while aleph == False:
                 # on cree une instance de la class Mot
@@ -396,13 +406,12 @@ class Game():
                 print "le mot est: {}".format(mot)
                 print "la lettre n°: {} est: {}".format(index , lettre)
                 print "voici l'artefact: {}".format(artefact)
-
-        
+                obje_V=Vitesse()                
                 destruct = False
                 max=1
                 while max < 455 and destruct == False:
-                   # son_vitesse(score, supra)  # Appel de la procédure son_vitesse 
-                    obje_V=Vitesse() 
+                    # son_vitesse(score, supra)  # Appel de la procédure son_vitesse 
+#############
                     pygame.time.Clock().tick(obje_V.vitesse)
                     fenetre.blit(text, (aaaa,max))   # affichage text tombant  
                     max +=1   
@@ -776,7 +785,7 @@ class Game():
                                 # Appel de la procédure son_vitesse 
                                 son_vitesse(score, supra)        
                                 max = 455     # On termine la boucle
-               
+             
                 pygame.display.flip() # Rafraichissement
 
                 if sauvegarde == True:
@@ -810,7 +819,7 @@ class Game():
                     aleph = True
         
         # Menu Scores
-        if selection == tableau[1]:
+        if selection == obj.tableau[1]:
             # Création d'un rectangle noir pour le fond
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             pygame.display.flip()
@@ -841,7 +850,7 @@ class Game():
 
 
         # Menu Crédits
-        if selection == tableau[2]:
+        if selection == obj.tableau[2]:
             # Création d'un rectangle noir pour le fond
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             pygame.display.flip()
@@ -873,7 +882,19 @@ class Game():
                                     aleph = False
                                     sauvegarde == False
                                     unedeplus = False
-  
+        
+        # menu quit 
+        if selection == obj.tableau[4]:
+            # Création d'un rectangle noir pour le fond
+            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+            bye="A Bientôt"
+            depart=font3.render(bye,2,(255,124,5))
+            fenetre.blit(depart,(400,300))
+            pygame.display.flip()
+            time.sleep(1)
+            sys.exit(0)
+
+
 
 if __name__ == '__main__':
     Game()

@@ -12,10 +12,8 @@ from WSconstantes import *
 
 
 class Score():
-    """
-    Class construisant une chaine de charactère pour afficher le score du joueur
-    Et tenant à jour la page des reccords
-    """
+    """ Class construisant une chaine de charactère pour afficher 
+        le score du joueur Et tenant à jour la page des reccords  """
     score= 0
     def __init__(self):
         Score.score=0
@@ -177,10 +175,8 @@ class Construction(Lettre): # Super héritage pour récuperer l'index de la lett
 class Vitesse(Score):
     """ Class renvoyant un indice de vitesse en fonction du score 
                   ^(;,,;)^ et ia ia Cthulhu...                """
-    vitesse = 60
+    vitesse=60              
     def __init__(self): 
-        if Score.score < 100:
-            Vitesse.vitesse= 60
         if Score.score >= 100:
              Vitesse.vitesse = 100
         if Score.score >= 200:
@@ -188,13 +184,14 @@ class Vitesse(Score):
         if Score.score >= 300:
             Vitesse.vitesse = 200
         if Score.score >= 400:
-            Vitesse.vitesse = 250 
+            Vitesse.vitesse = 300 
         if Score.score >= 500:
-            Vitesse.vitesse = 300      
+            Vitesse.vitesse = 400      
         if Score.score >= 600:
-            Vitesse.vitesse = 350  
+            Vitesse.vitesse = 500  
         self.vitesse = Vitesse.vitesse
-
+        print(Score.score)
+        print(Vitesse.vitesse)
 
 
 
