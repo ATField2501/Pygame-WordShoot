@@ -13,12 +13,15 @@ import random
 import pygame
 import time
 import sys
+from threading import Thread,RLock
 from pygame.locals import *
 from WSconstantes import *
 from WordShootClass import *
 
 
 ################################ Initialisation de la bibliothèque Pygame
+pygame.mixer.pre_init(44100, -16, 2, 2048)
+pygame.mixer.init()
 pygame.init()
 
 #Création de la fenêtre
@@ -62,8 +65,11 @@ zero_sept = pygame.mixer.Sound(zero_sept)
 zero_huit = pygame.mixer.Sound(zero_huit)
 zero_neuf = pygame.mixer.Sound(zero_neuf)
 niveau_fini = pygame.mixer.Sound(niveau_fini)
+# Initialise police de charactère
+font=pygame.font.Font(None, 29) 
+font2=pygame.font.Font(None, 55)
 
-########### fonctions et pocédures
+
 def son_vitesse(score, supra):
     if score == 100:
         print ' -- 0.1 --'
@@ -105,15 +111,34 @@ def son_vitesse(score, supra):
     elif score == 1000:
         print ' -- Niveau Complété --'
         niveau_fini.play()
-        
+
+verrou= RLock()
+
+class Gestion_volumetrik(Thread):
+    """ Gère la gestion des évennements au menu principale"""
+    def __init__(self,phidor):
+        Thread.__init__(self)
+        self.phidor=phidor
+    def run(self):
+        # RLock
+        with verrou:
+            if self.phidor == 55:
+                self.phidor = 56
+                print(self.phidor)
+                time.sleep(0.7)
+            if self.phidor == 56:
+                self.phidor = 55
+                print(self.phidor)
+                time.sleep(0.7)
+            
+class TestC():
+    def __init__(self,phidor):
+        self.phidor=phidor
+        self.phidor +=1
+
 
 class Game():
-    """ Pygame - Worshoot - Classe Principale"""
-    font=pygame.font.Font(None, 29) # Initialise police de charactère
-    font2=pygame.font.Font(None, 55)
-    font3=pygame.font.Font('Horst___.ttf', 55)
-    font4=pygame.font.Font('Horst___.ttf', 56)
-
+    """ Pygame - Worshoot - Classe Principale """
     ############################# Debut prog
     fenetre.blit(intrologo, (0,0))
     pygame.display.flip()
@@ -123,38 +148,36 @@ class Game():
     objet=Score() # Construction du score
     score= Score.score
     obj= Lecture() # Lecture du fichier
-    obj= Selecteur() # Initialisation de l'index du selecteur 
-    selection= obj.selecteur
-
+    
     # Démarage de la musique de fond
 #    pygame.mixer.music.set_volume(0.5) #Met le volume à 0.5 (moitié)
 #    pygame.mixer.music.play()
-
+    obj1=Selecteur()    
     continuer= True
     while continuer:
         # Initialisation du capital de points de vie
         supra= Vie_Joueur()
-        obj=Selecteur() # Première instance sans parametre 
-        selection=obj.selecteur
+#        obj=Selecteur() # Première instance sans parametre 
+        selection= obj1.selecteur   
+        ###### j'invoque mon thread   
+#        easy=Gestion_volumetrik(phidor)
+#        easy=TestC(phidor)
         ##### Ecran Principale
         c = True
-        while c:      
-            fenetre.blit(ecran1,(0,0)) ## Ecran de depart
-            titre=font3.render(logo1,2,(241,255,68))
-            titre2=font4.render(logo1,2,(241,255,68))
+        while c:
+   #         easy=TestC(phidor)
 
+
+            font3=pygame.font.Font(path+'Horst___.ttf', phidor)    
+            fenetre.blit(ecran1,(0,0)) ## Ecran de depart
             select=font.render(selection,2,( 80, 241, 0 ))
-            fenetre.blit(select,(362,390)) ## premier mot du tableau
+            fenetre.blit(select,(362,390)) ## premier mot du tableau           
+           # pygame.display.flip()             
+            titre=font3.render(logo1,2,(241,255,68))
             fenetre.blit(titre,(200,300))
+           
             pygame.display.flip()
-            time.sleep(0.7)
-            fenetre.blit(ecran1,(0,0)) ## Ecran de depart
-            fenetre.blit(titre2,(200,300))
-            fenetre.blit(select,(362,390)) ## premier mot du tableau
-            pygame.display.flip()
-            time.sleep(0.7)
-
-   
+  
 
             for event in pygame.event.get(): 
                 if event.type == KEYDOWN:
@@ -163,22 +186,25 @@ class Game():
                         c= False
                     if event.key == K_ESCAPE:
                         bipp.play()
-                        time.sleep(1)
+                       # time.sleep(1)
                         sys.exit(0)
                     if event.key == K_LEFT:
                         bipp.play()
-                        obj.deplace_moins() 
-                        obj=Selecteur()  
-                        selection=obj.selecteur
+                        obj1.deplace_moins() 
+                        obj1=Selecteur()  
+                        selection=obj1.selecteur
                     if event.key == K_RIGHT:
+                        print('yo yo RIGHT !!')
                         bipp.play()
-                        obj.deplace_plus() 
-                        obj=Selecteur() 
-                        selection=obj.selecteur
-
-
-
-        if selection == obj.tableau[0]:      
+                        obj1.deplace_plus() 
+                        obj1=Selecteur() 
+                        selection=obj1.selecteur
+                    #easy.join()
+                   # print(phidor)
+               
+            
+        
+        if selection == obj1.tableau[0]:      
             ### Entrée du nom du joueur
             nickname= ['nickname: ']
             stone= font.render(''.join(nickname),2,(80,241,0))
@@ -819,7 +845,7 @@ class Game():
                     aleph = True
         
         # Menu Scores
-        if selection == obj.tableau[1]:
+        if selection == obj1.tableau[1]:
             # Création d'un rectangle noir pour le fond
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             pygame.display.flip()
@@ -850,7 +876,7 @@ class Game():
 
 
         # Menu Crédits
-        if selection == obj.tableau[2]:
+        if selection == obj1.tableau[2]:
             # Création d'un rectangle noir pour le fond
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             pygame.display.flip()
@@ -884,12 +910,12 @@ class Game():
                                     unedeplus = False
         
         # menu quit 
-        if selection == obj.tableau[4]:
+        if selection == obj1.tableau[4]:
             # Création d'un rectangle noir pour le fond
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
-            bye="A Bientôt"
+            bye="A BientOt"
             depart=font3.render(bye,2,(255,124,5))
-            fenetre.blit(depart,(400,300))
+            fenetre.blit(depart,(150,300))
             pygame.display.flip()
             time.sleep(1)
             sys.exit(0)
@@ -898,9 +924,7 @@ class Game():
 
 if __name__ == '__main__':
     Game()
-
-
-
+   
 
 
 

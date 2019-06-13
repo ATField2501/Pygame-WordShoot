@@ -6,7 +6,7 @@
 
 
 import pickle
-import random 
+import random
 from WSconstantes import *
 
 
@@ -98,10 +98,8 @@ class Score():
 
 
 class Lecture():
-    """
-    Class lisant un fichier pour en extraire les lignes 
-    et les incorporer à la liste 'tableau'
-    """
+    """ Class lisant un fichier pour en extraire les lignes 
+        et les incorporer à la liste 'tableau' """
     tableau=[]
     def __init__(self, tableau = []):
         self.tableau = tableau
@@ -114,9 +112,8 @@ class Lecture():
 
 
 class Mot(Lecture):
-    """
-    Class ayant la charge de selectionner un mot au 'hasards' dans la liste 'tableau' 
-    """
+    """  Class ayant la charge de selectionner un mot au 'hasards' 
+         dans la liste 'tableau'  """
     mot=''
     maximum=0
     def __init__(self):
@@ -190,9 +187,6 @@ class Vitesse(Score):
         if Score.score >= 600:
             Vitesse.vitesse = 500  
         self.vitesse = Vitesse.vitesse
-        print(Score.score)
-        print(Vitesse.vitesse)
-
 
 
 class Vie_Joueur():
@@ -221,9 +215,7 @@ class Vie_Joueur():
 
 
 class Selecteur():
-    """
-    Class utilisée pour selectionner l'entrée utilisateur au menu principale.
-    """
+    """ Class utilisée pour selectionner l'entrée utilisateur au menu principale."""
     tableau=['  Start','Scores','Credits',' config','   quit']
     index = 0
     def __init__(self):
@@ -239,6 +231,5 @@ class Selecteur():
     def deplace_moins(self):
         """ Methode de modification négative de l'index du selecteur  """
         Selecteur.index -= 1
-
 
 

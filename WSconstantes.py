@@ -48,4 +48,4 @@ looser=" You Loose T.T"
 x=255
 y=255
 
-
+phidor=55
