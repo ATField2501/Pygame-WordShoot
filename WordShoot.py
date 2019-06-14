@@ -21,7 +21,7 @@ from WordShootClass import *
 
 ################################ Initialisation de la bibliothèque Pygame
 pygame.mixer.pre_init(44100, -16, 2, 2048)
-pygame.mixer.init()
+#pygame.mixer.init()
 pygame.init()
 
 #Création de la fenêtre
@@ -205,12 +205,13 @@ class Game():
             
         
         if selection == obj1.tableau[0]:      
+            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             ### Entrée du nom du joueur
             nickname= ['nickname: ']
             stone= font.render(''.join(nickname),2,(80,241,0))
-            fenetre.blit(stone,(50,550))
+            fenetre.blit(stone,(50,350))
             pygame.display.flip()
-            
+            long_standart=len(nickname[0])
             long_nickname=0
             # je limite la longueur du nickname 12
             while formalite == True and long_nickname < 12:
@@ -224,186 +225,198 @@ class Game():
                             long_nickname=12
                         if event.key == K_BACKSPACE:
                             try:
-                                del nickname[-1]
-                                long_nickname -= 1
+                                if long_nickname != 0:
+                                    del nickname[-1]
+                                    long_nickname -= 1
+                                    pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+                                    stone22= font.render(''.join(nickname),2,(80,241,0)) 
+                                    fenetre.blit(stone22,(50,350))
+                                    pygame.display.flip()
+                                else:
+                                    nickname= ['nickname: ']
+                                    stone= font.render(''.join(nickname),2,(80,241,0))
+                                    pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+
+                                    fenetre.blit(stone,(50,350))
+                                    pygame.display.flip()
+                         
                             except  IndexError:
+                                nickname= ['nickname: ']
                                 long_nickname=0
-                                pass
-                            fenetre.blit(ecran1,(0,0)) ## Ecran de depart
-                            stone22= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone22,(50,550))
-                            pygame.display.flip()
- 
+                                pygame.display.flip()
+                        
+
+
                         if event.key == K_a:
                             nickname.append('a')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                  
                             long_nickname += 1 
                         if event.key == K_b:
                             nickname.append('b')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1 
                         if event.key == K_c:
                             nickname.append('c')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                  
                             long_nickname += 1 
                         if event.key == K_d:
                             nickname.append('d')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1 
                         if event.key == K_e:
                             nickname.append('e')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip() 
                             long_nickname += 1 
                         if event.key == K_f:
                             nickname.append('f')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1 
                         if event.key == K_g:
                             nickname.append('g')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1                 
 
                         if event.key == K_h:
                             nickname.append('h')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1 
                         if event.key == K_i:
                             nickname.append('i')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1                 
 
                         if event.key == K_j:
                             nickname.append('j')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1 
                         if event.key == K_k:
                             nickname.append('k')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1                 
 
                         if event.key == K_l:
                             nickname.append('l')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1 
                         if event.key == K_m:
                             nickname.append('m')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1                 
 
                         if event.key == K_n:
                             nickname.append('n')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1 
                         if event.key == K_o:
                             nickname.append('o')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1                            
 
                         if event.key == K_p:
                             nickname.append('p')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1 
                         if event.key == K_q:
                             nickname.append('q')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1                 
 
                         if event.key == K_r:
                             nickname.append('r')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
 
                         if event.key == K_s:
                             nickname.append('s')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1                 
 
                         if event.key == K_t:
                             nickname.append('t')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1 
                         if event.key == K_u:
                             nickname.append('u')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1                 
 
                         if event.key == K_v:
                             nickname.append('v')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1 
                         if event.key == K_w:
                             nickname.append('w')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1                 
 
                         if event.key == K_x:
                             nickname.append('x')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1 
                         if event.key == K_y:
                             nickname.append('y')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1                
 
                         if event.key == K_z:
                             nickname.append('z')
                             stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,550))
+                            fenetre.blit(stone,(50,350))
                             pygame.display.flip()
                             long_nickname += 1
-            
- 
+                        
+                         
             aleph = False
             while aleph == False:
                 # on cree une instance de la class Mot
@@ -432,13 +445,13 @@ class Game():
                 print "le mot est: {}".format(mot)
                 print "la lettre n°: {} est: {}".format(index , lettre)
                 print "voici l'artefact: {}".format(artefact)
-                obje_V=Vitesse()                
+                obj_v=Vitesse()                
                 destruct = False
                 max=1
                 while max < 455 and destruct == False:
                     # son_vitesse(score, supra)  # Appel de la procédure son_vitesse 
 #############
-                    pygame.time.Clock().tick(obje_V.vitesse)
+                    pygame.time.Clock().tick(obj_v.vitesse)
                     fenetre.blit(text, (aaaa,max))   # affichage text tombant  
                     max +=1   
                     # Affectation de la variable d'instance score
