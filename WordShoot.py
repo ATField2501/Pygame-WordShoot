@@ -131,293 +131,207 @@ class Gestion_volumetrik(Thread):
                 print(self.phidor)
                 time.sleep(0.7)
             
-class TestC():
-    def __init__(self,phidor):
-        self.phidor=phidor
-        self.phidor +=1
+class Gestion_Ev_menu():
+    c=True
+    def __init__(self): 
+        """ """ 
+        obj1=Selecteur()
+        self.selection=obj1.selecteur
+        for event in pygame.event.get(): 
+            if event.type == KEYDOWN:
+                if event.key == K_RETURN:
+                    click.play()
+                    Gestion_Ev_menu.c= False
+                if event.key == K_ESCAPE:
+                    bipp.play()
+                    sys.exit(0)
+                if event.key == K_LEFT:
+                    print('yo yo LEFT !!')
+                    bipp.play()
+                    obj1.deplace_moins() 
+                    obj1=Selecteur()  
+                    self.selection=obj1.selecteur
+                    Gestion_Ev_menu.choix = True
+                if event.key == K_RIGHT:
+                    print('yo yo RIGHT !!')
+                    bipp.play()
+                    obj1.deplace_plus() 
+                    obj1=Selecteur() 
+                    self.selection=obj1.selecteur
+                    Gestion_Ev_menu.choix = True           
 
 
-class Game():
+class Gestion_Ev_nickname():
+    long_nickname=0
+    formalite=True
+    def __init__(self,nickname):
+        self.nickname=nickname
+        for event in pygame.event.get():
+            # Si un de ces événements est de type QUIT
+            if event.type == QUIT:     
+                Gestion_Ev_nickname.formalite = False
+
+            # Si un de ces éléments est de type clavier
+            if event.type == KEYDOWN:
+                if event.key == K_RETURN:
+                    Gestion_Ev_nickname.long_nickname=12
+                if event.key == K_BACKSPACE:
+                    try:
+                        if Gestion_Ev_nickname.long_nickname != 0:
+                            del self.nickname[-1]
+                            Gestion_Ev_nickname.long_nickname -= 1
+                            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+                            stone22= font.render(''.join(self.nickname),2,(80,241,0)) 
+                            fenetre.blit(stone22,(50,350))
+                            pygame.display.flip()
+                        else:
+                            self.nickname= ['nickname: ']
+                            stone= font.render(''.join(self.nickname),2,(80,241,0))
+                            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+
+                            fenetre.blit(stone,(50,350))
+                            pygame.display.flip()
+                 
+                    except  IndexError:
+                        self.nickname= ['nickname: ']
+                        Gestion_Ev_nickname.long_nickname = 0
+                        pygame.display.flip()
+                
+                if event.key == K_a:
+                    self.nickname.append('a')
+                    Gestion_Ev_nickname.long_nickname += 1 
+                if event.key == K_b:
+                    self.nickname.append('b')
+                    Gestion_Ev_nickname.long_nickname += 1 
+                if event.key == K_c:
+                    self.nickname.append('c')
+                    Gestion_Ev_nickname.long_nickname += 1 
+                if event.key == K_d:
+                    self.nickname.append('d')
+                    Gestion_Ev_nickname.long_nickname += 1 
+                if event.key == K_e:
+                    self.nickname.append('e')
+                    Gestion_Ev_nickname.long_nickname += 1 
+                if event.key == K_f:
+                    self.nickname.append('f')
+                    Gestion_Ev_nickname.long_nickname += 1 
+                if event.key == K_g:
+                    self.nickname.append('g')
+                    Gestion_Ev_nickname.long_nickname += 1                 
+                if event.key == K_h:
+                    self.nickname.append('h')
+                    Gestion_Ev_nickname.long_nickname += 1 
+                if event.key == K_i:
+                    self.nickname.append('i')
+                    Gestion_Ev_nickname.long_nickname += 1                 
+                if event.key == K_j:
+                    self.nickname.append('j')
+                    Gestion_Ev_nickname.long_nickname += 1 
+                if event.key == K_k:
+                    self.nickname.append('k')
+                    Gestion_Ev_nickname.long_nickname += 1                 
+                if event.key == K_l:
+                    self.nickname.append('l')
+                    Gestion_Ev_nickname.long_nickname += 1 
+                if event.key == K_m:
+                    self.nickname.append('m')
+                    Gestion_Ev_nickname.long_nickname += 1                 
+                if event.key == K_n:
+                    self.nickname.append('n')
+                    Gestion_Ev_nickname.long_nickname += 1 
+                if event.key == K_o:
+                    self.nickname.append('o')
+                    Gestion_Ev_nickname.long_nickname += 1                            
+                if event.key == K_p:
+                    self.nickname.append('p')
+                    Gestion_Ev_nickname.long_nickname += 1 
+                if event.key == K_q:
+                    self.nickname.append('q')
+                    Gestion_Ev_nickname.long_nickname += 1                 
+                if event.key == K_r:
+                    self.nickname.append('r')
+                    Gestion_Ev_nickname.long_nickname += 1
+                if event.key == K_s:
+                    self.nickname.append('s')
+                    Gestion_Ev_nickname.long_nickname += 1                 
+                if event.key == K_t:
+                    self.nickname.append('t')
+                    Gestion_Ev_nickname.long_nickname += 1 
+                if event.key == K_u:
+                    self.nickname.append('u')
+                    Gestion_Ev_nickname.long_nickname += 1                 
+                if event.key == K_v:
+                    self.nickname.append('v')
+                    Gestion_Ev_nickname.long_nickname += 1 
+                if event.key == K_w:
+                    self.nickname.append('w')
+                    Gestion_Ev_nickname.long_nickname += 1                 
+                if event.key == K_x:
+                    self.nickname.append('x')
+                    Gestion_Ev_nickname.long_nickname += 1 
+                if event.key == K_y:
+                    self.nickname.append('y')
+                    Gestion_Ev_nickname.long_nickname += 1                
+                if event.key == K_z:
+                    self.nickname.append('z')
+                    Gestion_Ev_nickname.long_nickname += 1
+                 
+
+class WordShoot():
     """ Pygame - Worshoot - Classe Principale """
     ############################# Debut prog
     fenetre.blit(intrologo, (0,0))
     pygame.display.flip()
     bal.play()
     time.sleep(3)
-    ligne1= font.render(ligne,2,( 251, 8, 8 )) # Ligne de fin de chute des mots
+    ligne1 = font.render(ligne,2,( 251, 8, 8 )) # Ligne de fin de chute des mots
     objet=Score() # Construction du score
     score= Score.score
-    obj= Lecture() # Lecture du fichier
+    obj = Lecture() # Lecture du fichier
     
     # Démarage de la musique de fond
 #    pygame.mixer.music.set_volume(0.5) #Met le volume à 0.5 (moitié)
 #    pygame.mixer.music.play()
-    obj1=Selecteur()    
-    continuer= True
+    
     while continuer:
-        # Initialisation du capital de points de vie
+        ## Initialisation du capital de points de vie
         supra= Vie_Joueur()
-#        obj=Selecteur() # Première instance sans parametre 
-        selection= obj1.selecteur   
-        ###### j'invoque mon thread   
-#        easy=Gestion_volumetrik(phidor)
-#        easy=TestC(phidor)
         ##### Ecran Principale
         c = True
-        while c:
-   #         easy=TestC(phidor)
-
-
+        while c:            
+            truc=Gestion_Ev_menu()
+            selection = truc.selection
+            c = Gestion_Ev_menu.c 
             font3=pygame.font.Font(path+'Horst___.ttf', phidor)    
-            fenetre.blit(ecran1,(0,0)) ## Ecran de depart
+            ## Ecran de depart
+            fenetre.blit(ecran1,(0,0))
+            ## Element du tableau Selecteur 
             select=font.render(selection,2,( 80, 241, 0 ))
-            fenetre.blit(select,(362,390)) ## premier mot du tableau           
-           # pygame.display.flip()             
+            fenetre.blit(select,(362,390))      
+            ## Titre du Jeu
             titre=font3.render(logo1,2,(241,255,68))
             fenetre.blit(titre,(200,300))
            
             pygame.display.flip()
-  
-
-            for event in pygame.event.get(): 
-                if event.type == KEYDOWN:
-                    if event.key == K_RETURN:
-                        click.play()
-                        c= False
-                    if event.key == K_ESCAPE:
-                        bipp.play()
-                       # time.sleep(1)
-                        sys.exit(0)
-                    if event.key == K_LEFT:
-                        bipp.play()
-                        obj1.deplace_moins() 
-                        obj1=Selecteur()  
-                        selection=obj1.selecteur
-                    if event.key == K_RIGHT:
-                        print('yo yo RIGHT !!')
-                        bipp.play()
-                        obj1.deplace_plus() 
-                        obj1=Selecteur() 
-                        selection=obj1.selecteur
-                    #easy.join()
-                   # print(phidor)
-               
-            
-        
-        if selection == obj1.tableau[0]:      
+                  
+        if selection == Selecteur.tableau[0]:      
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             ### Entrée du nom du joueur
             nickname= ['nickname: ']
-            stone= font.render(''.join(nickname),2,(80,241,0))
-            fenetre.blit(stone,(50,350))
+#            stone= font.render(''.join(nickname),2,(80,241,0))
+#            fenetre.blit(stone,(50,350))
             pygame.display.flip()
             long_standart=len(nickname[0])
             long_nickname=0
-            # je limite la longueur du nickname 12
+            # je limite la longueur du self.nickname 12
             while formalite == True and long_nickname < 12:
-                for event in pygame.event.get():
-                    # Si un de ces événements est de type QUIT
-                    if event.type == QUIT:     
-                        formalite = False
-                    # Si un de ces éléments est de type clavier
-                    if event.type == KEYDOWN:
-                        if event.key == K_RETURN:
-                            long_nickname=12
-                        if event.key == K_BACKSPACE:
-                            try:
-                                if long_nickname != 0:
-                                    del nickname[-1]
-                                    long_nickname -= 1
-                                    pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
-                                    stone22= font.render(''.join(nickname),2,(80,241,0)) 
-                                    fenetre.blit(stone22,(50,350))
-                                    pygame.display.flip()
-                                else:
-                                    nickname= ['nickname: ']
-                                    stone= font.render(''.join(nickname),2,(80,241,0))
-                                    pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
-
-                                    fenetre.blit(stone,(50,350))
-                                    pygame.display.flip()
-                         
-                            except  IndexError:
-                                nickname= ['nickname: ']
-                                long_nickname=0
-                                pygame.display.flip()
-                        
-
-
-                        if event.key == K_a:
-                            nickname.append('a')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                 
-                            long_nickname += 1 
-                        if event.key == K_b:
-                            nickname.append('b')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1 
-                        if event.key == K_c:
-                            nickname.append('c')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                 
-                            long_nickname += 1 
-                        if event.key == K_d:
-                            nickname.append('d')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1 
-                        if event.key == K_e:
-                            nickname.append('e')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip() 
-                            long_nickname += 1 
-                        if event.key == K_f:
-                            nickname.append('f')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1 
-                        if event.key == K_g:
-                            nickname.append('g')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1                 
-
-                        if event.key == K_h:
-                            nickname.append('h')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1 
-                        if event.key == K_i:
-                            nickname.append('i')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1                 
-
-                        if event.key == K_j:
-                            nickname.append('j')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1 
-                        if event.key == K_k:
-                            nickname.append('k')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1                 
-
-                        if event.key == K_l:
-                            nickname.append('l')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1 
-                        if event.key == K_m:
-                            nickname.append('m')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1                 
-
-                        if event.key == K_n:
-                            nickname.append('n')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1 
-                        if event.key == K_o:
-                            nickname.append('o')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1                            
-
-                        if event.key == K_p:
-                            nickname.append('p')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1 
-                        if event.key == K_q:
-                            nickname.append('q')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1                 
-
-                        if event.key == K_r:
-                            nickname.append('r')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-
-                        if event.key == K_s:
-                            nickname.append('s')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1                 
-
-                        if event.key == K_t:
-                            nickname.append('t')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1 
-                        if event.key == K_u:
-                            nickname.append('u')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1                 
-
-                        if event.key == K_v:
-                            nickname.append('v')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1 
-                        if event.key == K_w:
-                            nickname.append('w')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1                 
-
-                        if event.key == K_x:
-                            nickname.append('x')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1 
-                        if event.key == K_y:
-                            nickname.append('y')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1                
-
-                        if event.key == K_z:
-                            nickname.append('z')
-                            stone= font.render(''.join(nickname),2,(80,241,0))
-                            fenetre.blit(stone,(50,350))
-                            pygame.display.flip()
-                            long_nickname += 1
-                        
-                         
-            aleph = False
+                bidule=Gestion_Ev_nickname(nickname)
+                formalite=bidule.formalite       
+                long_nickname=bidule.long_nickname         
+                pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+                stone= font.render(''.join(bidule.nickname),2,(80,241,0))
+                fenetre.blit(stone,(50,350))
+                pygame.display.flip()
             while aleph == False:
                 # on cree une instance de la class Mot
                 obj = Mot()
@@ -483,23 +397,26 @@ class Game():
                     fenetre.blit(sCore, (700,550))
                     fenetre.blit(vie, (50,550))
                     fenetre.blit(ping,(325,550))
+                    
+                    
                     #On parcours la liste de tous les événements reçus
                     for event in pygame.event.get():   
                         #Si un de ces événements est de type QUIT
                         if event.type == QUIT:        
-                            continuer = False
+                           # continuer = False
                             destruct = True
+                            print('double-ok')
                         # Si un de ces éléments est de type clavier
                         if event.type == KEYDOWN:       
                             if event.key == K_ESCAPE:
                                 bipp.play()
                                 # Reinitialisation de l'index pour detruire complètement le sujet
                                 sujet.reinit()
-                                destruct = True
+                           #     destruct = True
                                 max = 455
-                                aleph = True
-
-
+                            #    aleph = True
+                                print('ok')
+                                  
                             if event.key == K_a:
                                 if 'a' == lettre:
                                     print '** UP **'
@@ -840,7 +757,7 @@ class Game():
                  #        pygame.draw.rect(fenetre, (0, 0 , 0), (0, 0, 2000 , 1100 ))
                         pygame.display.flip()
                  
-                    nicknamu=''.join(nickname[1:])
+                    nicknamu=''.join(self.nickname[1:])
                        
                     # Vérification si le score est un reccord
                     bidule=objet.verif_reccord(nicknamu)
@@ -856,9 +773,9 @@ class Game():
                     continuer = True
                     supra.reinit_vie()
                     aleph = True
-        
+    
         # Menu Scores
-        if selection == obj1.tableau[1]:
+        if selection == Selecteur.tableau[1]:
             # Création d'un rectangle noir pour le fond
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             pygame.display.flip()
@@ -881,15 +798,16 @@ class Game():
                             
             except TypeError:
                 pass
-            formalite = True
-            aleph = False
-            sauvegarde = False
+#            formalite = True
+#            aleph = False
+#            sauvegarde = False
             continuer = True
-            supra.reinit_vie()
+            selection = ' '
+#            supra.reinit_vie()
 
 
         # Menu Crédits
-        if selection == obj1.tableau[2]:
+        if selection == Selecteur.tableau[2]:
             # Création d'un rectangle noir pour le fond
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             pygame.display.flip()
@@ -911,19 +829,18 @@ class Game():
                         balthazar=400-(longg*5)
                         fenetre.blit(credit, (balthazar,max)) 
                         pygame.display.flip() # Rafraichissement
-                        max +=35
+                        max += 35
                         time.sleep(0.1)
                         for event in pygame.event.get():
                             if event.type == KEYDOWN: 
                                 if event.key == K_ESCAPE:
                                     bipp.play()
-                                    formalite = True
-                                    aleph = False
-                                    sauvegarde == False
-                                    unedeplus = False
+                                    
+                                    unedeplus = False        
+                                     
         
         # menu quit 
-        if selection == obj1.tableau[4]:
+        if selection == Selecteur.tableau[4]:
             # Création d'un rectangle noir pour le fond
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             bye="A BientOt"
@@ -936,8 +853,7 @@ class Game():
 
 
 if __name__ == '__main__':
-    Game()
+    WordShoot()
    
 
-
-
+

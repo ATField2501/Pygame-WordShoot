@@ -11,6 +11,7 @@ from WSconstantes import *
 
 
 
+
 class Score():
     """ Class construisant une chaine de charactère pour afficher 
         le score du joueur Et tenant à jour la page des reccords  """
@@ -232,4 +233,5 @@ class Selecteur():
         """ Methode de modification négative de l'index du selecteur  """
         Selecteur.index -= 1
 
+    
 

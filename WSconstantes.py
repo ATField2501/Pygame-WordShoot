@@ -39,6 +39,9 @@ niveau_fini = path+"WorldShoot-Musik/niveau_fini.ogg"
 
 ligne='___________________________________________________________________________'
 
+## Mes ptits booléens
+choix = False
+continuer = True
 sauvegarde= False
 formalite = True
 aleph = False
