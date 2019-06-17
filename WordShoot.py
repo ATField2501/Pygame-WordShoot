@@ -34,9 +34,7 @@ pygame.key.set_repeat(400, 30)
 intrologo= pygame.image.load(intro).convert()
 ecran1=pygame.image.load(ecran1).convert()
 neo = pygame.image.load(ecran_jeu).convert()
-#fond.fill((0,0,0)) # Remplissage avec du noir
-
- 
+#fond.fill((0,0,0)) # Remplissage avec du noir 
 # Titre fenetre
 pygame.display.set_caption(titre_fenetre)
 
@@ -115,7 +113,7 @@ def son_vitesse(score, supra):
 verrou= RLock()
 
 class Gestion_volumetrik(Thread):
-    """ Gère la gestion des évennements au menu principale"""
+    """ Gère la variation volumetrique du titre au menu principale """
     def __init__(self,phidor):
         Thread.__init__(self)
         self.phidor=phidor
@@ -132,6 +130,7 @@ class Gestion_volumetrik(Thread):
                 time.sleep(0.7)
             
 class Gestion_Ev_menu():
+    """ Gestion des évennement au menu principale """
     c=True
     def __init__(self): 
         """ """ 
@@ -161,6 +160,7 @@ class Gestion_Ev_menu():
 
 
 class Gestion_Ev_nickname(Gestion_Ev_menu):
+    """ Gère l'entrée utilisateur pour le nickname """
     long_nickname=0
     formalite=True
     def __init__(self,nickname):
@@ -276,31 +276,28 @@ class Gestion_Ev_nickname(Gestion_Ev_menu):
                     Gestion_Ev_nickname.long_nickname += 1
 
 class Gestion_Ev_jeux(Gestion_Ev_nickname):
-    def __init__(self,sujet,objA,objet,aaaa,max):
+    """ Gère la capture des touches pendant le jeux  """
+    def __init__(self,sujet,objA,objet,aaaa,max,destruct,aleph):
        """ """
        self.sujet = sujet
        self.aaaa = aaaa
        self.max = max
+       self.destruct = destruct
+       self.aleph = aleph
        #On parcours la liste de tous les événements reçus
        for event in pygame.event.get():   
-           #Si un de ces événements est de type QUIT
-           if event.type == QUIT:        
-               # continuer = False
-               destruct = True
-               print('double-ok')
-           # Si un de ces éléments est de type clavier
+          # Si un de ces éléments est de type clavier
            if event.type == KEYDOWN:       
                if event.key == K_ESCAPE:
                    bipp.play()
                    # Reinitialisation de l'index pour detruire complètement le self.sujet
                    self.sujet.reinit()
-                   destruct = True
-                   max = 455
-                   aleph = True
+                   self.destruct = True
+                   self.max = 455
+                   self.aleph = True
                    print('ok')
-                   Gestion_Ev_menu.c = False
-                   formalite = False
-                   long_nickname = 0 
+                   Gestion_Ev_menu.c = True
+
                if event.key == K_a:
                    if 'a' == sujet.lettre:
                        print '** UP **'
@@ -625,9 +622,9 @@ class WordShoot():
         obj = Lecture() # Lecture du fichier 
         ## Initialisation du capital de points de vie
         supra= Vie_Joueur()
-        ##### Ecran Principale
+        ####### Ecran Principale
         c = True
-        while c:            
+        while c: 
             truc = Gestion_Ev_menu()
             selection = truc.selection
             c = Gestion_Ev_menu.c 
@@ -641,8 +638,8 @@ class WordShoot():
             titre=font3.render(logo1,2,(241,255,68))
             fenetre.blit(titre,(200,300)) 
             pygame.display.flip()
-        ## jeux          
-        if selection == Selecteur.tableau[0]:      
+        ################### jeux          
+        if  selection == Selecteur.tableau[0]:      
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             ### Entrée du nom du joueur
             nickname= ['nickname: ']
@@ -721,38 +718,44 @@ class WordShoot():
                     fenetre.blit(vie, (50,550))
                     fenetre.blit(ping,(325,550))
                     
-                    escargot = Gestion_Ev_jeux(sujet,objA,objet,aaaa,max)
+                    escargot = Gestion_Ev_jeux(sujet,objA,objet,aaaa,max,destruct,aleph)
                     max = escargot.max
-                    # Appel de la procédure son_vitesse 
-                    son_vitesse(score, supra)        
- 
+                    c = escargot.c
+                    destruct = escargot.destruct
+                    aleph = escargot.aleph
+    
+
+                    if sauvegarde == True:
+                        nb=0
+                        while nb <= 4:
+                            time.sleep(1)
+                            nb+=1
+                            truc="You Loose T.T" 
+                            ecran_sauvegarde=font2.render(truc,2,(80,241,0))
+                            fenetre.blit(ecran_sauvegarde,(255+nb,35+nb))
+                            
+                            # Création d'un rectangle noir pour le fond
+                     #        pygame.draw.rect(fenetre, (0, 0 , 0), (0, 0, 2000 , 1100 ))
+                            pygame.display.flip()
+                     
+                        nicknamu=''.join(nickname[1:])                          
+                        # Vérification si le score est un reccord
+                        bidule=objet.verif_reccord(nicknamu)
+                        ecran_chouette=font2.render(bidule,2,(80,241,0))
+                        fenetre.blit(ecran_chouette,(255,400))
+                        pygame.display.flip()
+                        time.sleep(3)     
+                        ## Procedure verif reccord
+                        objet=Score() 
+                        supra.reinit_vie()
+                        destruct = True 
+                        aleph = True
+                        Gestion_Ev_menu.c = True
+                
+                # Appel de la procédure son_vitesse 
+                son_vitesse(score, supra)        
                 pygame.display.flip() # Rafraichissement
 
-                if sauvegarde == True:
-                    nb=0
-                    while nb <= 4:
-                        time.sleep(1)
-                        nb+=1
-                        truc="You Loose T.T" 
-                        ecran_sauvegarde=font2.render(truc,2,(80,241,0))
-                        fenetre.blit(ecran_sauvegarde,(255+nb,35+nb))
-                        
-                        # Création d'un rectangle noir pour le fond
-                 #        pygame.draw.rect(fenetre, (0, 0 , 0), (0, 0, 2000 , 1100 ))
-                        pygame.display.flip()
-                 
-                    nicknamu=''.join(nickname[1:])
-                       
-                    # Vérification si le score est un reccord
-                    bidule=objet.verif_reccord(nicknamu)
-                    ecran_chouette=font2.render(bidule,2,(80,241,0))
-                    fenetre.blit(ecran_chouette,(255,400))
-                    pygame.display.flip()
-                    time.sleep(3)     
-                    ## Procedure verif reccord
-                    objet=Score() 
-                    supra.reinit_vie()
-                    destruct = True 
 
         # Menu Scores
         if selection == Selecteur.tableau[1]:
@@ -778,12 +781,7 @@ class WordShoot():
                             
             except TypeError:
                 pass
-#            formalite = True
-#            aleph = False
-#            sauvegarde = False
-            continuer = False
-            
-#            supra.reinit_vie()
+            Gestion_Ev_menu.c = True
 
 
         # Menu Crédits
@@ -817,8 +815,8 @@ class WordShoot():
                                     bipp.play()
                                   #  continuer = False
                                     unedeplus = False        
-                                    c = False
-                                  #  aleph = False                                         
+                                    Gestion_Ev_menu.c = True
+                                              
         # menu config 
         if selection == Selecteur.tableau[3]:
             unedeplus = True
@@ -829,16 +827,14 @@ class WordShoot():
                 depart=font3.render(bye,2,(255,124,5))
                 fenetre.blit(depart,(150,300))
                 pygame.display.flip()
-                time.sleep(1)
+                
                 for event in pygame.event.get():
                     if event.type == KEYDOWN: 
                         if event.key == K_ESCAPE:
-                            bipp.play() 
-                           # unedeplus = False    
-                            continuer = False
-                            c = True 
-
-       
+                            bipp.play()  
+                            Gestion_Ev_menu.c = True                      
+                            unedeplus = False   
+        
         # menu quit 
         if selection == Selecteur.tableau[4]:
             # Création d'un rectangle noir pour le fond
