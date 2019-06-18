@@ -1,0 +1,1542 @@
+Help on package pygame:
+
+NNAAMMEE
+    pygame
+
+FFIILLEE
+    /usr/local/lib/python2.7/dist-packages/pygame/__init__.py
+
+DDEESSCCRRIIPPTTIIOONN
+    Pygame is a set of Python modules designed for writing games.
+    It is written on top of the excellent SDL library. This allows you
+    to create fully featured games and multimedia programs in the python
+    language. The package is highly portable, with games running on
+    Windows, MacOS, OS X, BeOS, FreeBSD, IRIX, and Linux.
+
+PPAACCKKAAGGEE  CCOONNTTEENNTTSS
+    _camera
+    _camera_opencv_highgui
+    _camera_vidcapture
+    _dummybackend
+    _freetype
+    _numpysndarray
+    _numpysurfarray
+    base
+    bufferproxy
+    camera
+    cdrom
+    color
+    colordict
+    compat
+    constants
+    cursors
+    display
+    docs (package)
+    draw
+    draw_py
+    event
+    examples (package)
+    fastevent
+    font
+    freetype
+    ftfont
+    gfxdraw
+    image
+    imageext
+    joystick
+    key
+    locals
+    macosx
+    mask
+    math
+    midi
+    mixer
+    mixer_music
+    mouse
+    newbuffer
+    overlay
+    pixelarray
+    pixelcopy
+    pkgdata
+    pypm
+    rect
+    rwobject
+    scrap
+    sndarray
+    sprite
+    surface
+    surfarray
+    surflock
+    sysfont
+    tests (package)
+    threads (package)
+    time
+    transform
+    version
+
+CCLLAASSSSEESS
+    __builtin__.object
+        BufferProxy
+        Color
+        PixelArray
+        Rect
+        Surface
+        overlay
+    exceptions.BufferError(exceptions.StandardError)
+        BufferError
+    exceptions.RuntimeError(exceptions.StandardError)
+        error
+    
+    class BBuuffffeerrEErrrroorr(exceptions.BufferError)
+     |  Method resolution order:
+     |      BufferError
+     |      exceptions.BufferError
+     |      exceptions.StandardError
+     |      exceptions.Exception
+     |      exceptions.BaseException
+     |      __builtin__.object
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.BufferError:
+     |  
+     |  ____iinniitt____(...)
+     |      x.__init__(...) initializes x; see help(type(x)) for signature
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from exceptions.BufferError:
+     |  
+     |  ____nneeww____ = <built-in method __new__ of type object>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.BaseException:
+     |  
+     |  ____ddeellaattttrr____(...)
+     |      x.__delattr__('name') <==> del x.name
+     |  
+     |  ____ggeettaattttrriibbuuttee____(...)
+     |      x.__getattribute__('name') <==> x.name
+     |  
+     |  ____ggeettiitteemm____(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  ____ggeettsslliiccee____(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  ____rreedduuccee____(...)
+     |  
+     |  ____rreepprr____(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  ____sseettaattttrr____(...)
+     |      x.__setattr__('name', value) <==> x.name = value
+     |  
+     |  ____sseettssttaattee____(...)
+     |  
+     |  ____ssttrr____(...)
+     |      x.__str__() <==> str(x)
+     |  
+     |  ____uunniiccooddee____(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from exceptions.BaseException:
+     |  
+     |  ____ddiicctt____
+     |  
+     |  aarrggss
+     |  
+     |  mmeessssaaggee
+    
+    class BBuuffffeerrPPrrooxxyy(__builtin__.object)
+     |  BufferProxy(<parent>) -> BufferProxy
+     |  pygame object to export a surface buffer through an array protocol
+     |  
+     |  Methods defined here:
+     |  
+     |  ____rreepprr____(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  wwrriittee(...)
+     |      write(buffer, offset=0)
+     |      Write raw bytes to object buffer.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  ____aarrrraayy__iinntteerrffaaccee____
+     |      Version 3 array interface, Python level
+     |  
+     |  ____aarrrraayy__ssttrruucctt____
+     |      Version 3 array interface, C level
+     |  
+     |  ____ddiicctt____
+     |      The object's attribute dictionary, read-only
+     |  
+     |  lleennggtthh
+     |      length -> int
+     |      The size, in bytes, of the exported buffer.
+     |  
+     |  ppaarreenntt
+     |      parent -> Surface
+     |      parent -> <parent>
+     |      Return wrapped exporting object.
+     |  
+     |  rraaww
+     |      raw -> bytes
+     |      A copy of the exported buffer as a single block of bytes.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  ____nneeww____ = <built-in method __new__ of type object>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+    
+    class CCoolloorr(__builtin__.object)
+     |  Color(name) -> Color
+     |  Color(r, g, b, a) -> Color
+     |  Color(rgbvalue) -> Color
+     |  pygame object for color representations
+     |  
+     |  Methods defined here:
+     |  
+     |  ____aadddd____(...)
+     |      x.__add__(y) <==> x+y
+     |  
+     |  ____ddeelliitteemm____(...)
+     |      x.__delitem__(y) <==> del x[y]
+     |  
+     |  ____ddiivv____(...)
+     |      x.__div__(y) <==> x/y
+     |  
+     |  ____eeqq____(...)
+     |      x.__eq__(y) <==> x==y
+     |  
+     |  ____ffllooaatt____(...)
+     |      x.__float__() <==> float(x)
+     |  
+     |  ____fflloooorrddiivv____(...)
+     |      x.__floordiv__(y) <==> x//y
+     |  
+     |  ____ggee____(...)
+     |      x.__ge__(y) <==> x>=y
+     |  
+     |  ____ggeettiitteemm____(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  ____ggeettsslliiccee____(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  ____ggtt____(...)
+     |      x.__gt__(y) <==> x>y
+     |  
+     |  ____hheexx____(...)
+     |      x.__hex__() <==> hex(x)
+     |  
+     |  ____iinnddeexx____(...)
+     |      x[y:z] <==> x[y.__index__():z.__index__()]
+     |  
+     |  ____iinniitt____(...)
+     |      x.__init__(...) initializes x; see help(type(x)) for signature
+     |  
+     |  ____iinntt____(...)
+     |      x.__int__() <==> int(x)
+     |  
+     |  ____iinnvveerrtt____(...)
+     |      x.__invert__() <==> ~x
+     |  
+     |  ____llee____(...)
+     |      x.__le__(y) <==> x<=y
+     |  
+     |  ____lleenn____(...)
+     |      x.__len__() <==> len(x)
+     |  
+     |  ____lloonngg____(...)
+     |      x.__long__() <==> long(x)
+     |  
+     |  ____lltt____(...)
+     |      x.__lt__(y) <==> x<y
+     |  
+     |  ____mmoodd____(...)
+     |      x.__mod__(y) <==> x%y
+     |  
+     |  ____mmuull____(...)
+     |      x.__mul__(y) <==> x*y
+     |  
+     |  ____nnee____(...)
+     |      x.__ne__(y) <==> x!=y
+     |  
+     |  ____oocctt____(...)
+     |      x.__oct__() <==> oct(x)
+     |  
+     |  ____rraadddd____(...)
+     |      x.__radd__(y) <==> y+x
+     |  
+     |  ____rrddiivv____(...)
+     |      x.__rdiv__(y) <==> y/x
+     |  
+     |  ____rreepprr____(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  ____rrfflloooorrddiivv____(...)
+     |      x.__rfloordiv__(y) <==> y//x
+     |  
+     |  ____rrmmoodd____(...)
+     |      x.__rmod__(y) <==> y%x
+     |  
+     |  ____rrmmuull____(...)
+     |      x.__rmul__(y) <==> y*x
+     |  
+     |  ____rrssuubb____(...)
+     |      x.__rsub__(y) <==> y-x
+     |  
+     |  ____sseettiitteemm____(...)
+     |      x.__setitem__(i, y) <==> x[i]=y
+     |  
+     |  ____ssuubb____(...)
+     |      x.__sub__(y) <==> x-y
+     |  
+     |  ccoorrrreecctt__ggaammmmaa(...)
+     |      correct_gamma (gamma) -> Color
+     |      Applies a certain gamma value to the Color.
+     |  
+     |  nnoorrmmaalliizzee(...)
+     |      normalize() -> tuple
+     |      Returns the normalized RGBA values of the Color.
+     |  
+     |  sseett__lleennggtthh(...)
+     |      set_length(len) -> None
+     |      Set the number of elements in the Color to 1,2,3, or 4.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  ____aarrrraayy__ssttrruucctt____
+     |      array structure interface, read only
+     |  
+     |  aa
+     |      a -> int
+     |      Gets or sets the alpha value of the Color.
+     |  
+     |  bb
+     |      b -> int
+     |      Gets or sets the blue value of the Color.
+     |  
+     |  ccmmyy
+     |      cmy -> tuple
+     |      Gets or sets the CMY representation of the Color.
+     |  
+     |  gg
+     |      g -> int
+     |      Gets or sets the green value of the Color.
+     |  
+     |  hhssllaa
+     |      hsla -> tuple
+     |      Gets or sets the HSLA representation of the Color.
+     |  
+     |  hhssvvaa
+     |      hsva -> tuple
+     |      Gets or sets the HSVA representation of the Color.
+     |  
+     |  ii11ii22ii33
+     |      i1i2i3 -> tuple
+     |      Gets or sets the I1I2I3 representation of the Color.
+     |  
+     |  rr
+     |      r -> int
+     |      Gets or sets the red value of the Color.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  ____nneeww____ = <built-in method __new__ of type object>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+    
+    OOvveerrllaayy = class overlay(__builtin__.object)
+     |  Overlay(format, (width, height)) -> Overlay
+     |  pygame object for video overlay graphics
+     |  
+     |  Methods defined here:
+     |  
+     |  ddiissppllaayy(...)
+     |      display((y, u, v)) -> None
+     |      display() -> None
+     |      set the overlay pixel data
+     |  
+     |  ggeett__hhaarrddwwaarree(...)
+     |      get_hardware(rect) -> int
+     |      test if the Overlay is hardware accelerated
+     |  
+     |  sseett__llooccaattiioonn(...)
+     |      set_location(rect) -> None
+     |      control where the overlay is displayed
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  ____nneeww____ = <built-in method __new__ of type object>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+    
+    class PPiixxeellAArrrraayy(__builtin__.object)
+     |  PixelArray(Surface) -> PixelArray
+     |  pygame object for direct pixel access of surfaces
+     |  
+     |  Methods defined here:
+     |  
+     |  ____ccoonnttaaiinnss____(...)
+     |      x.__contains__(y) <==> y in x
+     |  
+     |  ____ddeelliitteemm____(...)
+     |      x.__delitem__(y) <==> del x[y]
+     |  
+     |  ____eenntteerr____(...)
+     |      transpose() -> PixelArray
+     |      Closes the PixelArray, and releases Surface lock.
+     |  
+     |  ____eexxiitt____(...)
+     |      extract(color, distance=0, weights=(0.299, 0.587, 0.114)) -> PixelArray
+     |      Extracts the passed color from the PixelArray.
+     |  
+     |  ____ggeettiitteemm____(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  ____iitteerr____(...)
+     |      x.__iter__() <==> iter(x)
+     |  
+     |  ____lleenn____(...)
+     |      x.__len__() <==> len(x)
+     |  
+     |  ____rreepprr____(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  ____sseettiitteemm____(...)
+     |      x.__setitem__(i, y) <==> x[i]=y
+     |  
+     |  cclloossee(...)
+     |      transpose() -> PixelArray
+     |      Closes the PixelArray, and releases Surface lock.
+     |  
+     |  ccoommppaarree(...)
+     |      compare(array, distance=0, weights=(0.299, 0.587, 0.114)) -> PixelArray
+     |      Compares the PixelArray with another one.
+     |  
+     |  eexxttrraacctt(...)
+     |      extract(color, distance=0, weights=(0.299, 0.587, 0.114)) -> PixelArray
+     |      Extracts the passed color from the PixelArray.
+     |  
+     |  mmaakkee__ssuurrffaaccee(...)
+     |      make_surface() -> Surface
+     |      Creates a new Surface from the current PixelArray.
+     |  
+     |  rreeppllaaccee(...)
+     |      replace(color, repcolor, distance=0, weights=(0.299, 0.587, 0.114)) -> None
+     |      Replaces the passed color in the PixelArray with another one.
+     |  
+     |  ttrraannssppoossee(...)
+     |      transpose() -> PixelArray
+     |      Exchanges the x and y axis.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  ____aarrrraayy__iinntteerrffaaccee____
+     |      Version 3
+     |  
+     |  ____aarrrraayy__ssttrruucctt____
+     |      Version 3
+     |  
+     |  ____ddiicctt____
+     |  
+     |  iitteemmssiizzee
+     |      itemsize -> int
+     |      Returns the byte size of a pixel array item
+     |  
+     |  nnddiimm
+     |      ndim -> int
+     |      Returns the number of dimensions.
+     |  
+     |  sshhaappee
+     |      shape -> tuple of int's
+     |      Returns the array size.
+     |  
+     |  ssttrriiddeess
+     |      strides -> tuple of int's
+     |      Returns byte offsets for each array dimension.
+     |  
+     |  ssuurrffaaccee
+     |      surface -> Surface
+     |      Gets the Surface the PixelArray uses.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  ____nneeww____ = <built-in method __new__ of type object>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+    
+    class RReecctt(__builtin__.object)
+     |  Rect(left, top, width, height) -> Rect
+     |  Rect((left, top), (width, height)) -> Rect
+     |  Rect(object) -> Rect
+     |  pygame object for storing rectangular coordinates
+     |  
+     |  Methods defined here:
+     |  
+     |  ____ccooeerrccee____(...)
+     |      x.__coerce__(y) <==> coerce(x, y)
+     |  
+     |  ____ccooppyy____(...)
+     |  
+     |  ____ddeelliitteemm____(...)
+     |      x.__delitem__(y) <==> del x[y]
+     |  
+     |  ____eeqq____(...)
+     |      x.__eq__(y) <==> x==y
+     |  
+     |  ____ggee____(...)
+     |      x.__ge__(y) <==> x>=y
+     |  
+     |  ____ggeettiitteemm____(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  ____ggtt____(...)
+     |      x.__gt__(y) <==> x>y
+     |  
+     |  ____iinniitt____(...)
+     |      x.__init__(...) initializes x; see help(type(x)) for signature
+     |  
+     |  ____llee____(...)
+     |      x.__le__(y) <==> x<=y
+     |  
+     |  ____lleenn____(...)
+     |      x.__len__() <==> len(x)
+     |  
+     |  ____lltt____(...)
+     |      x.__lt__(y) <==> x<y
+     |  
+     |  ____nnee____(...)
+     |      x.__ne__(y) <==> x!=y
+     |  
+     |  ____nnoonnzzeerroo____(...)
+     |      x.__nonzero__() <==> x != 0
+     |  
+     |  ____rreedduuccee____(...)
+     |  
+     |  ____rreepprr____(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  ____sseettiitteemm____(...)
+     |      x.__setitem__(i, y) <==> x[i]=y
+     |  
+     |  ____ssttrr____(...)
+     |      x.__str__() <==> str(x)
+     |  
+     |  ccllaammpp(...)
+     |      clamp(Rect) -> Rect
+     |      moves the rectangle inside another
+     |  
+     |  ccllaammpp__iipp(...)
+     |      clamp_ip(Rect) -> None
+     |      moves the rectangle inside another, in place
+     |  
+     |  cclliipp(...)
+     |      clip(Rect) -> Rect
+     |      crops a rectangle inside another
+     |  
+     |  ccoolllliiddeeddiicctt(...)
+     |      collidedict(dict) -> (key, value)
+     |      test if one rectangle in a dictionary intersects
+     |  
+     |  ccoolllliiddeeddiiccttaallll(...)
+     |      collidedictall(dict) -> [(key, value), ...]
+     |      test if all rectangles in a dictionary intersect
+     |  
+     |  ccoolllliiddeelliisstt(...)
+     |      collidelist(list) -> index
+     |      test if one rectangle in a list intersects
+     |  
+     |  ccoolllliiddeelliissttaallll(...)
+     |      collidelistall(list) -> indices
+     |      test if all rectangles in a list intersect
+     |  
+     |  ccoolllliiddeeppooiinntt(...)
+     |      collidepoint(x, y) -> bool
+     |      collidepoint((x,y)) -> bool
+     |      test if a point is inside a rectangle
+     |  
+     |  ccoolllliiddeerreecctt(...)
+     |      colliderect(Rect) -> bool
+     |      test if two rectangles overlap
+     |  
+     |  ccoonnttaaiinnss(...)
+     |      contains(Rect) -> bool
+     |      test if one rectangle is inside another
+     |  
+     |  ccooppyy(...)
+     |      copy() -> Rect
+     |      copy the rectangle
+     |  
+     |  ffiitt(...)
+     |      fit(Rect) -> Rect
+     |      resize and move a rectangle with aspect ratio
+     |  
+     |  iinnffllaattee(...)
+     |      inflate(x, y) -> Rect
+     |      grow or shrink the rectangle size
+     |  
+     |  iinnffllaattee__iipp(...)
+     |      inflate_ip(x, y) -> None
+     |      grow or shrink the rectangle size, in place
+     |  
+     |  mmoovvee(...)
+     |      move(x, y) -> Rect
+     |      moves the rectangle
+     |  
+     |  mmoovvee__iipp(...)
+     |      move_ip(x, y) -> None
+     |      moves the rectangle, in place
+     |  
+     |  nnoorrmmaalliizzee(...)
+     |      normalize() -> None
+     |      correct negative sizes
+     |  
+     |  uunniioonn(...)
+     |      union(Rect) -> Rect
+     |      joins two rectangles into one
+     |  
+     |  uunniioonn__iipp(...)
+     |      union_ip(Rect) -> None
+     |      joins two rectangles into one, in place
+     |  
+     |  uunniioonnaallll(...)
+     |      unionall(Rect_sequence) -> Rect
+     |      the union of many rectangles
+     |  
+     |  uunniioonnaallll__iipp(...)
+     |      unionall_ip(Rect_sequence) -> None
+     |      the union of many rectangles, in place
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  ____ssaaffee__ffoorr__uunnppiicckklliinngg____
+     |  
+     |  bboottttoomm
+     |  
+     |  bboottttoommlleefftt
+     |  
+     |  bboottttoommrriigghhtt
+     |  
+     |  cceenntteerr
+     |  
+     |  cceenntteerrxx
+     |  
+     |  cceenntteerryy
+     |  
+     |  hh
+     |  
+     |  hheeiigghhtt
+     |  
+     |  lleefftt
+     |  
+     |  mmiiddbboottttoomm
+     |  
+     |  mmiiddlleefftt
+     |  
+     |  mmiiddrriigghhtt
+     |  
+     |  mmiiddttoopp
+     |  
+     |  rriigghhtt
+     |  
+     |  ssiizzee
+     |  
+     |  ttoopp
+     |  
+     |  ttoopplleefftt
+     |  
+     |  ttoopprriigghhtt
+     |  
+     |  ww
+     |  
+     |  wwiiddtthh
+     |  
+     |  xx
+     |  
+     |  yy
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  ____nneeww____ = <built-in method __new__ of type object>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+    
+    class SSuurrffaaccee(__builtin__.object)
+     |  Surface((width, height), flags=0, depth=0, masks=None) -> Surface
+     |  Surface((width, height), flags=0, Surface) -> Surface
+     |  pygame object for representing images
+     |  
+     |  Methods defined here:
+     |  
+     |  ____ccooppyy____(...)
+     |      copy() -> Surface
+     |      create a new copy of a Surface
+     |  
+     |  ____iinniitt____(...)
+     |      x.__init__(...) initializes x; see help(type(x)) for signature
+     |  
+     |  ____rreepprr____(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  bblliitt(...)
+     |      blit(source, dest, area=None, special_flags=0) -> Rect
+     |      draw one image onto another
+     |  
+     |  bblliittss(...)
+     |      blits(blit_sequence=(source, dest), ...), doreturn=1) -> [Rect, ...] or None
+     |      blits((source, dest, area), ...)) -> [Rect, ...]
+     |      blits((source, dest, area, special_flags), ...)) -> [Rect, ...]
+     |      draw many images onto another
+     |  
+     |  ccoonnvveerrtt(...)
+     |      convert(Surface=None) -> Surface
+     |      convert(depth, flags=0) -> Surface
+     |      convert(masks, flags=0) -> Surface
+     |      change the pixel format of an image
+     |  
+     |  ccoonnvveerrtt__aallpphhaa(...)
+     |      convert_alpha(Surface) -> Surface
+     |      convert_alpha() -> Surface
+     |      change the pixel format of an image including per pixel alphas
+     |  
+     |  ccooppyy(...)
+     |      copy() -> Surface
+     |      create a new copy of a Surface
+     |  
+     |  ffiillll(...)
+     |      fill(color, rect=None, special_flags=0) -> Rect
+     |      fill Surface with a solid color
+     |  
+     |  ggeett__aabbss__ooffffsseett(...)
+     |      get_abs_offset() -> (x, y)
+     |      find the absolute position of a child subsurface inside its top level parent
+     |  
+     |  ggeett__aabbss__ppaarreenntt(...)
+     |      get_abs_parent() -> Surface
+     |      find the top level parent of a subsurface
+     |  
+     |  ggeett__aallpphhaa(...)
+     |      get_alpha() -> int_value
+     |      get the current Surface transparency value
+     |  
+     |  ggeett__aatt(...)
+     |      get_at((x, y)) -> Color
+     |      get the color value at a single pixel
+     |  
+     |  ggeett__aatt__mmaappppeedd(...)
+     |      get_at_mapped((x, y)) -> Color
+     |      get the mapped color value at a single pixel
+     |  
+     |  ggeett__bbiittssiizzee(...)
+     |      get_bitsize() -> int
+     |      get the bit depth of the Surface pixel format
+     |  
+     |  ggeett__bboouunnddiinngg__rreecctt(...)
+     |      get_bounding_rect(min_alpha = 1) -> Rect
+     |      find the smallest rect containing data
+     |  
+     |  ggeett__bbuuffffeerr(...)
+     |      get_buffer() -> BufferProxy
+     |      acquires a buffer object for the pixels of the Surface.
+     |  
+     |  ggeett__bbyytteessiizzee(...)
+     |      get_bytesize() -> int
+     |      get the bytes used per Surface pixel
+     |  
+     |  ggeett__cclliipp(...)
+     |      get_clip() -> Rect
+     |      get the current clipping area of the Surface
+     |  
+     |  ggeett__ccoolloorrkkeeyy(...)
+     |      get_colorkey() -> RGB or None
+     |      Get the current transparent colorkey
+     |  
+     |  ggeett__ffllaaggss(...)
+     |      get_flags() -> int
+     |      get the additional flags used for the Surface
+     |  
+     |  ggeett__hheeiigghhtt(...)
+     |      get_height() -> height
+     |      get the height of the Surface
+     |  
+     |  ggeett__lloocckkeedd(...)
+     |      get_locked() -> bool
+     |      test if the Surface is current locked
+     |  
+     |  ggeett__lloocckkss(...)
+     |      get_locks() -> tuple
+     |      Gets the locks for the Surface
+     |  
+     |  ggeett__lloosssseess(...)
+     |      get_losses() -> (R, G, B, A)
+     |      the significant bits used to convert between a color and a mapped integer
+     |  
+     |  ggeett__mmaasskkss(...)
+     |      get_masks() -> (R, G, B, A)
+     |      the bitmasks needed to convert between a color and a mapped integer
+     |  
+     |  ggeett__ooffffsseett(...)
+     |      get_offset() -> (x, y)
+     |      find the position of a child subsurface inside a parent
+     |  
+     |  ggeett__ppaalleettttee(...)
+     |      get_palette() -> [RGB, RGB, RGB, ...]
+     |      get the color index palette for an 8-bit Surface
+     |  
+     |  ggeett__ppaalleettttee__aatt(...)
+     |      get_palette_at(index) -> RGB
+     |      get the color for a single entry in a palette
+     |  
+     |  ggeett__ppaarreenntt(...)
+     |      get_parent() -> Surface
+     |      find the parent of a subsurface
+     |  
+     |  ggeett__ppiittcchh(...)
+     |      get_pitch() -> int
+     |      get the number of bytes used per Surface row
+     |  
+     |  ggeett__rreecctt(...)
+     |      get_rect(**kwargs) -> Rect
+     |      get the rectangular area of the Surface
+     |  
+     |  ggeett__sshhiiffttss(...)
+     |      get_shifts() -> (R, G, B, A)
+     |      the bit shifts needed to convert between a color and a mapped integer
+     |  
+     |  ggeett__ssiizzee(...)
+     |      get_size() -> (width, height)
+     |      get the dimensions of the Surface
+     |  
+     |  ggeett__vviieeww(...)
+     |      get_view(<kind>='2') -> BufferProxy
+     |      return a buffer view of the Surface's pixels.
+     |  
+     |  ggeett__wwiiddtthh(...)
+     |      get_width() -> width
+     |      get the width of the Surface
+     |  
+     |  lloocckk(...)
+     |      lock() -> None
+     |      lock the Surface memory for pixel access
+     |  
+     |  mmaapp__rrggbb(...)
+     |      map_rgb(Color) -> mapped_int
+     |      convert a color into a mapped color value
+     |  
+     |  mmuussttlloocckk(...)
+     |      mustlock() -> bool
+     |      test if the Surface requires locking
+     |  
+     |  ssccrroollll(...)
+     |      scroll(dx=0, dy=0) -> None
+     |      Shift the surface image in place
+     |  
+     |  sseett__aallpphhaa(...)
+     |      set_alpha(value, flags=0) -> None
+     |      set_alpha(None) -> None
+     |      set the alpha value for the full Surface image
+     |  
+     |  sseett__aatt(...)
+     |      set_at((x, y), Color) -> None
+     |      set the color value for a single pixel
+     |  
+     |  sseett__cclliipp(...)
+     |      set_clip(rect) -> None
+     |      set_clip(None) -> None
+     |      set the current clipping area of the Surface
+     |  
+     |  sseett__ccoolloorrkkeeyy(...)
+     |      set_colorkey(Color, flags=0) -> None
+     |      set_colorkey(None) -> None
+     |      Set the transparent colorkey
+     |  
+     |  sseett__mmaasskkss(...)
+     |      set_masks((r,g,b,a)) -> None
+     |      set the bitmasks needed to convert between a color and a mapped integer
+     |  
+     |  sseett__ppaalleettttee(...)
+     |      set_palette([RGB, RGB, RGB, ...]) -> None
+     |      set the color palette for an 8-bit Surface
+     |  
+     |  sseett__ppaalleettttee__aatt(...)
+     |      set_palette_at(index, RGB) -> None
+     |      set the color for a single index in an 8-bit Surface palette
+     |  
+     |  sseett__sshhiiffttss(...)
+     |      set_shifts((r,g,b,a)) -> None
+     |      sets the bit shifts needed to convert between a color and a mapped integer
+     |  
+     |  ssuubbssuurrffaaccee(...)
+     |      subsurface(Rect) -> Surface
+     |      create a new surface that references its parent
+     |  
+     |  uunnlloocckk(...)
+     |      unlock() -> None
+     |      unlock the Surface memory from pixel access
+     |  
+     |  uunnmmaapp__rrggbb(...)
+     |      unmap_rgb(mapped_int) -> Color
+     |      convert a mapped integer color value into a Color
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  ____nneeww____ = <built-in method __new__ of type object>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+    
+    SSuurrffaacceeTTyyppee = class Surface(__builtin__.object)
+     |  Surface((width, height), flags=0, depth=0, masks=None) -> Surface
+     |  Surface((width, height), flags=0, Surface) -> Surface
+     |  pygame object for representing images
+     |  
+     |  Methods defined here:
+     |  
+     |  ____ccooppyy____(...)
+     |      copy() -> Surface
+     |      create a new copy of a Surface
+     |  
+     |  ____iinniitt____(...)
+     |      x.__init__(...) initializes x; see help(type(x)) for signature
+     |  
+     |  ____rreepprr____(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  bblliitt(...)
+     |      blit(source, dest, area=None, special_flags=0) -> Rect
+     |      draw one image onto another
+     |  
+     |  bblliittss(...)
+     |      blits(blit_sequence=(source, dest), ...), doreturn=1) -> [Rect, ...] or None
+     |      blits((source, dest, area), ...)) -> [Rect, ...]
+     |      blits((source, dest, area, special_flags), ...)) -> [Rect, ...]
+     |      draw many images onto another
+     |  
+     |  ccoonnvveerrtt(...)
+     |      convert(Surface=None) -> Surface
+     |      convert(depth, flags=0) -> Surface
+     |      convert(masks, flags=0) -> Surface
+     |      change the pixel format of an image
+     |  
+     |  ccoonnvveerrtt__aallpphhaa(...)
+     |      convert_alpha(Surface) -> Surface
+     |      convert_alpha() -> Surface
+     |      change the pixel format of an image including per pixel alphas
+     |  
+     |  ccooppyy(...)
+     |      copy() -> Surface
+     |      create a new copy of a Surface
+     |  
+     |  ffiillll(...)
+     |      fill(color, rect=None, special_flags=0) -> Rect
+     |      fill Surface with a solid color
+     |  
+     |  ggeett__aabbss__ooffffsseett(...)
+     |      get_abs_offset() -> (x, y)
+     |      find the absolute position of a child subsurface inside its top level parent
+     |  
+     |  ggeett__aabbss__ppaarreenntt(...)
+     |      get_abs_parent() -> Surface
+     |      find the top level parent of a subsurface
+     |  
+     |  ggeett__aallpphhaa(...)
+     |      get_alpha() -> int_value
+     |      get the current Surface transparency value
+     |  
+     |  ggeett__aatt(...)
+     |      get_at((x, y)) -> Color
+     |      get the color value at a single pixel
+     |  
+     |  ggeett__aatt__mmaappppeedd(...)
+     |      get_at_mapped((x, y)) -> Color
+     |      get the mapped color value at a single pixel
+     |  
+     |  ggeett__bbiittssiizzee(...)
+     |      get_bitsize() -> int
+     |      get the bit depth of the Surface pixel format
+     |  
+     |  ggeett__bboouunnddiinngg__rreecctt(...)
+     |      get_bounding_rect(min_alpha = 1) -> Rect
+     |      find the smallest rect containing data
+     |  
+     |  ggeett__bbuuffffeerr(...)
+     |      get_buffer() -> BufferProxy
+     |      acquires a buffer object for the pixels of the Surface.
+     |  
+     |  ggeett__bbyytteessiizzee(...)
+     |      get_bytesize() -> int
+     |      get the bytes used per Surface pixel
+     |  
+     |  ggeett__cclliipp(...)
+     |      get_clip() -> Rect
+     |      get the current clipping area of the Surface
+     |  
+     |  ggeett__ccoolloorrkkeeyy(...)
+     |      get_colorkey() -> RGB or None
+     |      Get the current transparent colorkey
+     |  
+     |  ggeett__ffllaaggss(...)
+     |      get_flags() -> int
+     |      get the additional flags used for the Surface
+     |  
+     |  ggeett__hheeiigghhtt(...)
+     |      get_height() -> height
+     |      get the height of the Surface
+     |  
+     |  ggeett__lloocckkeedd(...)
+     |      get_locked() -> bool
+     |      test if the Surface is current locked
+     |  
+     |  ggeett__lloocckkss(...)
+     |      get_locks() -> tuple
+     |      Gets the locks for the Surface
+     |  
+     |  ggeett__lloosssseess(...)
+     |      get_losses() -> (R, G, B, A)
+     |      the significant bits used to convert between a color and a mapped integer
+     |  
+     |  ggeett__mmaasskkss(...)
+     |      get_masks() -> (R, G, B, A)
+     |      the bitmasks needed to convert between a color and a mapped integer
+     |  
+     |  ggeett__ooffffsseett(...)
+     |      get_offset() -> (x, y)
+     |      find the position of a child subsurface inside a parent
+     |  
+     |  ggeett__ppaalleettttee(...)
+     |      get_palette() -> [RGB, RGB, RGB, ...]
+     |      get the color index palette for an 8-bit Surface
+     |  
+     |  ggeett__ppaalleettttee__aatt(...)
+     |      get_palette_at(index) -> RGB
+     |      get the color for a single entry in a palette
+     |  
+     |  ggeett__ppaarreenntt(...)
+     |      get_parent() -> Surface
+     |      find the parent of a subsurface
+     |  
+     |  ggeett__ppiittcchh(...)
+     |      get_pitch() -> int
+     |      get the number of bytes used per Surface row
+     |  
+     |  ggeett__rreecctt(...)
+     |      get_rect(**kwargs) -> Rect
+     |      get the rectangular area of the Surface
+     |  
+     |  ggeett__sshhiiffttss(...)
+     |      get_shifts() -> (R, G, B, A)
+     |      the bit shifts needed to convert between a color and a mapped integer
+     |  
+     |  ggeett__ssiizzee(...)
+     |      get_size() -> (width, height)
+     |      get the dimensions of the Surface
+     |  
+     |  ggeett__vviieeww(...)
+     |      get_view(<kind>='2') -> BufferProxy
+     |      return a buffer view of the Surface's pixels.
+     |  
+     |  ggeett__wwiiddtthh(...)
+     |      get_width() -> width
+     |      get the width of the Surface
+     |  
+     |  lloocckk(...)
+     |      lock() -> None
+     |      lock the Surface memory for pixel access
+     |  
+     |  mmaapp__rrggbb(...)
+     |      map_rgb(Color) -> mapped_int
+     |      convert a color into a mapped color value
+     |  
+     |  mmuussttlloocckk(...)
+     |      mustlock() -> bool
+     |      test if the Surface requires locking
+     |  
+     |  ssccrroollll(...)
+     |      scroll(dx=0, dy=0) -> None
+     |      Shift the surface image in place
+     |  
+     |  sseett__aallpphhaa(...)
+     |      set_alpha(value, flags=0) -> None
+     |      set_alpha(None) -> None
+     |      set the alpha value for the full Surface image
+     |  
+     |  sseett__aatt(...)
+     |      set_at((x, y), Color) -> None
+     |      set the color value for a single pixel
+     |  
+     |  sseett__cclliipp(...)
+     |      set_clip(rect) -> None
+     |      set_clip(None) -> None
+     |      set the current clipping area of the Surface
+     |  
+     |  sseett__ccoolloorrkkeeyy(...)
+     |      set_colorkey(Color, flags=0) -> None
+     |      set_colorkey(None) -> None
+     |      Set the transparent colorkey
+     |  
+     |  sseett__mmaasskkss(...)
+     |      set_masks((r,g,b,a)) -> None
+     |      set the bitmasks needed to convert between a color and a mapped integer
+     |  
+     |  sseett__ppaalleettttee(...)
+     |      set_palette([RGB, RGB, RGB, ...]) -> None
+     |      set the color palette for an 8-bit Surface
+     |  
+     |  sseett__ppaalleettttee__aatt(...)
+     |      set_palette_at(index, RGB) -> None
+     |      set the color for a single index in an 8-bit Surface palette
+     |  
+     |  sseett__sshhiiffttss(...)
+     |      set_shifts((r,g,b,a)) -> None
+     |      sets the bit shifts needed to convert between a color and a mapped integer
+     |  
+     |  ssuubbssuurrffaaccee(...)
+     |      subsurface(Rect) -> Surface
+     |      create a new surface that references its parent
+     |  
+     |  uunnlloocckk(...)
+     |      unlock() -> None
+     |      unlock the Surface memory from pixel access
+     |  
+     |  uunnmmaapp__rrggbb(...)
+     |      unmap_rgb(mapped_int) -> Color
+     |      convert a mapped integer color value into a Color
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  ____nneeww____ = <built-in method __new__ of type object>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+    
+    class eerrrroorr(exceptions.RuntimeError)
+     |  Method resolution order:
+     |      error
+     |      exceptions.RuntimeError
+     |      exceptions.StandardError
+     |      exceptions.Exception
+     |      exceptions.BaseException
+     |      __builtin__.object
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.RuntimeError:
+     |  
+     |  ____iinniitt____(...)
+     |      x.__init__(...) initializes x; see help(type(x)) for signature
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from exceptions.RuntimeError:
+     |  
+     |  ____nneeww____ = <built-in method __new__ of type object>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.BaseException:
+     |  
+     |  ____ddeellaattttrr____(...)
+     |      x.__delattr__('name') <==> del x.name
+     |  
+     |  ____ggeettaattttrriibbuuttee____(...)
+     |      x.__getattribute__('name') <==> x.name
+     |  
+     |  ____ggeettiitteemm____(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  ____ggeettsslliiccee____(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  ____rreedduuccee____(...)
+     |  
+     |  ____rreepprr____(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  ____sseettaattttrr____(...)
+     |      x.__setattr__('name', value) <==> x.name = value
+     |  
+     |  ____sseettssttaattee____(...)
+     |  
+     |  ____ssttrr____(...)
+     |      x.__str__() <==> str(x)
+     |  
+     |  ____uunniiccooddee____(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from exceptions.BaseException:
+     |  
+     |  ____ddiicctt____
+     |  
+     |  aarrggss
+     |  
+     |  mmeessssaaggee
+
+FFUUNNCCTTIIOONNSS
+    MMaasskk(...)
+        Mask(size=(width, height)) -> Mask
+        Mask(size=(width, height), fill=False) -> Mask
+        pygame object for representing 2D bitmasks
+    
+    eennccooddee__ffiillee__ppaatthh(...)
+        encode_file_path([obj [, etype]]) -> bytes or None
+        Encode a Unicode or bytes object as a file system path
+    
+    eennccooddee__ssttrriinngg(...)
+        encode_string([obj [, encoding [, errors [, etype]]]]) -> bytes or None
+        Encode a Unicode or bytes object
+    
+    ggeett__aarrrraayy__iinntteerrffaaccee(...)
+        return an array struct interface as an interface dictionary
+    
+    ggeett__eerrrroorr(...)
+        get_error() -> errorstr
+        get the current error message
+    
+    ggeett__iinniitt(...)
+        get_init() -> bool
+        returns True if pygame is currently initialized
+    
+    ggeett__ssddll__bbyytteeoorrddeerr(...)
+        get_sdl_byteorder() -> int
+        get the byte order of SDL
+    
+    ggeett__ssddll__vveerrssiioonn(...)
+        get_sdl_version() -> major, minor, patch
+        get the version number of SDL
+    
+    iinniitt(...)
+        init() -> (numpass, numfail)
+        initialize all imported pygame modules
+    
+    ppaacckkaaggeerr__iimmppoorrttss()
+        some additional imports that py2app/py2exe will want to see
+    
+    qquuiitt(...)
+        quit() -> None
+        uninitialize all pygame modules
+    
+    rreeggiisstteerr__qquuiitt(...)
+        register_quit(callable) -> None
+        register a function to be called when pygame quits
+    
+    sseeggffaauulltt(...)
+        crash
+    
+    sseett__eerrrroorr(...)
+        set_error(error_msg) -> None
+        set the current error message
+    
+    wwaarrnn__uunnwwaanntteedd__ffiilleess()
+        warn about unneeded old files
+
+DDAATTAA
+    AACCTTIIVVEEEEVVEENNTT = 1
+    AANNYYFFOORRMMAATT = 268435456
+    AASSYYNNCCBBLLIITT = 4
+    AAUUDDIIOODDEEVVIICCEEAADDDDEEDD = -1
+    AAUUDDIIOODDEEVVIICCEERREEMMOOVVEEDD = -1
+    AAUUDDIIOO__AALLLLOOWW__AANNYY__CCHHAANNGGEE = -1
+    AAUUDDIIOO__AALLLLOOWW__CCHHAANNNNEELLSS__CCHHAANNGGEE = -1
+    AAUUDDIIOO__AALLLLOOWW__FFOORRMMAATT__CCHHAANNGGEE = -1
+    AAUUDDIIOO__AALLLLOOWW__FFRREEQQUUEENNCCYY__CCHHAANNGGEE = -1
+    AAUUDDIIOO__SS1166 = 32784
+    AAUUDDIIOO__SS1166LLSSBB = 32784
+    AAUUDDIIOO__SS1166MMSSBB = 36880
+    AAUUDDIIOO__SS1166SSYYSS = 32784
+    AAUUDDIIOO__SS88 = 32776
+    AAUUDDIIOO__UU1166 = 16
+    AAUUDDIIOO__UU1166LLSSBB = 16
+    AAUUDDIIOO__UU1166MMSSBB = 4112
+    AAUUDDIIOO__UU1166SSYYSS = 16
+    AAUUDDIIOO__UU88 = 8
+    BBIIGG__EENNDDIIAANN = 4321
+    BBLLEENNDD__AADDDD = 1
+    BBLLEENNDD__MMAAXX = 5
+    BBLLEENNDD__MMIINN = 4
+    BBLLEENNDD__MMUULLTT = 3
+    BBLLEENNDD__PPRREEMMUULLTTIIPPLLIIEEDD = 17
+    BBLLEENNDD__RRGGBBAA__AADDDD = 6
+    BBLLEENNDD__RRGGBBAA__MMAAXX = 16
+    BBLLEENNDD__RRGGBBAA__MMIINN = 9
+    BBLLEENNDD__RRGGBBAA__MMUULLTT = 8
+    BBLLEENNDD__RRGGBBAA__SSUUBB = 7
+    BBLLEENNDD__RRGGBB__AADDDD = 1
+    BBLLEENNDD__RRGGBB__MMAAXX = 5
+    BBLLEENNDD__RRGGBB__MMIINN = 4
+    BBLLEENNDD__RRGGBB__MMUULLTT = 3
+    BBLLEENNDD__RRGGBB__SSUUBB = 2
+    BBLLEENNDD__SSUUBB = 2
+    BBUUTTTTOONN__LLEEFFTT = 1
+    BBUUTTTTOONN__MMIIDDDDLLEE = 2
+    BBUUTTTTOONN__RRIIGGHHTT = 3
+    BBUUTTTTOONN__WWHHEEEELLDDOOWWNN = 5
+    BBUUTTTTOONN__WWHHEEEELLUUPP = 4
+    BBUUTTTTOONN__XX11 = 6
+    BBUUTTTTOONN__XX22 = 7
+    DDOOUUBBLLEEBBUUFF = 1073741824
+    DDRROOPPBBEEGGIINN = -1
+    DDRROOPPCCOOMMPPLLEETTEE = -1
+    DDRROOPPFFIILLEE = -1
+    DDRROOPPTTEEXXTT = -1
+    FFIINNGGEERRDDOOWWNN = -1
+    FFIINNGGEERRMMOOTTIIOONN = -1
+    FFIINNGGEERRUUPP = -1
+    FFUULLLLSSCCRREEEENN = -2147483648
+    GGLL__AACCCCEELLEERRAATTEEDD__VVIISSUUAALL = 15
+    GGLL__AACCCCUUMM__AALLPPHHAA__SSIIZZEE = 11
+    GGLL__AACCCCUUMM__BBLLUUEE__SSIIZZEE = 10
+    GGLL__AACCCCUUMM__GGRREEEENN__SSIIZZEE = 9
+    GGLL__AACCCCUUMM__RREEDD__SSIIZZEE = 8
+    GGLL__AALLPPHHAA__SSIIZZEE = 3
+    GGLL__BBLLUUEE__SSIIZZEE = 2
+    GGLL__BBUUFFFFEERR__SSIIZZEE = 4
+    GGLL__DDEEPPTTHH__SSIIZZEE = 6
+    GGLL__DDOOUUBBLLEEBBUUFFFFEERR = 5
+    GGLL__GGRREEEENN__SSIIZZEE = 1
+    GGLL__MMUULLTTIISSAAMMPPLLEEBBUUFFFFEERRSS = 13
+    GGLL__MMUULLTTIISSAAMMPPLLEESSAAMMPPLLEESS = 14
+    GGLL__RREEDD__SSIIZZEE = 0
+    GGLL__SSTTEENNCCIILL__SSIIZZEE = 7
+    GGLL__SSTTEERREEOO = 12
+    GGLL__SSWWAAPP__CCOONNTTRROOLL = 16
+    HHAATT__CCEENNTTEERREEDD = 0
+    HHAATT__DDOOWWNN = 4
+    HHAATT__LLEEFFTT = 8
+    HHAATT__LLEEFFTTDDOOWWNN = 12
+    HHAATT__LLEEFFTTUUPP = 9
+    HHAATT__RRIIGGHHTT = 2
+    HHAATT__RRIIGGHHTTDDOOWWNN = 6
+    HHAATT__RRIIGGHHTTUUPP = 3
+    HHAATT__UUPP = 1
+    HHAAVVEE__NNEEWWBBUUFF = 1
+    HHWWAACCCCEELL = 256
+    HHWWPPAALLEETTTTEE = 536870912
+    HHWWSSUURRFFAACCEE = 1
+    IIYYUUVV__OOVVEERRLLAAYY = 1448433993
+    JJOOYYAAXXIISSMMOOTTIIOONN = 7
+    JJOOYYBBAALLLLMMOOTTIIOONN = 8
+    JJOOYYBBUUTTTTOONNDDOOWWNN = 10
+    JJOOYYBBUUTTTTOONNUUPP = 11
+    JJOOYYHHAATTMMOOTTIIOONN = 9
+    KKEEYYDDOOWWNN = 2
+    KKEEYYUUPP = 3
+    KKMMOODD__AALLTT = 768
+    KKMMOODD__CCAAPPSS = 8192
+    KKMMOODD__CCTTRRLL = 192
+    KKMMOODD__LLAALLTT = 256
+    KKMMOODD__LLCCTTRRLL = 64
+    KKMMOODD__LLMMEETTAA = 1024
+    KKMMOODD__LLSSHHIIFFTT = 1
+    KKMMOODD__MMEETTAA = 3072
+    KKMMOODD__MMOODDEE = 16384
+    KKMMOODD__NNOONNEE = 0
+    KKMMOODD__NNUUMM = 4096
+    KKMMOODD__RRAALLTT = 512
+    KKMMOODD__RRCCTTRRLL = 128
+    KKMMOODD__RRMMEETTAA = 2048
+    KKMMOODD__RRSSHHIIFFTT = 2
+    KKMMOODD__SSHHIIFFTT = 3
+    KK__00 = 48
+    KK__11 = 49
+    KK__22 = 50
+    KK__33 = 51
+    KK__44 = 52
+    KK__55 = 53
+    KK__66 = 54
+    KK__77 = 55
+    KK__88 = 56
+    KK__99 = 57
+    KK__AAMMPPEERRSSAANNDD = 38
+    KK__AASSTTEERRIISSKK = 42
+    KK__AATT = 64
+    KK__BBAACCKKQQUUOOTTEE = 96
+    KK__BBAACCKKSSLLAASSHH = 92
+    KK__BBAACCKKSSPPAACCEE = 8
+    KK__BBRREEAAKK = 318
+    KK__CCAAPPSSLLOOCCKK = 301
+    KK__CCAARREETT = 94
+    KK__CCLLEEAARR = 12
+    KK__CCOOLLOONN = 58
+    KK__CCOOMMMMAA = 44
+    KK__DDEELLEETTEE = 127
+    KK__DDOOLLLLAARR = 36
+    KK__DDOOWWNN = 274
+    KK__EENNDD = 279
+    KK__EEQQUUAALLSS = 61
+    KK__EESSCCAAPPEE = 27
+    KK__EEUURROO = 321
+    KK__EEXXCCLLAAIIMM = 33
+    KK__FF11 = 282
+    KK__FF1100 = 291
+    KK__FF1111 = 292
+    KK__FF1122 = 293
+    KK__FF1133 = 294
+    KK__FF1144 = 295
+    KK__FF1155 = 296
+    KK__FF22 = 283
+    KK__FF33 = 284
+    KK__FF44 = 285
+    KK__FF55 = 286
+    KK__FF66 = 287
+    KK__FF77 = 288
+    KK__FF88 = 289
+    KK__FF99 = 290
+    KK__FFIIRRSSTT = 0
+    KK__GGRREEAATTEERR = 62
+    KK__HHAASSHH = 35
+    KK__HHEELLPP = 315
+    KK__HHOOMMEE = 278
+    KK__IINNSSEERRTT = 277
+    KK__KKPP00 = 256
+    KK__KKPP11 = 257
+    KK__KKPP22 = 258
+    KK__KKPP33 = 259
+    KK__KKPP44 = 260
+    KK__KKPP55 = 261
+    KK__KKPP66 = 262
+    KK__KKPP77 = 263
+    KK__KKPP88 = 264
+    KK__KKPP99 = 265
+    KK__KKPP__DDIIVVIIDDEE = 267
+    KK__KKPP__EENNTTEERR = 271
+    KK__KKPP__EEQQUUAALLSS = 272
+    KK__KKPP__MMIINNUUSS = 269
+    KK__KKPP__MMUULLTTIIPPLLYY = 268
+    KK__KKPP__PPEERRIIOODD = 266
+    KK__KKPP__PPLLUUSS = 270
+    KK__LLAALLTT = 308
+    KK__LLAASSTT = 323
+    KK__LLCCTTRRLL = 306
+    KK__LLEEFFTT = 276
+    KK__LLEEFFTTBBRRAACCKKEETT = 91
+    KK__LLEEFFTTPPAARREENN = 40
+    KK__LLEESSSS = 60
+    KK__LLMMEETTAA = 310
+    KK__LLSSHHIIFFTT = 304
+    KK__LLSSUUPPEERR = 311
+    KK__MMEENNUU = 319
+    KK__MMIINNUUSS = 45
+    KK__MMOODDEE = 313
+    KK__NNUUMMLLOOCCKK = 300
+    KK__PPAAGGEEDDOOWWNN = 281
+    KK__PPAAGGEEUUPP = 280
+    KK__PPAAUUSSEE = 19
+    KK__PPEERRIIOODD = 46
+    KK__PPLLUUSS = 43
+    KK__PPOOWWEERR = 320
+    KK__PPRRIINNTT = 316
+    KK__QQUUEESSTTIIOONN = 63
+    KK__QQUUOOTTEE = 39
+    KK__QQUUOOTTEEDDBBLL = 34
+    KK__RRAALLTT = 307
+    KK__RRCCTTRRLL = 305
+    KK__RREETTUURRNN = 13
+    KK__RRIIGGHHTT = 275
+    KK__RRIIGGHHTTBBRRAACCKKEETT = 93
+    KK__RRIIGGHHTTPPAARREENN = 41
+    KK__RRMMEETTAA = 309
+    KK__RRSSHHIIFFTT = 303
+    KK__RRSSUUPPEERR = 312
+    KK__SSCCRROOLLLLOOCCKK = 302
+    KK__SSEEMMIICCOOLLOONN = 59
+    KK__SSLLAASSHH = 47
+    KK__SSPPAACCEE = 32
+    KK__SSYYSSRREEQQ = 317
+    KK__TTAABB = 9
+    KK__UUNNDDEERRSSCCOORREE = 95
+    KK__UUNNKKNNOOWWNN = 0
+    KK__UUPP = 273
+    KK__aa = 97
+    KK__bb = 98
+    KK__cc = 99
+    KK__dd = 100
+    KK__ee = 101
+    KK__ff = 102
+    KK__gg = 103
+    KK__hh = 104
+    KK__ii = 105
+    KK__jj = 106
+    KK__kk = 107
+    KK__ll = 108
+    KK__mm = 109
+    KK__nn = 110
+    KK__oo = 111
+    KK__pp = 112
+    KK__qq = 113
+    KK__rr = 114
+    KK__ss = 115
+    KK__tt = 116
+    KK__uu = 117
+    KK__vv = 118
+    KK__ww = 119
+    KK__xx = 120
+    KK__yy = 121
+    KK__zz = 122
+    LLIILL__EENNDDIIAANN = 1234
+    MMOOUUSSEEBBUUTTTTOONNDDOOWWNN = 5
+    MMOOUUSSEEBBUUTTTTOONNUUPP = 6
+    MMOOUUSSEEMMOOTTIIOONN = 4
+    MMOOUUSSEEWWHHEEEELL = -1
+    MMUULLTTIIGGEESSTTUURREE = -1
+    NNOOEEVVEENNTT = 0
+    NNOOFFRRAAMMEE = 32
+    NNUUMMEEVVEENNTTSS = 32
+    OOPPEENNGGLL = 2
+    OOPPEENNGGLLBBLLIITT = 10
+    PPRREEAALLLLOOCC = 16777216
+    QQUUIITT = 12
+    RREESSIIZZAABBLLEE = 16
+    RRLLEEAACCCCEELL = 16384
+    RRLLEEAACCCCEELLOOKK = 8192
+    SSCCRRAAPP__BBMMPP = 'image/bmp'
+    SSCCRRAAPP__CCLLIIPPBBOOAARRDD = 0
+    SSCCRRAAPP__PPBBMM = 'image/pbm'
+    SSCCRRAAPP__PPPPMM = 'image/ppm'
+    SSCCRRAAPP__SSEELLEECCTTIIOONN = 1
+    SSCCRRAAPP__TTEEXXTT = 'text/plain'
+    SSRRCCAALLPPHHAA = 65536
+    SSRRCCCCOOLLOORRKKEEYY = 4096
+    SSWWSSUURRFFAACCEE = 0
+    SSYYSSWWMMEEVVEENNTT = 13
+    TTEEXXTTEEDDIITTIINNGG = -1
+    TTEEXXTTIINNPPUUTT = -1
+    TTIIMMEERR__RREESSOOLLUUTTIIOONN = 10
+    UUSSEERREEVVEENNTT = 24
+    UUSSEERREEVVEENNTT__DDRROOPPFFIILLEE = 4096
+    UUYYVVYY__OOVVEERRLLAAYY = 1498831189
+    VVIIDDEEOOEEXXPPOOSSEE = 17
+    VVIIDDEEOORREESSIIZZEE = 16
+    WWIINNDDOOWWEEVVEENNTT = -1
+    WWIINNDDOOWWEEVVEENNTT__CCLLOOSSEE = -1
+    YYUUYY22__OOVVEERRLLAAYY = 844715353
+    YYVV1122__OOVVEERRLLAAYY = 842094169
+    YYVVYYUU__OOVVEERRLLAAYY = 1431918169
+    ____vveerrssiioonn____ = '1.9.6'
+    mmoovviiee = <MissingModule instance>
+    rreevv = ''
+    vveerr = '1.9.6'
+    vveerrnnuumm = PygameVersion(major=1, minor=9, patch=6)
+
+VVEERRSSIIOONN
+    1.9.6
+

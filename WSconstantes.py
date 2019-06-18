@@ -1,5 +1,5 @@
 # -*- coding: utf8
-""" Constantes du jeu Word Shooting """
+""" Constantes du jeu WordShoot """
 
 
 path='/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/'

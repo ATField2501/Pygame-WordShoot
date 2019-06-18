@@ -69,7 +69,6 @@ font2=pygame.font.Font(None, 55)
 font3=pygame.font.Font(path+'Horst___.ttf', 56)
 font4=pygame.font.Font(path+'Horst___.ttf', 57)
 font5=pygame.font.Font(path+'Horst___.ttf', 58)
-#font3=pygame.font.Font(path+'Horst___.ttf', phidor) 
 def son_vitesse(score, supra):
     if score == 100:
         print ' -- 0.1 --'
@@ -614,10 +613,26 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
 class WordShoot():
     """ Pygame - Worshoot - Classe Principale """
     ############################# Debut prog
-    fenetre.blit(intrologo, (0,0))
-    pygame.display.flip()
     bal.play()
-    time.sleep(3) 
+    # test animation
+    nb = 0
+    while nb < 200:
+        pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+        intrologo.set_alpha(nb)
+        pygame.Surface.convert_alpha(intrologo)
+        fenetre.blit(intrologo,(0,0))
+        pygame.display.flip()  
+        nb += 1
+    nb1 = 200    
+    while nb1 != 0:
+        pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+        intrologo.set_alpha(nb1)
+        pygame.Surface.convert_alpha(intrologo)
+        fenetre.blit(intrologo,(0,0))
+        pygame.display.flip()  
+        nb1 -= 1
+
+#    time.sleep(3) 
     ######### Démarage de la musique de fond
 #    pygame.mixer.music.set_volume(0.5) #Met le volume à 0.5 (moitié)
 #    pygame.mixer.music.play()    
@@ -780,14 +795,14 @@ class WordShoot():
                     pygame.display.flip()   
                     time.sleep(0.4)
                     like += 35        
-                time.sleep(5)
-        
-                for event in pygame.event.get():   
-                    if event.type == KEYDOWN: 
-                        if event.key == K_ESCAPE:
-                            bipp.play()
-                            Gestion_Ev_menu.c = True
-                           
+                
+            
+                    for event in pygame.event.get():   
+                        if event.type == KEYDOWN: 
+                            if event.key == K_ESCAPE:
+                                bipp.play()
+                                Gestion_Ev_menu.c = True
+                time.sleep(5)           
             except TypeError:
                 pass
             Gestion_Ev_menu.c = True
@@ -855,7 +870,7 @@ class WordShoot():
                 pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
                 font3=pygame.font.Font(path+'Horst___.ttf', 56+nb)
                 depart=font3.render(bye,2,(255,124,5))
-                fenetre.blit(depart,(255-(nb*2),255))
+                fenetre.blit(depart,(255-(nb*3),255))
                 pygame.display.flip()
                 nb += 1
             
