@@ -66,11 +66,6 @@ class Score():
         print(self.mnemo)
         # insertion du nouveau reccord
         self.mnemo[nicknamu]=Score.score
-#        try:
-#            self.mnemo.pop(keys)
-#
-#        except KeyError:
-#            pass
         print(self.mnemo)
         pickle.dump(self.mnemo,open(path_shadows,'wb'))
 
@@ -82,7 +77,7 @@ class Score():
             ecran_reccords=[]
             #### snippet MrGecko (tri un dico par valeurs en mode reverse) 
             f = lambda dico : sorted(self.vrac.items(),lambda a,b: cmp(a[1],b[1]),reverse=True)
-            ####################   
+            ##############################################################   
             tmp=f(self.vrac)  
             nb=1
             # je n'affiche que les dix premiers résultats
@@ -118,8 +113,9 @@ class Mot(Lecture):
     mot=''
     maximum=0
     def __init__(self):
-        Mot.mot = random.choice(Lecture.tableau) ######### Super methode random
-        Mot.mot = Mot.mot.strip() # suppresion des characteres de fin de lignes(\n)
+        Mot.mot = random.choice(Lecture.tableau) 
+        # suppresion des characteres de fin de lignes(\n)
+        Mot.mot = Mot.mot.strip() 
         Mot.maximum = len(Mot.mot) 
         
 

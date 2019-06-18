@@ -1,9 +1,9 @@
 * Cagliostro-Software *
 
+* pygame1.9.6 *  
+
 * python2.7 *
-   
-* pygame *  
-      
+         
 musique : cagliostro
 design : cagliostro
 prog  : cagliostro

@@ -5,7 +5,7 @@
 path='/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/'
 path_shadows='/home/cagliostro/Documents/ATField2501-Repository/Pygame-WordShoot/shadows'
 
-titre_fenetre=' '*7+" * Caglio Word Shooting *"
+titre_fenetre=' '*15+" * Caglio Word Shooting *"
 logo1='WorldShoot'
 
 # Images du jeu

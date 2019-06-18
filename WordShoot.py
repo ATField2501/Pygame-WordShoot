@@ -161,9 +161,12 @@ class Gestion_Ev_menu():
 
 class Gestion_Ev_nickname(Gestion_Ev_menu):
     """ Gère l'entrée utilisateur pour le nickname """
-    long_nickname=0
-    formalite=True
     def __init__(self,nickname):
+        ## attribut de class definits dans l'objet 
+        ## pour être reinitialisé à chaques instances
+        Gestion_Ev_nickname.long_nickname = 0
+        Gestion_Ev_nickname.formalite = True
+        ## Attribut d'objet
         self.nickname=nickname
         for event in pygame.event.get():
             # Si un de ces événements est de type QUIT
@@ -173,7 +176,8 @@ class Gestion_Ev_nickname(Gestion_Ev_menu):
             # Si un de ces éléments est de type clavier
             if event.type == KEYDOWN:
                 if event.key == K_RETURN:
-                    Gestion_Ev_nickname.long_nickname=12
+                    Gestion_Ev_nickname.long_nickname = 12
+                  #  Gestion_Ev_nickname.formalite = False
                 if event.key == K_BACKSPACE:
                     try:
                         if Gestion_Ev_nickname.long_nickname != 0:
@@ -616,7 +620,8 @@ class WordShoot():
 #    pygame.mixer.music.set_volume(0.5) #Met le volume à 0.5 (moitié)
 #    pygame.mixer.music.play()    
     while continuer:
-        ligne1 = font.render(ligne,2,( 251, 8, 8 )) # Ligne de fin de chute des mots
+        # Ligne de fin de chute des mots
+        ligne1 = font.render(ligne,2,( 251, 8, 8 )) 
         objet=Score() # Construction du score
         score= Score.score
         obj = Lecture() # Lecture du fichier 
@@ -624,7 +629,8 @@ class WordShoot():
         supra= Vie_Joueur()
         ####### Ecran Principale
         c = True
-        while c: 
+        while c:
+            ## Appel du gestionnaire d'èvennement
             truc = Gestion_Ev_menu()
             selection = truc.selection
             c = Gestion_Ev_menu.c 
@@ -645,9 +651,10 @@ class WordShoot():
             nickname= ['nickname: ']
             pygame.display.flip()
             long_standart=len(nickname[0])
-            long_nickname=0
+            long_nickname = 0
             # je limite la longueur du self.nickname 12
             while formalite == True and long_nickname < 12:
+                ## Appel du gestionnaire d'evennement
                 bidule = Gestion_Ev_nickname(nickname)
                 formalite = bidule.formalite       
                 long_nickname = bidule.long_nickname         
@@ -655,16 +662,16 @@ class WordShoot():
                 stone = font.render(''.join(bidule.nickname),2,(80,241,0))
                 fenetre.blit(stone,(50,350))
                 pygame.display.flip()
+            aleph = False    
             while aleph == False:
                 # on cree une instance de la class Mot
                 obj = Mot()
-                # on affecte l'attribut 'mot' de la class Mot à la variable mot
                 mot = obj.mot           
                 # on cree une instance en passant en parametre mot 
                 objA = Construction(mot)
                 # on affect l'attribut artefact à la variable artefact
                 artefact = objA.artefact    
-#                # on cree une instance, l'objet sera le charactère à trouver 
+                # on cree une instance, l'objet sera le charactère à trouver 
                 sujet = Lettre()      
                 lettre = sujet.lettre 
                 index = Lettre.index +1 # pour log
@@ -699,32 +706,33 @@ class WordShoot():
                     fenetre.blit(text1, (aaaa,max))
 #                    fenetre.blit(text2, (aaaa,max))
                     
-                    # Petite vérifications
-                    if max ==453:    # Son de fin de chute
+                    # Fin de chute
+                    if max ==453:    
                         loose.play() 
                         objet.score_forme()
                         sauvegarde = supra.enlev_vie()
                         sujet.reinit()
                         destruct = True
+                    pygame.display.flip() # Rafraichissement
 
                     # Affichage chaine de charactère contenue dans la liste 'artefact"
                     simbad= ''.join(artefact)
                     ping = font2.render(simbad,22,( 240, 240, 4 )) 
-                    pygame.display.flip() # Rafraichissement
                     fenetre.blit(neo, (0,0))
-                    fenetre.blit(ligne1, (0,450))
+                    fenetre.blit(ligne1, (0,450)) 
                     fenetre.blit(nick, (350,500))     
                     fenetre.blit(sCore, (700,550))
                     fenetre.blit(vie, (50,550))
                     fenetre.blit(ping,(325,550))
                     
+                    # Appel Gestionnaire d'èvennement
                     escargot = Gestion_Ev_jeux(sujet,objA,objet,aaaa,max,destruct,aleph)
                     max = escargot.max
                     c = escargot.c
                     destruct = escargot.destruct
                     aleph = escargot.aleph
     
-
+                    # Fin de partie
                     if sauvegarde == True:
                         nb=0
                         while nb <= 4:
@@ -733,9 +741,6 @@ class WordShoot():
                             truc="You Loose T.T" 
                             ecran_sauvegarde=font2.render(truc,2,(80,241,0))
                             fenetre.blit(ecran_sauvegarde,(255+nb,35+nb))
-                            
-                            # Création d'un rectangle noir pour le fond
-                     #        pygame.draw.rect(fenetre, (0, 0 , 0), (0, 0, 2000 , 1100 ))
                             pygame.display.flip()
                      
                         nicknamu=''.join(nickname[1:])                          
@@ -745,14 +750,15 @@ class WordShoot():
                         fenetre.blit(ecran_chouette,(255,400))
                         pygame.display.flip()
                         time.sleep(3)     
-                        ## Procedure verif reccord
-                        objet=Score() 
+                        ## Destruction du score
+                        objet=Score()
+                        ## Destruction du capitale points
                         supra.reinit_vie()
                         destruct = True 
                         aleph = True
                         Gestion_Ev_menu.c = True
                 
-                # Appel de la procédure son_vitesse 
+                # Procédure son_vitesse en fonction de la vitesse (niveau)
                 son_vitesse(score, supra)        
                 pygame.display.flip() # Rafraichissement
 
