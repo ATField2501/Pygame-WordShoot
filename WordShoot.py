@@ -614,7 +614,7 @@ class WordShoot():
     """ Pygame - Worshoot - Classe Principale """
     ############################# Debut prog
     bal.play()
-    # test animation
+    # Animation fondu enchaîné
     nb = 0
     while nb < 200:
         pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
@@ -722,7 +722,7 @@ class WordShoot():
 #                    text2 = font.render(sample1,2,( 255, 0, 0 ))
                     fenetre.blit(text1, (aaaa,max))
 #                    fenetre.blit(text2, (aaaa,max))
-                    
+                    sauvegarde = False
                     # Fin de chute
                     if max ==453:    
                         loose.play() 
@@ -748,7 +748,7 @@ class WordShoot():
                     c = escargot.c
                     destruct = escargot.destruct
                     aleph = escargot.aleph
-    
+                    
                     # Fin de partie
                     if sauvegarde == True:
                         nb=0
@@ -774,7 +774,8 @@ class WordShoot():
                         destruct = True 
                         aleph = True
                         Gestion_Ev_menu.c = True
-                
+                        # Réinitialisation de la vitesse
+                        obj_v.vitesse_reinit()
                 # Procédure son_vitesse en fonction de la vitesse (niveau)
                 son_vitesse(score, supra)        
                 pygame.display.flip() # Rafraichissement

@@ -184,7 +184,8 @@ class Vitesse(Score):
         if Score.score >= 600:
             Vitesse.vitesse = 500  
         self.vitesse = Vitesse.vitesse
-
+    def vitesse_reinit(self):
+        Vitesse.vitesse = 60
 
 class Vie_Joueur():
     """ Gestion des points de vie du joueur """
