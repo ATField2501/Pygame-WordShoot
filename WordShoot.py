@@ -66,8 +66,10 @@ niveau_fini = pygame.mixer.Sound(niveau_fini)
 # Initialise police de charactère
 font=pygame.font.Font(None, 29) 
 font2=pygame.font.Font(None, 55)
-
-
+font3=pygame.font.Font(path+'Horst___.ttf', 56)
+font4=pygame.font.Font(path+'Horst___.ttf', 57)
+font5=pygame.font.Font(path+'Horst___.ttf', 58)
+#font3=pygame.font.Font(path+'Horst___.ttf', phidor) 
 def son_vitesse(score, supra):
     if score == 100:
         print ' -- 0.1 --'
@@ -143,7 +145,7 @@ class Gestion_Ev_menu():
                     Gestion_Ev_menu.c= False
                 if event.key == K_ESCAPE:
                     bipp.play()
-                    sys.exit(0)
+                    #sys.exit(0)
                 if event.key == K_LEFT:
                     print('yo yo LEFT !!')
                     bipp.play()
@@ -634,7 +636,7 @@ class WordShoot():
             truc = Gestion_Ev_menu()
             selection = truc.selection
             c = Gestion_Ev_menu.c 
-            font3=pygame.font.Font(path+'Horst___.ttf', phidor)    
+            # # # #   
             ## Ecran de depart
             fenetre.blit(ecran1,(0,0))
             ## Element du tableau Selecteur 
@@ -784,7 +786,8 @@ class WordShoot():
                     if event.type == KEYDOWN: 
                         if event.key == K_ESCAPE:
                             bipp.play()
-                            
+                            Gestion_Ev_menu.c = True
+                           
             except TypeError:
                 pass
             Gestion_Ev_menu.c = True
@@ -845,11 +848,18 @@ class WordShoot():
         if selection == Selecteur.tableau[4]:
             # Création d'un rectangle noir pour le fond
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
-            bye="A BientOt"
-            depart=font3.render(bye,2,(255,124,5))
-            fenetre.blit(depart,(150,300))
-            pygame.display.flip()
-            time.sleep(1)
+            bye = "A BientOt"
+            nb = 0
+            nb1 = 1
+            while nb < 35:
+                pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+                font3=pygame.font.Font(path+'Horst___.ttf', 56+nb)
+                depart=font3.render(bye,2,(255,124,5))
+                fenetre.blit(depart,(255-(nb*2),255))
+                pygame.display.flip()
+                nb += 1
+            
+            time.sleep(0.5)
             sys.exit(0)
 
 
