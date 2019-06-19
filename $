@@ -166,7 +166,7 @@ class Gestion_Ev_nickname(Gestion_Ev_menu):
     def __init__(self,nickname):
         ## attribut de class definits dans l'objet 
         ## pour être reinitialisé à chaques instances
-        Gestion_Ev_nickname.long_nickname = len(nickname)
+        Gestion_Ev_nickname.long_nickname = 0
         Gestion_Ev_nickname.formalite = True
         # variable d'instance
         self.nickname = nickname
@@ -179,26 +179,27 @@ class Gestion_Ev_nickname(Gestion_Ev_menu):
             if event.type == KEYDOWN:
                 if event.key == K_RETURN:
                     Gestion_Ev_nickname.long_nickname = 12
-                if event.key == K_BACKSPACE:
+                  #  Gestion_Ev_nickname.formalite = False
+                if event?!?jedi=0, .key == K_BACKSPACE:?!? (*_*value*_*, ..., sep, end, file, flush) ?!?jedi?!?
                     print("top top")
                     try:
                         if Gestion_Ev_nickname.long_nickname != 0:
                             del self.nickname[-1]
                             Gestion_Ev_nickname.long_nickname -= 1
                             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
-                       #     stone22 = font.render(''.join(self.nickname),2,(80,241,0)) 
-                       #     fenetre.blit(stone22,(50,350))
-                       #     pygame.display.flip()
+                            stone22 = font.render(''.join(self.nickname),2,(80,241,0)) 
+                            fenetre.blit(stone22,(50,350))
+                            pygame.display.flip()
+                            print(self.nickname)
+                            print(nickname)
+                            print(Gestion_Ev_nickname.long_nickname)
                         else:
                             self.nickname= ['nickname: ']
-                       #     stone = font.render(''.join(self.nickname),2,(80,241,0))
-                       #     pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
-                       #     fenetre.blit(stone,(50,350))
-                       #     pygame.display.flip()
-                        print(self.nickname)
-                        print(nickname)
-                        print(Gestion_Ev_nickname.long_nickname)
-
+                            stone = font.render(''.join(self.nickname),2,(80,241,0))
+                            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+                            fenetre.blit(stone,(50,350))
+                            pygame.display.flip()
+                 
                     except  IndexError:
                         self.nickname= ['nickname: ']
                         Gestion_Ev_nickname.long_nickname = 0
@@ -681,8 +682,7 @@ class WordShoot():
                 ## Appel du gestionnaire d'evennement
                 bidule = Gestion_Ev_nickname(nickname)
                 formalite = Gestion_Ev_nickname.formalite       
-                long_nickname = Gestion_Ev_nickname.long_nickname  
-                nickname = bidule.nickname
+                long_nickname = Gestion_Ev_nickname.long_nickname         
                 pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
                 stone = font.render(''.join(bidule.nickname),2,(80,241,0))
                 fenetre.blit(stone,(50,350))
