@@ -66,7 +66,6 @@ class Score():
         print(self.mnemo)
         # insertion du nouveau reccord
         self.mnemo[nicknamu]=Score.score
-        print(self.mnemo)
         pickle.dump(self.mnemo,open(path_shadows,'wb'))
 
 
@@ -94,8 +93,8 @@ class Score():
 
 
 class Lecture():
-    """ Class lisant un fichier pour en extraire les lignes 
-        et les incorporer à la liste 'tableau' """
+    """ Lecture du fichier pour en extraire les lignes 
+        et les incorporées à la liste 'tableau' """
     tableau=[]
     def __init__(self, tableau = []):
         self.tableau = tableau
@@ -108,8 +107,7 @@ class Lecture():
 
 
 class Mot(Lecture):
-    """  Class ayant la charge de selectionner un mot au 'hasards' 
-         dans la liste 'tableau'  """
+    """  Selection d'un mot au 'hasards' dans la liste 'tableau'  """
     mot=''
     maximum=0
     def __init__(self):

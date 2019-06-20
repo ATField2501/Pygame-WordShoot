@@ -8,7 +8,7 @@
                                #      Licence GPL        #
                                ###########################
 
-import string
+#import string
 import random
 import pygame
 import time
@@ -186,19 +186,8 @@ class Gestion_Ev_nickname(Gestion_Ev_menu):
                             del self.nickname[-1]
                             Gestion_Ev_nickname.long_nickname -= 1
                             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
-                       #     stone22 = font.render(''.join(self.nickname),2,(80,241,0)) 
-                       #     fenetre.blit(stone22,(50,350))
-                       #     pygame.display.flip()
                         else:
                             self.nickname= ['nickname: ']
-                       #     stone = font.render(''.join(self.nickname),2,(80,241,0))
-                       #     pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
-                       #     fenetre.blit(stone,(50,350))
-                       #     pygame.display.flip()
-                        print(self.nickname)
-                        print(nickname)
-                        print(Gestion_Ev_nickname.long_nickname)
-
                     except  IndexError:
                         self.nickname= ['nickname: ']
                         Gestion_Ev_nickname.long_nickname = 0
@@ -282,7 +271,7 @@ class Gestion_Ev_nickname(Gestion_Ev_menu):
                 if event.key == K_z:
                     self.nickname.append('z')
                     Gestion_Ev_nickname.long_nickname += 1
-#                if event.key == K_a + K_LSHIFT or K_RSHIFT:
+#                if event.key == K_a + K_LSHIFT or K_a + K_RSHIFT:
 #                    self.nickname.append('A')
 #                    Gestion_Ev_nickname.long_nickname += 1
 #
@@ -613,7 +602,159 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                    self.max = 455     # On termine la boucle
 
 
+class Gestion_Score():
+    def __init__(self,objet):
+        """ """
+        # Création d'un rectangle noir pour le fond
+        pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+        pygame.display.flip()
+        ecran_reccords=objet.lecture_score()
+        babylone=ecran_reccords
+        like=25
+        
+        unedeplus = True
+        while unedeplus:
+            for event in pygame.event.get():   
+                if event.type == KEYDOWN: 
+                    if event.key == K_ESCAPE:
+                        bipp.play()
+                        Gestion_Ev_menu.c = True
+                        unedeplus = False
+            try:
+                for e in babylone:
+                    nervure=font.render(e,2,(250,250,0))
+                    fenetre.blit(nervure,(235,like))
+                    pygame.display.flip()   
+                    click.play()
+                    like += 45         
+                    time.sleep(0.5)     
+                        
+                # Si le fichier n'existe pas                       
+            except TypeError:
+                pass
+            time.sleep(10)
 
+
+class Gestion_Credit():
+    def __init__(self):
+        """ """
+        # Création d'un rectangle noir pour le fond
+        pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+        pygame.display.flip()
+        unedeplus = True
+        while unedeplus:
+            ether=[]
+            with open(path+"Caglio_credits.txt", "r") as fichier:
+                for ligne in fichier:
+                    ether.append(ligne)
+                    max = 1
+                    
+                for index, i in enumerate(ether):
+                    pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+
+                    B=random.randint(0,255)
+                    R=random.randint(0,255)
+                    G=random.randint(0,255)
+                    yin = i.strip()
+                    credit = font.render(yin,2,( B, 255, G ))
+                    longg= len(ether[index])
+                    balthazar=400-(longg*5)
+                    fenetre.blit(credit, (balthazar,max)) 
+                    pygame.display.flip() # Rafraichissement
+                    max += 35
+                    time.sleep(0.1)
+                max = 1    
+                for index, i in enumerate(ether):
+                    B=random.randint(0,255)
+                    R=random.randint(0,255)
+                    G=random.randint(0,255)
+                    yin = i.strip()
+                    credit = font.render(yin,2,( B, 255, G ))
+                    longg= len(ether[index])
+                    balthazar=400-(longg*5)
+                    fenetre.blit(credit, (balthazar,max)) 
+                    pygame.display.flip() # Rafraichissement
+                    max += 35
+                    time.sleep(0.5)
+
+                    for event in pygame.event.get():
+                        if event.type == KEYDOWN: 
+                            if event.key == K_ESCAPE:
+                                bipp.play()
+                              #  continuer = False
+                                unedeplus = False        
+                                Gestion_Ev_menu.c = True
+
+class Gestion_Config():
+    def __init__(self):
+        """ """
+        unedeplus = True
+        while unedeplus:
+            # Création d'un rectangle noir pour le fond
+            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+            elem_tab = ['1','2','3']
+            on = "on"
+            off = "off"
+            config = "Config"
+            musique = "Musique "
+            normal = "Normal"
+            difficile = "Difficile"
+            bruitage = "Son_Effet  "
+            difficulte = "Niveau  "
+            piste = "Piste  "
+            separateur= " = "
+            ## Eléments
+            separ = font.render(separateur,2,(155,55,123))
+            depart = font3.render(config,2,(255,124,5))
+            fenetre.blit(depart,(255,10))
+            element1 = font.render(musique,2,(155,255,5))
+            fenetre.blit(separ,(400,150))
+            fenetre.blit(element1,(250,150))
+            fenetre.blit(separ,(400,180))
+            element2 = font.render(bruitage,2,(155,255,5))
+            fenetre.blit(element2,(250,180))
+            fenetre.blit(separ,(400,210))
+            element3 = font.render(difficulte,2,(155,255,5))
+            fenetre.blit(element3,(250,210))
+            fenetre.blit(separ,(400,240))
+            element4 = font.render(piste,2,(155,255,5))
+            fenetre.blit(element4,(250,240))               
+            ## Valeur des éléments
+            elem_val1 = font.render(off,2,(35,252,255)) 
+            elem_val2 = font.render(off,2,(35,252,255)) 
+            elem_val3 = font.render(normal,2,(35,252,255)) 
+            elem_val4 = font.render(elem_tab[0],2,(35,252,255))
+            fenetre.blit(elem_val1,(430,150))
+            fenetre.blit(elem_val2,(430,180))
+            fenetre.blit(elem_val3,(430,210))
+            fenetre.blit(elem_val4,(430,240))
+            pygame.display.flip()
+            
+            for event in pygame.event.get():
+                if event.type == KEYDOWN: 
+                    if event.key == K_ESCAPE:
+                        bipp.play()  
+                        Gestion_Ev_menu.c = True 
+                        unedeplus = False   
+
+class Gestion_Quit():
+    def __init__(self):
+        """ """
+        # Création d'un rectangle noir pour le fond
+        pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+        bye = "A BientOt"
+        nb = 0
+        nb1 = 1
+        while nb < 35:
+            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+            font3=pygame.font.Font(path+'Horst___.ttf', 56+nb)
+            depart=font3.render(bye,2,(255,124,5))
+            fenetre.blit(depart,(255-(nb*3),255))
+            pygame.display.flip()
+            nb += 1
+        
+        time.sleep(0.5)
+        sys.exit(0)
 
 
 
@@ -790,131 +931,17 @@ class WordShoot():
 
 
         # Menu Scores
-        if selection == Selecteur.tableau[1]:
-            # Création d'un rectangle noir pour le fond
-            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
-            pygame.display.flip()
-            ecran_reccords=objet.lecture_score()
-            babylone=ecran_reccords
-            like=25
-            try:
-                for e in babylone:
-                    nervure=font.render(e,2,(250,250,0))
-                    fenetre.blit(nervure,(155,like))
-                    pygame.display.flip()   
-                    time.sleep(0.4)
-                    like += 35        
-                
-            
-                    for event in pygame.event.get():   
-                        if event.type == KEYDOWN: 
-                            if event.key == K_ESCAPE:
-                                bipp.play()
-                                Gestion_Ev_menu.c = True
-                time.sleep(5)           
-            except TypeError:
-                pass
-            Gestion_Ev_menu.c = True
-
-
+        if selection == Selecteur.tableau[1]: 
+            Gestion_Score(objet)
         # Menu Crédits
         if selection == Selecteur.tableau[2]:
-            # Création d'un rectangle noir pour le fond
-            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
-            pygame.display.flip()
-            unedeplus = True
-            while unedeplus:
-                ether=[]
-                with open(path+"Caglio_credits.txt", "r") as fichier:
-                    for ligne in fichier:
-                        ether.append(ligne)
-                        max = 1
-                        
-                    for index, i in enumerate(ether):
-                        pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
-
-                        B=random.randint(0,255)
-                        R=random.randint(0,255)
-                        G=random.randint(0,255)
-                        yin = i.strip()
-                        credit = font.render(yin,2,( B, 255, G ))
-                        longg= len(ether[index])
-                        balthazar=400-(longg*5)
-                        fenetre.blit(credit, (balthazar,max)) 
-                        pygame.display.flip() # Rafraichissement
-                        max += 35
-                        time.sleep(0.1)
-                    max = 1    
-                    for index, i in enumerate(ether):
-                        B=random.randint(0,255)
-                        R=random.randint(0,255)
-                        G=random.randint(0,255)
-                        yin = i.strip()
-                        credit = font.render(yin,2,( B, 255, G ))
-                        longg= len(ether[index])
-                        balthazar=400-(longg*5)
-                        fenetre.blit(credit, (balthazar,max)) 
-                        pygame.display.flip() # Rafraichissement
-                        max += 35
-                        time.sleep(1)
-
-                        for event in pygame.event.get():
-                            if event.type == KEYDOWN: 
-                                if event.key == K_ESCAPE:
-                                    bipp.play()
-                                  #  continuer = False
-                                    unedeplus = False        
-                                    Gestion_Ev_menu.c = True
-                                              
+            Gestion_Credit()                        
         # menu config 
         if selection == Selecteur.tableau[3]:
-            unedeplus = True
-            while unedeplus:
-                # Création d'un rectangle noir pour le fond
-                pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
-                on = "on"
-                off = "off"
-                config = "Config"
-                musique = "Musique = "
-                normal = "Normal"
-                difficile = "Difficile"
-                bruitage = "Son_Effet = "
-                difficulte = "Niveau = "
-                depart = font3.render(config,2,(255,124,5))
-                fenetre.blit(depart,(255,10))
-                element1 = font.render(musique+off,2,(155,255,5))
-                fenetre.blit(element1,(20,150))
-                element2 = font.render(bruitage+on,2,(155,255,5))
-                fenetre.blit(element2,(20,180))
-                element3 = font.render(difficulte+normal,2,(155,255,5))
-                fenetre.blit(element3,(20,210))
-                pygame.display.flip()
-                
-                for event in pygame.event.get():
-                    if event.type == KEYDOWN: 
-                        if event.key == K_ESCAPE:
-                            bipp.play()  
-                            Gestion_Ev_menu.c = True 
-                            unedeplus = False   
-        
+            Gestion_Config() 
         # menu quit 
         if selection == Selecteur.tableau[4]:
-            # Création d'un rectangle noir pour le fond
-            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
-            bye = "A BientOt"
-            nb = 0
-            nb1 = 1
-            while nb < 35:
-                pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
-                font3=pygame.font.Font(path+'Horst___.ttf', 56+nb)
-                depart=font3.render(bye,2,(255,124,5))
-                fenetre.blit(depart,(255-(nb*3),255))
-                pygame.display.flip()
-                nb += 1
-            
-            time.sleep(0.5)
-            sys.exit(0)
-
+            Gestion_Quit()
 
 
 if __name__ == '__main__':
