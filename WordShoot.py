@@ -633,8 +633,8 @@ class Gestion_Score():
             except TypeError:
                 pass
             time.sleep(10)
-
-
+            Gestion_Ev_menu.c = True
+            unedeplus = False
 class Gestion_Credit():
     def __init__(self):
         """ """
@@ -756,29 +756,34 @@ class Gestion_Quit():
         time.sleep(0.5)
         sys.exit(0)
 
+class Animation_intro():
+    def __init__(self):
+        """   """
+        bal.play()
+        # Animation fondu enchaîné
+        nb = 0
+        while nb < 200:
+            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+            intrologo.set_alpha(nb)
+            pygame.Surface.convert_alpha(intrologo)
+            fenetre.blit(intrologo,(0,0))
+            pygame.display.flip()  
+            nb += 1
+        nb1 = 200    
+        while nb1 != 0:
+            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+            intrologo.set_alpha(nb1)
+            pygame.Surface.convert_alpha(intrologo)
+            fenetre.blit(intrologo,(0,0))
+            pygame.display.flip()  
+            nb1 -= 1
+
 
 
 class WordShoot():
     """ Pygame - Worshoot - Classe Principale """
     ############################# Debut prog
-    bal.play()
-    # Animation fondu enchaîné
-    nb = 0
-    while nb < 200:
-        pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
-        intrologo.set_alpha(nb)
-        pygame.Surface.convert_alpha(intrologo)
-        fenetre.blit(intrologo,(0,0))
-        pygame.display.flip()  
-        nb += 1
-    nb1 = 200    
-    while nb1 != 0:
-        pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
-        intrologo.set_alpha(nb1)
-        pygame.Surface.convert_alpha(intrologo)
-        fenetre.blit(intrologo,(0,0))
-        pygame.display.flip()  
-        nb1 -= 1
+    Animation_intro()
 
 #    time.sleep(3) 
     ######### Démarage de la musique de fond
