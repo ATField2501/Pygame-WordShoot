@@ -25,7 +25,7 @@ son01 = path+"WorldShoot-Musik/excelent0001.ogg"
 son02 = path+"WorldShoot-Musik/loose.ogg"
 bip = path+"WorldShoot-Musik/beep03.ogg"
 bipp = path+"WorldShoot-Musik/beep01.ogg"
-click = path+"WorldShoot-Musik/click01.wav"
+click = path+"WorldShoot-Musik/click02.ogg"
 zero_un = path+"WorldShoot-Musik/zero_1.ogg"
 zero_deux = path+"WorldShoot-Musik/zero_2.ogg"
 zero_trois = path+"WorldShoot-Musik/zero_3.ogg"
@@ -36,10 +36,13 @@ zero_sept = path+"WorldShoot-Musik/zero_7.ogg"
 zero_huit = path+"WorldShoot-Musik/zero_8.ogg"
 zero_neuf = path+"WorldShoot-Musik/zero_9.ogg"
 niveau_fini = path+"WorldShoot-Musik/niveau_fini.ogg"
-
+clock = path+"WorldShoot-Musik/clock.ogg"
 ligne='___________________________________________________________________________'
 
 ## Mes ptits booléens
+musique = True
+son = True
+hard = False
 choix = False
 continuer = True
 sauvegarde= False

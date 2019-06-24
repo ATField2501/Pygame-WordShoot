@@ -135,6 +135,8 @@ class Lettre(Mot):
     def reinit(self):
         """ Methode de réinitialisation de l'index """
         Lettre.index = -1
+    def destructiveKomando(self):
+        Lettre.index = 0
 
     def alteration(self, suprem=False):
         """ Methode d'alteration du mot à trouver. 
@@ -229,4 +231,25 @@ class Selecteur():
         Selecteur.index -= 1
 
     
+class Deplacement_config():
+    """ Déplacement dans la fenêtre de configuration"""
+    index = 0
+    chakazulu = [(225,145),(225,175),(225,205),(225,235)]
+    zulu = chakazulu[0]
+
+    def __init__(self):
+        """ """
+    def deplace_up(self):
+        """ Methode de modification positive de l'index du selecteur  """
+        Deplacement_config.index -= 1
+        if Deplacement_config.index < 0:
+            Deplacement_config.index = 3
+        Deplacement_config.zulu = Deplacement_config.chakazulu[Deplacement_config.index]
+    def deplace_down(self):
+        """ Methode de modification négative de l'index du selecteur  """
+        Deplacement_config.index += 1
+        if Deplacement_config.index > 3:
+            Deplacement_config.index = 0
+ 
+        Deplacement_config.zulu = Deplacement_config.chakazulu[Deplacement_config.index]
 

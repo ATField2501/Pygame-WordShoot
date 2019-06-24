@@ -30,7 +30,7 @@ fenetre = pygame.display.set_mode((800, 600), RESIZABLE)
 size, x, y = (0,0), 800, 600
 
 # Pour fonction appui long
-pygame.key.set_repeat(400, 30)
+#pygame.key.set_repeat(400, 30)
 
 intrologo= pygame.image.load(intro).convert()
 ecran1=pygame.image.load(ecran1).convert()
@@ -64,6 +64,7 @@ zero_sept = pygame.mixer.Sound(zero_sept)
 zero_huit = pygame.mixer.Sound(zero_huit)
 zero_neuf = pygame.mixer.Sound(zero_neuf)
 niveau_fini = pygame.mixer.Sound(niveau_fini)
+clockout = pygame.mixer.Sound(clock)
 # Initialise police de charactère
 font=pygame.font.Font(None, 29) 
 font2=pygame.font.Font(None, 55)
@@ -310,6 +311,10 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                        index = Lettre.index + 1  
                    else:
                        print '** DOWN **'
+                       clockout.play()
+                       # Retour à zéro à la première erreur
+                       if hard == True:
+                           sujet.destructiveKomando()
 
                if event.key == K_b:
                    if 'b' == sujet.lettre:
@@ -321,7 +326,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                        index = Lettre.index + 1   
                    else:
                        print '** DOWN **'
-
+                       clockout.play()
+                       if hard == True:
+                           sujet.destructiveKomando()
                if event.key == K_c:
                    if 'c' == sujet.lettre:
                        print '** UP **'
@@ -332,7 +339,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                        index = Lettre.index + 1   
                    else:
                        print '** DOWN **'
-
+                       clockout.play()
+                       if hard == True:
+                           sujet.destructiveKomando()
                if event.key == K_d:
                    if 'd' == sujet.lettre:
                        print '** UP **'
@@ -343,7 +352,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                        index = Lettre.index + 1   
                    else:
                        print '** DOWN **'
-
+                       clockout.play()
+                       if hard == True:
+                           sujet.destructiveKomando()          
                if event.key == K_e:
                    if 'e' == sujet.lettre:
                        print '** UP **'
@@ -354,7 +365,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                        index = Lettre.index + 1   
                    else:
                        print '** DOWN **'
-
+                       clockout.play()
+                       if hard == True:
+                           sujet.destructiveKomando()
                if event.key == K_f:
                    if 'f' == sujet.lettre:
                         print '** UP **'
@@ -365,7 +378,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         index = Lettre.index + 1   
                    else:
                         print '** DOWN **'
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                if event.key == K_g:
                    if 'g' == sujet.lettre:
                         print '** UP **'
@@ -376,7 +391,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         index = Lettre.index + 1   
                    else:
                         print '** DOWN **'
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                if event.key == K_h:
                    if 'h' == sujet.lettre:
                         print '** UP **'
@@ -387,7 +404,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         index = Lettre.index + 1   
                    else:
                         print '** DOWN **'
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                if event.key == K_i:
                    if 'i' == sujet.lettre:
                         print '** UP **'
@@ -398,7 +417,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         index = Lettre.index + 1   
                    else:
                         print '** DOWN **'
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                if event.key == K_j:
                    if 'j' == sujet.lettre:
                         print '** UP **'
@@ -409,7 +430,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         index = Lettre.index + 1   
                    else:
                         print '** DOWN **'
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                if event.key == K_k:
                    if 'k' == sujet.lettre:
                         print '** UP **'
@@ -420,7 +443,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         index = Lettre.index + 1   
                    else:
                         print '** DOWN **'
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                if event.key == K_l:
                    if 'l' == sujet.lettre:
                         print '** UP **'
@@ -431,7 +456,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         index = Lettre.index + 1   
                    else:
                         print '** DOWN **'
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                if event.key == K_m:
                    if 'm' == sujet.lettre:
                         print '** UP **'
@@ -442,7 +469,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         index = Lettre.index + 1   
                    else:
                         print '** DOWN **'
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                if event.key == K_n:
                    if 'n' == sujet.lettre:
                         print '** UP **'
@@ -453,7 +482,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         index = Lettre.index + 1  
                    else:
                         print '** DOWN **'
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                if event.key == K_o:
                    if 'o' == sujet.lettre:
                         print '** UP **'
@@ -464,7 +495,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         index = Lettre.index + 1   
                    else:
                         print '** DOWN **'
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                if event.key == K_p:
                    if 'p' == sujet.lettre:
                         print '** UP **'
@@ -475,7 +508,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         index = Lettre.index + 1   
                    else:
                         print '** DOWN **'
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                if event.key == K_q:
                    if 'q' == sujet.lettre:
                         print '** UP **'
@@ -486,7 +521,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         index = Lettre.index + 1   
                    else:
                         print '** DOWN **'
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                if event.key == K_r:
                    if 'r' == sujet.lettre:
                         print '** UP **'
@@ -495,10 +532,11 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         self.sujet = Lettre()  
                         sujet.lettre = self.sujet.lettre 
                         index = Lettre.index + 1   
-
                    else:
                         print '** DOWN **'
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                if event.key == K_s:
                    if 's' == sujet.lettre:
                         print '** UP **'
@@ -509,7 +547,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         index = Lettre.index + 1   
                    else:
                         print '** DOWN **'
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                if event.key == K_t:
                    if 't' == sujet.lettre:
                         print '** UP **'
@@ -520,7 +560,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         index = Lettre.index + 1
                    else:
                         print '** DOWN **'
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                if event.key == K_u:
                    if 'u' == sujet.lettre:
                         print '** UP **'
@@ -531,7 +573,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         index = Lettre.index + 1   
                    else:
                         print '** DOWN **'
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                if event.key == K_v:
                    if 'v' == sujet.lettre:
                         print '** UP **'
@@ -542,7 +586,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         index = Lettre.index + 1
                    else:
                         print '** DOWN **'
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                if event.key == K_w:
                    if 'w' == sujet.lettre:
                         print '** UP **'
@@ -553,7 +599,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         index = Lettre.index + 1   
                    else:
                         print '** DOWN **'
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                if event.key == K_x:
                    if 'x' == sujet.lettre:
                         print '** UP **'
@@ -564,7 +612,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         index = Lettre.index + 1   
                    else:
                         print '** DOWN **'
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                if event.key == K_y:
                    if 'y' == sujet.lettre:
                         print '** UP **'
@@ -575,7 +625,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         index = Lettre.index + 1   
                    else:
                         print '** DOWN **'
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                if event.key == K_z:
                    if 'z' == sujet.lettre:
                         print '** UP **'
@@ -586,8 +638,9 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                         index = Lettre.index + 1
                    else:
                         print '** DOWN **'
-
-
+                        clockout.play()
+                        if hard == True:
+                            sujet.destructiveKomando()
                ### Test si le mot à été trouvé
                if self.sujet.victoire == True:
                    print '** VICTORY !! **'
@@ -601,6 +654,36 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                    fenetre.blit(text1, (self.aaaa,self.max))
                    self.max = 455     # On termine la boucle
 
+class Gestion_Ev_config():
+    """ """
+    unedeplus = True
+    def __init__(self):
+        chaka = Deplacement_config()
+        for event in pygame.event.get(): 
+            if event.type == KEYDOWN:
+                if event.key == K_RETURN:
+                    click.play()
+                    Gestion_Ev_menu.c = True
+                    Gestion_Ev_config.unedeplus = False
+                if event.key == K_ESCAPE:
+                    bipp.play()
+                    Gestion_Ev_menu.c = True 
+                    Gestion_Ev_config.unedeplus = False   
+                if event.key == K_LEFT:
+                    print('yo yo LEFT !!')
+                    bipp.play()
+                if event.key == K_RIGHT:
+                    print('yo yo RIGHT !!')
+                    bipp.play()
+                if event.key == K_UP:
+                    print('yo yo UP !!')
+                    bipp.play()
+                    chaka.deplace_up()
+                if event.key == K_DOWN:
+                    print('yo yo DOWN !!')
+                    bipp.play()
+                    chaka.deplace_down()
+                print(chaka.index)        
 
 class Gestion_Score():
     def __init__(self,objet):
@@ -687,56 +770,56 @@ class Gestion_Credit():
 
 class Gestion_Config():
     def __init__(self):
-        """ """
+        """ """ 
+        oulaoups = 29
         unedeplus = True
         while unedeplus:
             # Création d'un rectangle noir pour le fond
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
-            elem_tab = ['1','2','3']
-            on = "on"
-            off = "off"
-            config = "Config"
-            musique = "Musique "
-            normal = "Normal"
-            difficile = "Difficile"
-            bruitage = "Son_Effet  "
-            difficulte = "Niveau  "
-            piste = "Piste  "
+            elem_tab1 = ['1','2','3']
+            elem_tab2 = ["on","off", "Normal","Difficile"]
+            elem_tab3 = ["Config","Musique ","effet audio","Niveau","Piste"] 
             separateur= " = "
             ## Eléments
             separ = font.render(separateur,2,(155,55,123))
-            depart = font3.render(config,2,(255,124,5))
+            depart = font3.render(elem_tab3[0],2,(255,124,5))
+            element1 = font.render(elem_tab3[1],2,(155,255,5))
+            element2 = font.render(elem_tab3[2],2,(155,255,5))
+            element3 = font.render(elem_tab3[3],2,(155,255,5))
+            element4 = font.render(elem_tab3[4],2,(155,255,5))
             fenetre.blit(depart,(255,10))
-            element1 = font.render(musique,2,(155,255,5))
             fenetre.blit(separ,(400,150))
             fenetre.blit(element1,(250,150))
             fenetre.blit(separ,(400,180))
-            element2 = font.render(bruitage,2,(155,255,5))
             fenetre.blit(element2,(250,180))
             fenetre.blit(separ,(400,210))
-            element3 = font.render(difficulte,2,(155,255,5))
             fenetre.blit(element3,(250,210))
-            fenetre.blit(separ,(400,240))
-            element4 = font.render(piste,2,(155,255,5))
+            fenetre.blit(separ,(400,240)) 
             fenetre.blit(element4,(250,240))               
             ## Valeur des éléments
-            elem_val1 = font.render(off,2,(35,252,255)) 
-            elem_val2 = font.render(off,2,(35,252,255)) 
-            elem_val3 = font.render(normal,2,(35,252,255)) 
-            elem_val4 = font.render(elem_tab[0],2,(35,252,255))
+            elem_val1 = font.render(elem_tab2[1],2,(35,252,255)) 
+            elem_val2 = font.render(elem_tab2[1],2,(35,252,255)) 
+            elem_val3 = font.render(elem_tab2[2],2,(35,252,255)) 
+            elem_val4 = font.render(elem_tab1[0],2,(35,252,255))
             fenetre.blit(elem_val1,(430,150))
             fenetre.blit(elem_val2,(430,180))
             fenetre.blit(elem_val3,(430,210))
             fenetre.blit(elem_val4,(430,240))
-            pygame.display.flip()
+  
+            Gestion_Ev_config()
+            unedeplus = Gestion_Ev_config.unedeplus
+            fontx=pygame.font.Font(None, oulaoups) 
+            visual1  = ">" 
+            visualise = fontx.render(visual1,2,(155,255,5))  
+            phidor = Deplacement_config.zulu
+            fenetre.blit(visualise,(phidor))
             
-            for event in pygame.event.get():
-                if event.type == KEYDOWN: 
-                    if event.key == K_ESCAPE:
-                        bipp.play()  
-                        Gestion_Ev_menu.c = True 
-                        unedeplus = False   
-
+            pygame.display.flip()
+            oulaoups += 1
+            phidor = oulaoups
+            time.sleep(0.1)
+            if oulaoups > 35:
+                oulaoups = 29
 class Gestion_Quit():
     def __init__(self):
         """ """
@@ -890,7 +973,8 @@ class Gestion_jeux():
 class Animation_intro():
     def __init__(self):
         """   """
-        bal.play()
+        if son == True:
+            bal.play()
         # Animation fondu enchaîné
         nb = 0
         while nb < 200:
