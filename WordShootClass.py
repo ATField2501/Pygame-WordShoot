@@ -230,15 +230,40 @@ class Selecteur():
         """ Methode de modification négative de l'index du selecteur  """
         Selecteur.index -= 1
 
-    
-class Deplacement_config():
+
+class Memoire():
+    """ Garde en mémoire les règlages du jeu """
+    # Elements de réglage    
+    elem_tab1 = ['1','2','3']
+    elem_tab2 = ["on","off"]
+    elem_tab3 = ["Normal","Difficile"]
+    elem_tab4 = ["Config","Musique ","effet audio","Niveau","Piste"]  
+    # Valeurs des éléments
+    musique = elem_tab2[0]
+    son = elem_tab2[0]
+    niveau = elem_tab3[0]
+    piste = elem_tab1[0]
+    longinus = [musique , son , niveau , piste]
+    def modificateur_plus():
+        if Deplacement_config.index == 1:
+            longinus[Deplacement_config.index] = elem_tab2[1] 
+        if Deplacement_config.index == 2:
+            longinus[Deplacement_config.index] = elem_tab2[1]
+        if Deplacement_config.index == 3:
+            longinus[Deplacement_config.index] = elem_tab1[1]
+        if Deplacement_config.index == 4:
+            longinus[Deplacement_config.index] = elem_tab1[1]
+    def modificateur_moins():
+        pass
+
+class Deplacement_config(Memoire):
     """ Déplacement dans la fenêtre de configuration"""
     index = 0
     chakazulu = [(225,145),(225,175),(225,205),(225,235)]
     zulu = chakazulu[0]
 
     def __init__(self):
-        """ """
+        """ constructeur """
     def deplace_up(self):
         """ Methode de modification positive de l'index du selecteur  """
         Deplacement_config.index -= 1
@@ -249,7 +274,12 @@ class Deplacement_config():
         """ Methode de modification négative de l'index du selecteur  """
         Deplacement_config.index += 1
         if Deplacement_config.index > 3:
-            Deplacement_config.index = 0
- 
+            Deplacement_config.index = 0 
         Deplacement_config.zulu = Deplacement_config.chakazulu[Deplacement_config.index]
+    def deplace_d(self):
+        Memoire.modificateur_plus(Deplacement_config.index) 
+    def deplace_g(self):
+        Memoire.modificateur_moins(Deplacement_config.index) 
+
+
 

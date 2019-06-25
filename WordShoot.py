@@ -68,9 +68,9 @@ clockout = pygame.mixer.Sound(clock)
 # Initialise police de charactère
 font=pygame.font.Font(None, 29) 
 font2=pygame.font.Font(None, 55)
-font3=pygame.font.Font(path+'Horst___.ttf', 56)
-font4=pygame.font.Font(path+'Horst___.ttf', 57)
-font5=pygame.font.Font(path+'Horst___.ttf', 58)
+font3=pygame.font.Font(path+'/Horst___.ttf', 56)
+font4=pygame.font.Font(path+'/Horst___.ttf', 57)
+font5=pygame.font.Font(path+'/Horst___.ttf', 58)
 def son_vitesse(score, supra):
     if score == 100:
         print ' -- 0.1 --'
@@ -655,7 +655,7 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                    self.max = 455     # On termine la boucle
 
 class Gestion_Ev_config():
-    """ """
+    """ Gestion des évennement clavier sur page de confifuration """
     unedeplus = True
     def __init__(self):
         chaka = Deplacement_config()
@@ -727,7 +727,7 @@ class Gestion_Credit():
         unedeplus = True
         while unedeplus:
             ether=[]
-            with open(path+"Caglio_credits.txt", "r") as fichier:
+            with open(path+"/Caglio_credits.txt", "r") as fichier:
                 for ligne in fichier:
                     ether.append(ligne)
                     max = 1
@@ -770,23 +770,20 @@ class Gestion_Credit():
 
 class Gestion_Config():
     def __init__(self):
-        """ """ 
+        tt = Memoire() 
         oulaoups = 29
         unedeplus = True
         while unedeplus:
             # Création d'un rectangle noir pour le fond
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
-            elem_tab1 = ['1','2','3']
-            elem_tab2 = ["on","off", "Normal","Difficile"]
-            elem_tab3 = ["Config","Musique ","effet audio","Niveau","Piste"] 
             separateur= " = "
             ## Eléments
             separ = font.render(separateur,2,(155,55,123))
-            depart = font3.render(elem_tab3[0],2,(255,124,5))
-            element1 = font.render(elem_tab3[1],2,(155,255,5))
-            element2 = font.render(elem_tab3[2],2,(155,255,5))
-            element3 = font.render(elem_tab3[3],2,(155,255,5))
-            element4 = font.render(elem_tab3[4],2,(155,255,5))
+            depart = font3.render(tt.elem_tab3[0],2,(255,124,5))
+            element1 = font.render(tt.elem_tab4[1],2,(155,255,5)) # musique
+            element2 = font.render(tt.elem_tab4[2],2,(155,255,5)) # son
+            element3 = font.render(tt.elem_tab4[3],2,(155,255,5)) # niveau
+            element4 = font.render(tt.elem_tab4[4],2,(155,255,5)) # piste
             fenetre.blit(depart,(255,10))
             fenetre.blit(separ,(400,150))
             fenetre.blit(element1,(250,150))
@@ -797,10 +794,10 @@ class Gestion_Config():
             fenetre.blit(separ,(400,240)) 
             fenetre.blit(element4,(250,240))               
             ## Valeur des éléments
-            elem_val1 = font.render(elem_tab2[1],2,(35,252,255)) 
-            elem_val2 = font.render(elem_tab2[1],2,(35,252,255)) 
-            elem_val3 = font.render(elem_tab2[2],2,(35,252,255)) 
-            elem_val4 = font.render(elem_tab1[0],2,(35,252,255))
+            elem_val1 = font.render(tt.musique,2,(35,252,255)) 
+            elem_val2 = font.render(tt.son,2,(35,252,255)) 
+            elem_val3 = font.render(tt.niveau,2,(35,252,255)) 
+            elem_val4 = font.render(tt.piste,2,(35,252,255))
             fenetre.blit(elem_val1,(430,150))
             fenetre.blit(elem_val2,(430,180))
             fenetre.blit(elem_val3,(430,210))
@@ -830,7 +827,7 @@ class Gestion_Quit():
         nb1 = 1
         while nb < 35:
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
-            font3=pygame.font.Font(path+'Horst___.ttf', 56+nb)
+            font3=pygame.font.Font(path+'/Horst___.ttf', 56+nb)
             depart=font3.render(bye,2,(255,124,5))
             fenetre.blit(depart,(255-(nb*3),255))
             pygame.display.flip()
