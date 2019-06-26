@@ -230,33 +230,7 @@ class Selecteur():
         """ Methode de modification négative de l'index du selecteur  """
         Selecteur.index -= 1
 
-
-class Memoire():
-    """ Garde en mémoire les règlages du jeu """
-    # Elements de réglage    
-    elem_tab1 = ['1','2','3']
-    elem_tab2 = ["on","off"]
-    elem_tab3 = ["Normal","Difficile"]
-    elem_tab4 = ["Config","Musique ","effet audio","Niveau","Piste"]  
-    # Valeurs des éléments
-    musique = elem_tab2[0]
-    son = elem_tab2[0]
-    niveau = elem_tab3[0]
-    piste = elem_tab1[0]
-    longinus = [musique , son , niveau , piste]
-    def modificateur_plus():
-        if Deplacement_config.index == 1:
-            longinus[Deplacement_config.index] = elem_tab2[1] 
-        if Deplacement_config.index == 2:
-            longinus[Deplacement_config.index] = elem_tab2[1]
-        if Deplacement_config.index == 3:
-            longinus[Deplacement_config.index] = elem_tab1[1]
-        if Deplacement_config.index == 4:
-            longinus[Deplacement_config.index] = elem_tab1[1]
-    def modificateur_moins():
-        pass
-
-class Deplacement_config(Memoire):
+class Deplacement_config():
     """ Déplacement dans la fenêtre de configuration"""
     index = 0
     chakazulu = [(225,145),(225,175),(225,205),(225,235)]
@@ -264,6 +238,7 @@ class Deplacement_config(Memoire):
 
     def __init__(self):
         """ constructeur """
+        self.blade = Memoire()
     def deplace_up(self):
         """ Methode de modification positive de l'index du selecteur  """
         Deplacement_config.index -= 1
@@ -277,9 +252,84 @@ class Deplacement_config(Memoire):
             Deplacement_config.index = 0 
         Deplacement_config.zulu = Deplacement_config.chakazulu[Deplacement_config.index]
     def deplace_d(self):
-        Memoire.modificateur_plus(Deplacement_config.index) 
+        self.blade.modificateur_plus() 
     def deplace_g(self):
-        Memoire.modificateur_moins(Deplacement_config.index) 
+        self.blade.modificateur_moins() 
+ 
+
+class Memoire(Deplacement_config):
+    """ Garde en mémoire les règlages du jeu """
+    # Elements de réglage    
+    elem_tab1 = ['1','2','3']
+    elem_tab2 = ["on","off"]
+    elem_tab3 = ["Normal","Difficile"]
+    elem_tab4 = ["Musique ","effet audio","Niveau","Piste"]  
+    indice1 = 0 # musique
+    indice2 = 0 # son
+    indice3 = 0 # niveau
+    indice4 = 0 # piste
+
+    def __init__(self):
+        """ """
+        self.index = Deplacement_config.index
+        
+        # Valeurs des éléments
+        self.musique = Memoire.elem_tab2[Memoire.indice1]
+        self.son = Memoire.elem_tab2[Memoire.indice2]
+        self.niveau = Memoire.elem_tab3[Memoire.indice3]
+        self.piste = Memoire.elem_tab1[Memoire.indice4]
+
+   
+    def maj_index(self):
+        """ Gestion depassement d'index """
+        # gestion des index
+        if Memoire.indice1 > 1:
+            Memoire.indice1 = 0
+        if Memoire.indice1 < 0:
+            Memoire.indice1 = 1 
+        if Memoire.indice2 > 1:
+            Memoire.indice2 = 0
+        if Memoire.indice2 < 0:
+            Memoire.indice2 = 1
+        if Memoire.indice3 > 1:
+            Memoire.indice3 = 0
+        if Memoire.indice3 < 0:
+            Memoire.indice3 = 1
+        if Memoire.indice4 > 2:
+            Memoire.indice4 = 0
+        if Memoire.indice4 < 0:
+            Memoire.indice4 = 2
+        # Pour logs    
+        print('indice1 = '+str(self.indice1))
+        print('indice2 = '+str(self.indice2))
+        print('indice3 = '+str(self.indice3))
+        print('indice4 = '+str(self.indice4))
+#        print('musique: '+str(Memoire.musique))
+    def modificateur_plus(self):        
+        print(str(self.index)+'   '+str(Deplacement_config.index))
 
 
-
+        # Gestion des valeurs
+        if Deplacement_config.index == 0: # musique
+            Memoire.indice1 += 1
+        if Deplacement_config.index == 1: # son
+            Memoire.indice2 += 1
+        if Deplacement_config.index == 2: # niveau
+            Memoire.indice3 += 1
+        if Deplacement_config.index == 3: # piste
+            Memoire.indice4 += 1
+        self.maj_index()
+  
+    def modificateur_moins(self):
+        print(str(self.index)+'   '+str(Deplacement_config.index))       
+  
+        if Deplacement_config.index == 0: # musique
+            Memoire.indice1 -= 1
+        if Deplacement_config.index == 1: # son
+            Memoire.indice2 -= 1
+        if Deplacement_config.index == 2: # niveau
+            Memoire.indice3 -= 1
+        if Deplacement_config.index == 3: # piste
+            Memoire.indice4 -= 1
+        self.maj_index()
+   

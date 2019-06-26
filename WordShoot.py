@@ -672,9 +672,11 @@ class Gestion_Ev_config():
                 if event.key == K_LEFT:
                     print('yo yo LEFT !!')
                     bipp.play()
+                    chaka.deplace_d()
                 if event.key == K_RIGHT:
                     print('yo yo RIGHT !!')
                     bipp.play()
+                    chaka.deplace_g()
                 if event.key == K_UP:
                     print('yo yo UP !!')
                     bipp.play()
@@ -683,7 +685,7 @@ class Gestion_Ev_config():
                     print('yo yo DOWN !!')
                     bipp.play()
                     chaka.deplace_down()
-                print(chaka.index)        
+              #  print(chaka.index)        
 
 class Gestion_Score():
     def __init__(self,objet):
@@ -769,21 +771,22 @@ class Gestion_Credit():
                                 Gestion_Ev_menu.c = True
 
 class Gestion_Config():
-    def __init__(self):
-        tt = Memoire() 
+    def __init__(self): 
         oulaoups = 29
         unedeplus = True
         while unedeplus:
+            tt = Memoire() 
             # Création d'un rectangle noir pour le fond
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             separateur= " = "
+            config = "config"
             ## Eléments
             separ = font.render(separateur,2,(155,55,123))
-            depart = font3.render(tt.elem_tab3[0],2,(255,124,5))
-            element1 = font.render(tt.elem_tab4[1],2,(155,255,5)) # musique
-            element2 = font.render(tt.elem_tab4[2],2,(155,255,5)) # son
-            element3 = font.render(tt.elem_tab4[3],2,(155,255,5)) # niveau
-            element4 = font.render(tt.elem_tab4[4],2,(155,255,5)) # piste
+            depart = font3.render(config,1,(255,124,5))
+            element1 = font.render(Memoire.elem_tab4[0],2,(155,255,5)) # musique
+            element2 = font.render(Memoire.elem_tab4[1],2,(155,255,5)) # son
+            element3 = font.render(Memoire.elem_tab4[2],2,(155,255,5)) # niveau
+            element4 = font.render(Memoire.elem_tab4[3],2,(155,255,5)) # piste
             fenetre.blit(depart,(255,10))
             fenetre.blit(separ,(400,150))
             fenetre.blit(element1,(250,150))
