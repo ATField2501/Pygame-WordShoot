@@ -308,20 +308,6 @@ class Memoire(Deplacement_config):
     def modificateur_plus(self):        
         print(str(self.index)+'   '+str(Deplacement_config.index))
 
-
-        # Gestion des valeurs
-        if Deplacement_config.index == 0: # musique
-            Memoire.indice1 += 1
-        if Deplacement_config.index == 1: # son
-            Memoire.indice2 += 1
-        if Deplacement_config.index == 2: # niveau
-            Memoire.indice3 += 1
-        if Deplacement_config.index == 3: # piste
-            Memoire.indice4 += 1
-        self.maj_index()
-  
-    def modificateur_moins(self):
-        print(str(self.index)+'   '+str(Deplacement_config.index))       
   
         if Deplacement_config.index == 0: # musique
             Memoire.indice1 -= 1
@@ -332,4 +318,18 @@ class Memoire(Deplacement_config):
         if Deplacement_config.index == 3: # piste
             Memoire.indice4 -= 1
         self.maj_index()
-   
+ 
+ 
+    def modificateur_moins(self):
+        print(str(self.index)+'   '+str(Deplacement_config.index))       
+         # Gestion des valeurs
+        if Deplacement_config.index == 0: # musique
+            Memoire.indice1 += 1
+        if Deplacement_config.index == 1: # son
+            Memoire.indice2 += 1
+        if Deplacement_config.index == 2: # niveau
+            Memoire.indice3 += 1
+        if Deplacement_config.index == 3: # piste
+            Memoire.indice4 += 1
+        self.maj_index()
+  
