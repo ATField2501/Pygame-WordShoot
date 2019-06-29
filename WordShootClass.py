@@ -98,7 +98,7 @@ class Lecture():
     tableau=[]
     def __init__(self, tableau = []):
         self.tableau = tableau
-        with open(path+"base_text/WS_informatique.txt", "r") as fichier:
+        with open(path+"/base_text/WS_informatique.txt", "r") as fichier:
             for ligne in fichier:
                 self.tableau.append(ligne)
                 Lecture.tableau= self.tableau
@@ -233,7 +233,7 @@ class Selecteur():
 class Deplacement_config():
     """ Déplacement dans la fenêtre de configuration"""
     index = 0
-    chakazulu = [(225,145),(225,175),(225,205),(225,235)]
+    chakazulu = [(375,145),(375,175),(375,205),(375,235)]
     zulu = chakazulu[0]
 
     def __init__(self):

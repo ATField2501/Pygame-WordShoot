@@ -39,7 +39,7 @@ zero_huit = path+"/WorldShoot-Musik/zero_8.ogg"
 zero_neuf = path+"/WorldShoot-Musik/zero_9.ogg"
 niveau_fini = path+"/WorldShoot-Musik/niveau_fini.ogg"
 clock = path+"/WorldShoot-Musik/clock.ogg"
-ligne='___________________________________________________________________________'
+ligne='________________________________________________________________________'
 
 ## Mes ptits booléens
 musique = True

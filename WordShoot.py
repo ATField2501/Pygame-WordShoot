@@ -25,9 +25,14 @@ pygame.mixer.pre_init(44100, -16, 2, 2048)
 #pygame.mixer.init()
 pygame.init()
 
-#Création de la fenêtre
-fenetre = pygame.display.set_mode((800, 600), RESIZABLE)
-size, x, y = (0,0), 800, 600
+# Création de la fenêtre
+fenetre = pygame.display.set_mode((1200, 1000), FULLSCREEN)
+#size, x, y = (0,0), 800, 600
+
+# Connaître dimension fenêtre
+size = fenetre.get_size()
+
+pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
 
 # Pour fonction appui long
 #pygame.key.set_repeat(400, 30)
@@ -68,9 +73,10 @@ clockout = pygame.mixer.Sound(clock)
 # Initialise police de charactère
 font=pygame.font.Font(None, 29) 
 font2=pygame.font.Font(None, 55)
-font3=pygame.font.Font(path+'/Horst___.ttf', 56)
-font4=pygame.font.Font(path+'/Horst___.ttf', 57)
-font5=pygame.font.Font(path+'/Horst___.ttf', 58)
+font22=pygame.font.Font(None, 35)
+font3=pygame.font.Font(path+'/Horst___.ttf', 65)
+font4=pygame.font.Font(path+'/Horst___.ttf', 81)
+font5=pygame.font.Font(path+'/Horst___.ttf', 82)
 def son_vitesse(score, supra):
     if score == 100:
         print ' -- 0.1 --'
@@ -136,7 +142,8 @@ class Gestion_Ev_menu():
     """ Gestion des évennement au menu principale """
     c=True
     def __init__(self): 
-        """ """ 
+        """ """
+        pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
         obj1=Selecteur()
         self.selection=obj1.selecteur
         for event in pygame.event.get(): 
@@ -695,8 +702,10 @@ class Gestion_Score():
         pygame.display.flip()
         ecran_reccords=objet.lecture_score()
         babylone=ecran_reccords
-        like=25
-        
+        like=100
+        score = 'Scores'
+        titre = font3.render(score,1,(255,124,5))
+        fenetre.blit(titre,(450,10))
         unedeplus = True
         while unedeplus:
             for event in pygame.event.get():   
@@ -708,7 +717,7 @@ class Gestion_Score():
             try:
                 for e in babylone:
                     nervure=font.render(e,2,(250,250,0))
-                    fenetre.blit(nervure,(235,like))
+                    fenetre.blit(nervure,(450,like))
                     pygame.display.flip()   
                     click.play()
                     like += 45         
@@ -743,7 +752,7 @@ class Gestion_Credit():
                     yin = i.strip()
                     credit = font.render(yin,2,( B, 255, G ))
                     longg= len(ether[index])
-                    balthazar=400-(longg*5)
+                    balthazar=600-(longg*5)
                     fenetre.blit(credit, (balthazar,max)) 
                     pygame.display.flip() # Rafraichissement
                     max += 35
@@ -756,7 +765,7 @@ class Gestion_Credit():
                     yin = i.strip()
                     credit = font.render(yin,2,( B, 255, G ))
                     longg= len(ether[index])
-                    balthazar=400-(longg*5)
+                    balthazar=600-(longg*5)
                     fenetre.blit(credit, (balthazar,max)) 
                     pygame.display.flip() # Rafraichissement
                     max += 35
@@ -780,6 +789,9 @@ class Gestion_Config():
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             separateur= " = "
             config = "config"
+            x1 = 560
+            x2 = 410
+            x3 = 600
             ## Eléments
             separ = font.render(separateur,2,(155,55,123))
             depart = font3.render(config,1,(255,124,5))
@@ -787,24 +799,24 @@ class Gestion_Config():
             element2 = font.render(Memoire.elem_tab4[1],2,(155,255,5)) # son
             element3 = font.render(Memoire.elem_tab4[2],2,(155,255,5)) # niveau
             element4 = font.render(Memoire.elem_tab4[3],2,(155,255,5)) # piste
-            fenetre.blit(depart,(255,10))
-            fenetre.blit(separ,(400,150))
-            fenetre.blit(element1,(250,150))
-            fenetre.blit(separ,(400,180))
-            fenetre.blit(element2,(250,180))
-            fenetre.blit(separ,(400,210))
-            fenetre.blit(element3,(250,210))
-            fenetre.blit(separ,(400,240)) 
-            fenetre.blit(element4,(250,240))               
+            fenetre.blit(depart,(x2+5,10))
+            fenetre.blit(separ,(x1,150))
+            fenetre.blit(element1,(x2,150))
+            fenetre.blit(separ,(x1,180))
+            fenetre.blit(element2,(x2,180))
+            fenetre.blit(separ,(x1,210))
+            fenetre.blit(element3,(x2,210))
+            fenetre.blit(separ,(x1,240)) 
+            fenetre.blit(element4,(x2,240))               
             ## Valeur des éléments
             elem_val1 = font.render(tt.musique,2,(35,252,255)) 
             elem_val2 = font.render(tt.son,2,(35,252,255)) 
             elem_val3 = font.render(tt.niveau,2,(35,252,255)) 
             elem_val4 = font.render(tt.piste,2,(35,252,255))
-            fenetre.blit(elem_val1,(430,150))
-            fenetre.blit(elem_val2,(430,180))
-            fenetre.blit(elem_val3,(430,210))
-            fenetre.blit(elem_val4,(430,240))
+            fenetre.blit(elem_val1,(x3,150))
+            fenetre.blit(elem_val2,(x3,180))
+            fenetre.blit(elem_val3,(x3,210))
+            fenetre.blit(elem_val4,(x3,240))
   
             Gestion_Ev_config()
             unedeplus = Gestion_Ev_config.unedeplus
@@ -831,8 +843,8 @@ class Gestion_Quit():
         while nb < 35:
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             font3=pygame.font.Font(path+'/Horst___.ttf', 56+nb)
-            depart=font3.render(bye,2,(255,124,5))
-            fenetre.blit(depart,(255-(nb*3),255))
+            depart=font3.render(bye,2,(241,255,68))
+            fenetre.blit(depart,(420-(nb*3),255))
             pygame.display.flip()
             nb += 1
         
@@ -868,10 +880,14 @@ class Gestion_jeux():
             formalite = Gestion_Ev_nickname.formalite       
             long_nickname = Gestion_Ev_nickname.long_nickname  
             nickname = bidule.nickname
-            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1000 ))
             stone = font.render(''.join(bidule.nickname),2,(80,241,0))
             fenetre.blit(stone,(50,350))
             pygame.display.flip()
+            
+        pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1000 ))
+        pygame.draw.rect(fenetre, (156, 175, 175), (200, 0 , 802 , 604 ))
+       
         aleph = False    
         while aleph == False:
             # on cree une instance de la class Mot
@@ -887,9 +903,11 @@ class Gestion_jeux():
             index = Lettre.index +1 # pour log
             ########### Construction fenetres
             text = font.render(mot,2,( 80, 241, 0 ))
+            # Quelque variables de bon cru
+            x = 200
             # On tire au hasard le point d'apparition du mot sur l'axe horizontale
-            aaaa=random.randint(1,720)  
-            fenetre.blit(text, (aaaa,1))
+            aaaa=random.randint(x,720)  
+            fenetre.blit(text, (aaaa,5))
             objet.score_forme()
             sCore = font.render(str(objet.score_en_forme),2,( 80, 241, 0 ))
             nick = font.render(str(''.join(nickname[1:])),2,(255,162,0))    
@@ -928,12 +946,12 @@ class Gestion_jeux():
                 # Affichage chaine de charactère contenue dans la liste 'artefact"
                 simbad= ''.join(artefact)
                 ping = font2.render(simbad,22,( 240, 240, 4 )) 
-                fenetre.blit(neo, (0,0))
-                fenetre.blit(ligne1, (0,450)) 
-                fenetre.blit(nick, (350,500))     
-                fenetre.blit(sCore, (700,550))
-                fenetre.blit(vie, (50,550))
-                fenetre.blit(ping,(325,550))
+                fenetre.blit(neo, (x+1,2))
+                fenetre.blit(ligne1, (x,450)) 
+                fenetre.blit(nick, (x+350,500))     
+                fenetre.blit(sCore, (x+700,550))
+                fenetre.blit(vie, (x+50,550))
+                fenetre.blit(ping,(x+325,550))
                 
                 # Appel Gestionnaire d'èvennement
                 escargot = Gestion_Ev_jeux(sujet,objA,objet,aaaa,max,destruct,aleph)
@@ -950,14 +968,14 @@ class Gestion_jeux():
                         nb+=1
                         truc="You Loose T.T" 
                         ecran_sauvegarde=font2.render(truc,2,(80,241,0))
-                        fenetre.blit(ecran_sauvegarde,(255+nb,35+nb))
+                        fenetre.blit(ecran_sauvegarde,((x+255)+nb,35+nb))
                         pygame.display.flip()
                  
                     nicknamu=''.join(nickname[1:])                          
                     # Vérification si le score est un reccord
                     bidule=objet.verif_reccord(nicknamu)
                     ecran_chouette=font2.render(bidule,2,(80,241,0))
-                    fenetre.blit(ecran_chouette,(255,400))
+                    fenetre.blit(ecran_chouette,(x+255,400))
                     pygame.display.flip()
                     time.sleep(3)     
                     ## Destruction du score
@@ -984,7 +1002,7 @@ class Animation_intro():
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             intrologo.set_alpha(nb)
             pygame.Surface.convert_alpha(intrologo)
-            fenetre.blit(intrologo,(0,0))
+            fenetre.blit(intrologo,(200,155))
             pygame.display.flip()  
             nb += 1
         nb1 = 200    
@@ -992,14 +1010,14 @@ class Animation_intro():
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             intrologo.set_alpha(nb1)
             pygame.Surface.convert_alpha(intrologo)
-            fenetre.blit(intrologo,(0,0))
+            fenetre.blit(intrologo,(200,155))
             pygame.display.flip()  
             nb1 -= 1
 
 
 
 class WordShoot():
-    """ Pygame - Worshoot - Classe Principale """
+    """ Pygame - Worshoot - Classe Principale """ 
     ## Debut prog
     Animation_intro()
     ## Appel de la mémoire du jeu
@@ -1008,6 +1026,7 @@ class WordShoot():
     niveau = Memoire.indice3
     piste = Memoire.indice4
     while continuer:
+        pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
         ####### Ecran Principale
         c = True
         while c:
@@ -1018,13 +1037,13 @@ class WordShoot():
             c = Gestion_Ev_menu.c 
             # # # #   
             ## Ecran de depart
-            fenetre.blit(ecran1,(0,0))
+            fenetre.blit(ecran1,(290,10))
             ## Element du tableau Selecteur 
-            select=font.render(selection,2,( 80, 241, 0 ))
-            fenetre.blit(select,(362,390))      
+            select=font22.render(selection,2,( 80, 241, 0 ))
+            fenetre.blit(select,(562,700))      
             ## Titre du Jeu
             titre=font3.render(logo1,2,(241,255,68))
-            fenetre.blit(titre,(200,300)) 
+            fenetre.blit(titre,(350,550)) 
             pygame.display.flip()
         # Menu jeux          
         if  selection == Selecteur.tableau[0]:      
@@ -1039,7 +1058,6 @@ class WordShoot():
         if selection == Selecteur.tableau[3]:
             Gestion_Config() 
             c = Gestion_Ev_menu.c 
-
         # menu quit 
         if selection == Selecteur.tableau[4]:
             Gestion_Quit()
