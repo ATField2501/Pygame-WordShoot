@@ -771,7 +771,7 @@ class Gestion_Credit():
                                 Gestion_Ev_menu.c = True
 
 class Gestion_Config():
-    def __init__(self): 
+    def __init__(self):
         oulaoups = 29
         unedeplus = True
         while unedeplus:
@@ -842,6 +842,11 @@ class Gestion_Quit():
 class Gestion_jeux():
     def __init__(self,objet):
         """ """
+        if musique == 0: 
+            ######### Démarage de la musique de fond
+            pygame.mixer.music.set_volume(0.5) 
+            pygame.mixer.music.play()    
+
         # Ligne de fin de chute des mots
         ligne1 = font.render(ligne,2,( 251, 8, 8 )) 
         score= Score.score
@@ -972,10 +977,8 @@ class Gestion_jeux():
 
 class Animation_intro():
     def __init__(self):
-        """   """
-        if son == True:
-            bal.play()
-        # Animation fondu enchaîné
+        """ Animation fondu enchaîné """
+        bal.play()
         nb = 0
         while nb < 200:
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
@@ -999,9 +1002,11 @@ class WordShoot():
     """ Pygame - Worshoot - Classe Principale """
     ## Debut prog
     Animation_intro()
-    ######### Démarage de la musique de fond
-#    pygame.mixer.music.set_volume(0.5) #Met le volume à 0.5 (moitié)
-#    pygame.mixer.music.play()    
+    ## Appel de la mémoire du jeu
+    musique = Memoire.indice1
+    son = Memoire.indice2
+    niveau = Memoire.indice3
+    piste = Memoire.indice4
     while continuer:
         ####### Ecran Principale
         c = True
@@ -1033,6 +1038,8 @@ class WordShoot():
         # menu config 
         if selection == Selecteur.tableau[3]:
             Gestion_Config() 
+            c = Gestion_Ev_menu.c 
+
         # menu quit 
         if selection == Selecteur.tableau[4]:
             Gestion_Quit()
