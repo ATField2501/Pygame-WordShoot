@@ -25,8 +25,11 @@ pygame.mixer.pre_init(44100, -16, 2, 2048)
 #pygame.mixer.init()
 pygame.init()
 
+# info
+a = pygame.display.Info()
+
 # Création de la fenêtre
-fenetre = pygame.display.set_mode((1200, 1000), FULLSCREEN)
+fenetre = pygame.display.set_mode((a.current_w, a.current_h), FULLSCREEN)
 #size, x, y = (0,0), 800, 600
 
 # Connaître dimension fenêtre
