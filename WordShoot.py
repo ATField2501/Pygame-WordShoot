@@ -27,6 +27,11 @@ pygame.init()
 
 # info
 a = pygame.display.Info()
+x = a.current_w/3.5
+y = a.current_h/5
+
+# log
+print(a)
 
 # Création de la fenêtre
 fenetre = pygame.display.set_mode((a.current_w, a.current_h), FULLSCREEN)
@@ -708,7 +713,7 @@ class Gestion_Score():
         like=100
         score = 'Scores'
         titre = font3.render(score,1,(255,124,5))
-        fenetre.blit(titre,(450,10))
+        fenetre.blit(titre,(x+300,10))
         unedeplus = True
         while unedeplus:
             for event in pygame.event.get():   
@@ -720,13 +725,13 @@ class Gestion_Score():
             try:
                 for e in babylone:
                     nervure=font.render(e,2,(250,250,0))
-                    fenetre.blit(nervure,(450,like))
+                    fenetre.blit(nervure,(x+350,like))
                     pygame.display.flip()   
                     click.play()
                     like += 45         
                     time.sleep(0.5)     
                         
-                # Si le fichier n'existe pas                       
+            # Si le fichier n'existe pas                       
             except TypeError:
                 pass
             time.sleep(10)
@@ -755,7 +760,7 @@ class Gestion_Credit():
                     yin = i.strip()
                     credit = font.render(yin,2,( B, 255, G ))
                     longg= len(ether[index])
-                    balthazar=600-(longg*5)
+                    balthazar=(x+400)-(longg*5)
                     fenetre.blit(credit, (balthazar,max)) 
                     pygame.display.flip() # Rafraichissement
                     max += 35
@@ -768,7 +773,7 @@ class Gestion_Credit():
                     yin = i.strip()
                     credit = font.render(yin,2,( B, 255, G ))
                     longg= len(ether[index])
-                    balthazar=600-(longg*5)
+                    balthazar=(x+400)-(longg*5)
                     fenetre.blit(credit, (balthazar,max)) 
                     pygame.display.flip() # Rafraichissement
                     max += 35
@@ -847,7 +852,7 @@ class Gestion_Quit():
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             font3=pygame.font.Font(path+'/Horst___.ttf', 56+nb)
             depart=font3.render(bye,2,(241,255,68))
-            fenetre.blit(depart,(420-(nb*3),255))
+            fenetre.blit(depart,((x+250)-(nb*3),y))
             pygame.display.flip()
             nb += 1
         
@@ -1005,7 +1010,7 @@ class Animation_intro():
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             intrologo.set_alpha(nb)
             pygame.Surface.convert_alpha(intrologo)
-            fenetre.blit(intrologo,(200,155))
+            fenetre.blit(intrologo,(x,y))
             pygame.display.flip()  
             nb += 1
         nb1 = 200    
@@ -1013,7 +1018,7 @@ class Animation_intro():
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             intrologo.set_alpha(nb1)
             pygame.Surface.convert_alpha(intrologo)
-            fenetre.blit(intrologo,(200,155))
+            fenetre.blit(intrologo,(x,y))
             pygame.display.flip()  
             nb1 -= 1
 
@@ -1040,13 +1045,13 @@ class WordShoot():
             c = Gestion_Ev_menu.c 
             # # # #   
             ## Ecran de depart
-            fenetre.blit(ecran1,(290,10))
+            fenetre.blit(ecran1,(x+70,y-200))
             ## Element du tableau Selecteur 
             select=font22.render(selection,2,( 80, 241, 0 ))
-            fenetre.blit(select,(562,700))      
+            fenetre.blit(select,(x+350,y+450))      
             ## Titre du Jeu
             titre=font3.render(logo1,2,(241,255,68))
-            fenetre.blit(titre,(350,550)) 
+            fenetre.blit(titre,(x+140,y+300)) 
             pygame.display.flip()
         # Menu jeux          
         if  selection == Selecteur.tableau[0]:      
