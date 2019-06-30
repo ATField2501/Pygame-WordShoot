@@ -34,7 +34,7 @@ y = a.current_h/5
 print(a)
 
 # Création de la fenêtre
-fenetre = pygame.display.set_mode((a.current_w, a.current_h), FULLSCREEN)
+fenetre = pygame.display.set_mode((a.current_w, a.current_h), RESIZABLE)
 #size, x, y = (0,0), 800, 600
 
 # Connaître dimension fenêtre
@@ -890,7 +890,7 @@ class Gestion_jeux():
             nickname = bidule.nickname
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1000 ))
             stone = font.render(''.join(bidule.nickname),2,(80,241,0))
-            fenetre.blit(stone,(50,350))
+            fenetre.blit(stone,(450,350))
             pygame.display.flip()
             
         pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1000 ))
