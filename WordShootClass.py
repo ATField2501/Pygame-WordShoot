@@ -233,7 +233,7 @@ class Selecteur():
 class Deplacement_config():
     """ Déplacement dans la fenêtre de configuration"""
     index = 0
-    chakazulu = [(375,145),(375,175),(375,205),(375,235)]
+    chakazulu = [(775,145),(775,175),(775,205),(775,235)]
     zulu = chakazulu[0]
 
     def __init__(self):

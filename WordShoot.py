@@ -82,9 +82,9 @@ clockout = pygame.mixer.Sound(clock)
 font=pygame.font.Font(None, 29) 
 font2=pygame.font.Font(None, 55)
 font22=pygame.font.Font(None, 35)
-font3=pygame.font.Font(path+'/Horst___.ttf', 65)
-font4=pygame.font.Font(path+'/Horst___.ttf', 81)
-font5=pygame.font.Font(path+'/Horst___.ttf', 82)
+font3=pygame.font.Font(path+'/Quantum.otf', 125)
+font4=pygame.font.Font(path+'/Quantum.otf', 81)
+font5=pygame.font.Font(path+'/Quantum.otf', 82)
 def son_vitesse(score, supra):
     if score == 100:
         print ' -- 0.1 --'
@@ -710,10 +710,10 @@ class Gestion_Score():
         pygame.display.flip()
         ecran_reccords=objet.lecture_score()
         babylone=ecran_reccords
-        like=100
+        like=200
         score = 'Scores'
-        titre = font3.render(score,1,(255,124,5))
-        fenetre.blit(titre,(x+300,10))
+        titre = font5.render(score,1,(255,124,5))
+        fenetre.blit(titre,(x+270,10))
         unedeplus = True
         while unedeplus:
             for event in pygame.event.get():   
@@ -725,7 +725,7 @@ class Gestion_Score():
             try:
                 for e in babylone:
                     nervure=font.render(e,2,(250,250,0))
-                    fenetre.blit(nervure,(x+350,like))
+                    fenetre.blit(nervure,(x+310,like))
                     pygame.display.flip()   
                     click.play()
                     like += 45         
@@ -797,17 +797,17 @@ class Gestion_Config():
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
             separateur= " = "
             config = "config"
-            x1 = 560
-            x2 = 410
-            x3 = 600
+            x1 = 970
+            x2 = 820
+            x3 = 1010
             ## Eléments
             separ = font.render(separateur,2,(155,55,123))
-            depart = font3.render(config,1,(255,124,5))
+            depart = font5.render(config,1,(255,124,5))
             element1 = font.render(Memoire.elem_tab4[0],2,(155,255,5)) # musique
             element2 = font.render(Memoire.elem_tab4[1],2,(155,255,5)) # son
             element3 = font.render(Memoire.elem_tab4[2],2,(155,255,5)) # niveau
             element4 = font.render(Memoire.elem_tab4[3],2,(155,255,5)) # piste
-            fenetre.blit(depart,(x2+5,10))
+            fenetre.blit(depart,(x+270,10))
             fenetre.blit(separ,(x1,150))
             fenetre.blit(element1,(x2,150))
             fenetre.blit(separ,(x1,180))
@@ -850,9 +850,9 @@ class Gestion_Quit():
         nb1 = 1
         while nb < 35:
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
-            font3=pygame.font.Font(path+'/Horst___.ttf', 56+nb)
+            font3=pygame.font.Font(path+'/Quantum.otf', 56+nb)
             depart=font3.render(bye,2,(241,255,68))
-            fenetre.blit(depart,((x+250)-(nb*3),y))
+            fenetre.blit(depart,((x+250)-(nb*3),y+200))
             pygame.display.flip()
             nb += 1
         
@@ -894,7 +894,7 @@ class Gestion_jeux():
             pygame.display.flip()
             
         pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1000 ))
-        pygame.draw.rect(fenetre, (156, 175, 175), (200, 0 , 802 , 604 ))
+        pygame.draw.rect(fenetre, (156, 175, 175), (550, 0 , 802 , 604 ))
        
         aleph = False    
         while aleph == False:
@@ -912,7 +912,7 @@ class Gestion_jeux():
             ########### Construction fenetres
             text = font.render(mot,2,( 80, 241, 0 ))
             # Quelque variables de bon cru
-            x = 200
+            x = 550
             # On tire au hasard le point d'apparition du mot sur l'axe horizontale
             aaaa=random.randint(x,720)  
             fenetre.blit(text, (aaaa,5))
@@ -1051,7 +1051,7 @@ class WordShoot():
             fenetre.blit(select,(x+350,y+450))      
             ## Titre du Jeu
             titre=font3.render(logo1,2,(241,255,68))
-            fenetre.blit(titre,(x+140,y+300)) 
+            fenetre.blit(titre,(x,y+300)) 
             pygame.display.flip()
         # Menu jeux          
         if  selection == Selecteur.tableau[0]:      
