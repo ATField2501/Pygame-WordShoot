@@ -3,12 +3,13 @@
 
 import os
 
-path= os.popen('pwd').read()
-path = path.strip()
+path = os.getcwd()
+#path= os.popen('pwd').read()
+#path = path.strip()
 path_shadows=path+'/shadows'
 
 titre_fenetre=' '*15+" * Caglio Word Shooting *"
-logo1='WorldShoot'
+logo1='WordShoot'
 
 # Images du jeu
 intro= path+"/Caglio-WShoot_images/intro01.png"
