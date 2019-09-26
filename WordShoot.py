@@ -27,20 +27,32 @@ pygame.init()
 
 # info
 a = pygame.display.Info()
-x = a.current_w/3.5
-y = a.current_h/5
-
+## coordonnées
+x = a.current_w/2
+y = a.current_h/2
+#
+#print(x)
+#print(y)
+#
+## test
+#size = (0,0)
+#
 # log
 print(a)
 
+
+
+
 # Création de la fenêtre
 fenetre = pygame.display.set_mode((a.current_w, a.current_h), RESIZABLE)
-#size, x, y = (0,0), 800, 600
+dd = a.current_w/2 , a.current_h/2
+#size, x, y = (0,0), a.current_w/2, a.current_h/2
 
 # Connaître dimension fenêtre
 size = fenetre.get_size()
-
-pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+print(size,x,y)
+print(a.current_w/2, a.current_h/2)
+pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, x , y ))
 
 # Pour fonction appui long
 #pygame.key.set_repeat(400, 30)
@@ -130,22 +142,20 @@ def son_vitesse(score, supra):
 verrou= RLock()
 
 class Gestion_volumetrik(Thread):
-    """ Gère la variation volumetrique du titre au menu principale """
-    def __init__(self,phidor):
+    """ Gère la taille de la fenêtre dans un flux parallèle """
+    def __init__(self):
         Thread.__init__(self)
-        self.phidor=phidor
     def run(self):
+        print('thread ---> OK!')
         # RLock
         with verrou:
-            if self.phidor == 55:
-                self.phidor = 56
-                print(self.phidor)
-                time.sleep(0.7)
-            if self.phidor == 56:
-                self.phidor = 55
-                print(self.phidor)
-                time.sleep(0.7)
-            
+           for event in pygame.event.get():   
+               if event.type == pygame.VIDEORESIZE: # Redimentionnement de la fenetre
+                   size, x, y = event.size, event.w, event.h
+                   #fond = pygame.transform.scale(fond, (x, y)) ## SUPER TRANSFORMATION IMAGE
+                   print size, x, y
+                    
+           
 class Gestion_Ev_menu():
     """ Gestion des évennement au menu principale """
     c=True
@@ -154,7 +164,15 @@ class Gestion_Ev_menu():
         pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
         obj1=Selecteur()
         self.selection=obj1.selecteur
-        for event in pygame.event.get(): 
+        for event in pygame.event.get():
+        # gestion fenetre
+  
+            if event.type == pygame.VIDEORESIZE: # Redimentionnement de la fenetre
+                size, x, y = event.size, event.w, event.h
+        #fond = pygame.transform.scale(fond, (x, y)) ## SUPER TRANSFORMATION IMAGE
+                print size, x, y
+
+
             if event.type == KEYDOWN:
                 if event.key == K_RETURN:
                     click.play()
@@ -302,7 +320,12 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
        self.aleph = aleph
        #On parcours la liste de tous les événements reçus
        for event in pygame.event.get():   
-          # Si un de ces éléments est de type clavier
+#           if event.type == pygame.VIDEORESIZE: # Redimentionnement de la fenetre
+#               size, x, y = event.size, event.w, event.h
+#               #fond = pygame.transform.scale(fond, (x, y)) ## SUPER TRANSFORMATION IMAGE
+#               print size, x, y
+#
+           # Si un de ces éléments est de type clavier
            if event.type == KEYDOWN:       
                if event.key == K_ESCAPE:
                    bipp.play()
@@ -670,11 +693,12 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                    self.max = 455     # On termine la boucle
 
 class Gestion_Ev_config():
-    """ Gestion des évennement clavier sur page de confifuration """
+    """ Gestion des évennement clavier sur page de configuration """
     unedeplus = True
+    c = True
     def __init__(self):
         chaka = Deplacement_config()
-        for event in pygame.event.get(): 
+        for event in pygame.event.get():  
             if event.type == KEYDOWN:
                 if event.key == K_RETURN:
                     click.play()
@@ -792,9 +816,9 @@ class Gestion_Config():
         oulaoups = 29
         unedeplus = True
         while unedeplus:
-            tt = Memoire() 
             # Création d'un rectangle noir pour le fond
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+            tt = Memoire() 
             separateur= " = "
             config = "config"
             x1 = 970
@@ -807,7 +831,7 @@ class Gestion_Config():
             element2 = font.render(Memoire.elem_tab4[1],2,(155,255,5)) # son
             element3 = font.render(Memoire.elem_tab4[2],2,(155,255,5)) # niveau
             element4 = font.render(Memoire.elem_tab4[3],2,(155,255,5)) # piste
-            fenetre.blit(depart,(x+270,10))
+            fenetre.blit(depart,(x-150,10))
             fenetre.blit(separ,(x1,150))
             fenetre.blit(element1,(x2,150))
             fenetre.blit(separ,(x1,180))
@@ -840,22 +864,23 @@ class Gestion_Config():
             time.sleep(0.1)
             if oulaoups > 35:
                 oulaoups = 29
+        Gestion_Ev_menu.c = True               
 class Gestion_Quit():
     def __init__(self):
         """ """
         # Création d'un rectangle noir pour le fond
-        pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+        pygame.draw.rect(fenetre, NOIR , (0, 0, a.current_w , a.current_h ))
         bye = "A BientOt"
         nb = 0
         nb1 = 1
         while nb < 35:
-            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+            pygame.draw.rect(fenetre, NOIR , (0, 0, a.current_w , a.current_h))
             font3=pygame.font.Font(path+'/Quantum.otf', 56+nb)
             depart=font3.render(bye,2,(241,255,68))
-            fenetre.blit(depart,((x+250)-(nb*3),y+200))
+            fenetre.blit(depart,((x/2)+nb,y-nb))
             pygame.display.flip()
             nb += 1
-        
+               
         time.sleep(0.5)
         sys.exit(0)
 
@@ -928,7 +953,7 @@ class Gestion_jeux():
             destruct = False
             max=1
             while max < 455 and destruct == False:
-                pygame.time.Clock().tick(obj_v.vitesse)
+                pygame.time.Clock().tick_busy_loop(obj_v.vitesse)
                 fenetre.blit(text, (aaaa,max))   # affichage text tombant  
                 max +=1   
                 # Affectation de la variable d'instance score
@@ -960,7 +985,10 @@ class Gestion_jeux():
                 fenetre.blit(sCore, (x+700,550))
                 fenetre.blit(vie, (x+50,550))
                 fenetre.blit(ping,(x+325,550))
-                
+
+                # Clavier virtuel
+                Clavier_virtuel()
+                #  pygame.draw.line (fenetre, (156,175,175), (802, 604), (100, 100), 1)
                 # Appel Gestionnaire d'èvennement
                 escargot = Gestion_Ev_jeux(sujet,objA,objet,aaaa,max,destruct,aleph)
                 max = escargot.max
@@ -999,34 +1027,72 @@ class Gestion_jeux():
             son_vitesse(score, supra)        
             pygame.display.flip() # Rafraichissement
 
+class Clavier_virtuel():
+    def __init__(self, position = 0):
+        """ Clavier Virtuel, Accepte en paramètre un nombre entier représentant la position de la lettre
+            dans l'alphabet pour mettre en évidence la touche concernée """
+        
+        
+        # un trapeze positionné sous la base de l'ecran supèrieur
+#        angle = 0.436332
+        # clavier
+#        pygame.draw.line(fenetre, (156, 175, 175), (800,600),  ( 800, 600 ))
+#        pygame.draw.line(fenetre, (156, 175, 175), (550,600),  ( 400, 800 ))
+        
+        # initialisation d'un compteur
+        nb_touche = 1 
+        # initialisation coordonnée de la première touche
+        a , b, c, d =  500, 650, 50, 10
+        # Dix groupes de trois touches
+        while nb_touche < 11:
+            # rangées de touches
+            pygame.draw.rect(fenetre, ROUGE, (a, b, c, d))
+            pygame.draw.rect(fenetre, ROUGE, (a, b+50, c, d))
+            pygame.draw.rect(fenetre, ROUGE, (a, b+100, c, d))
+            a += 100
+            nb_touche +=1
+
+
+
+
+#                pygame.draw.polygon(fenetre, ((100,100),(300,200),(300,500),(100,300)), 0, 0)
+#                pygame.draw.polygon (fenetre, (156,175,175), ((100,100),(802,802),(300,500),(100,300)))
+
 
 
 class Animation_intro():
     def __init__(self):
         """ Animation fondu enchaîné """
         bal.play()
-        nb = 0
+        nb = 0 
         while nb < 200:
-            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, a.current_w,a.current_h ))
             intrologo.set_alpha(nb)
             pygame.Surface.convert_alpha(intrologo)
-            fenetre.blit(intrologo,(x,y))
+            # round() --> arrondir
+            center = fenetre.get_rect()
+            print(center.center)
+            print(x/2,y/2)
+            fenetre.blit(intrologo,(x-400,y-290))
             pygame.display.flip()  
             nb += 1
         nb1 = 200    
         while nb1 != 0:
-            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, a.current_w,a.current_h ))
             intrologo.set_alpha(nb1)
             pygame.Surface.convert_alpha(intrologo)
-            fenetre.blit(intrologo,(x,y))
+            fenetre.blit(intrologo,(x-400 , y-290))
             pygame.display.flip()  
             nb1 -= 1
-
+        
 
 
 class WordShoot():
-    """ Pygame - Worshoot - Classe Principale """ 
-    ## Debut prog
+    """ Pygame - Worshoot - Classe Principale """
+    ## Appel du thread pour la gestion de la fenêtre
+#    thread1 = Gestion_volumetrik()
+#    thread1.run()
+
     Animation_intro()
     ## Appel de la mémoire du jeu
     musique = Memoire.indice1
@@ -1034,7 +1100,7 @@ class WordShoot():
     niveau = Memoire.indice3
     piste = Memoire.indice4
     while continuer:
-        pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1100 ))
+        pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, a.current_w,a.current_h ))
         ####### Ecran Principale
         c = True
         while c:
@@ -1042,16 +1108,17 @@ class WordShoot():
             ## Appel du gestionnaire d'èvennement
             truc = Gestion_Ev_menu()
             selection = truc.selection
-            c = Gestion_Ev_menu.c 
-            # # # #   
+            c = Gestion_Ev_menu.c
+            # # # #  
+#            x , y = x/2 , y/2 
             ## Ecran de depart
-            fenetre.blit(ecran1,(x+70,y-200))
+            fenetre.blit(ecran1,((x/2)+150,0))
             ## Element du tableau Selecteur 
             select=font22.render(selection,2,( 80, 241, 0 ))
-            fenetre.blit(select,(x+350,y+450))      
+            fenetre.blit(select,(x-50,y+150))
             ## Titre du Jeu
             titre=font3.render(logo1,2,(241,255,68))
-            fenetre.blit(titre,(x,y+300)) 
+            fenetre.blit(titre,(x-370,y-50)) 
             pygame.display.flip()
         # Menu jeux          
         if  selection == Selecteur.tableau[0]:      
@@ -1064,8 +1131,7 @@ class WordShoot():
             Gestion_Credit()                        
         # menu config 
         if selection == Selecteur.tableau[3]:
-            Gestion_Config() 
-            c = Gestion_Ev_menu.c 
+            Gestion_Config()  
         # menu quit 
         if selection == Selecteur.tableau[4]:
             Gestion_Quit()
@@ -1073,5 +1139,7 @@ class WordShoot():
 
 if __name__ == '__main__':
     WordShoot()
-   
+    # terminer le thread
+    thread1.join()
+  
 

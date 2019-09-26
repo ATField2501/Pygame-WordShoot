@@ -42,6 +42,11 @@ niveau_fini = path+"/WorldShoot-Musik/niveau_fini.ogg"
 clock = path+"/WorldShoot-Musik/clock.ogg"
 ligne='________________________________________________________________________'
 
+## Code couleurs
+ROUGE = (245, 5, 5)
+NOIR = (0, 0, 0)
+
+
 ## Mes ptits booléens
 musique = True
 son = True
@@ -53,6 +58,7 @@ formalite = True
 aleph = False
 vie_symbole=u"\u262F"
 looser=" You Loose T.T"
+
 ## Coordonnées
 x=255
 y=255
