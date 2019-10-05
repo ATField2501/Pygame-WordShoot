@@ -1094,7 +1094,7 @@ class Clavier_virtuel(Gestion_Ev_jeux):
         couleur = VERT   
         # Troisième rangée de dic touches
         while nb_touche < 30:             
-            if nb_touche == stupeur and stupeur < 30 and stupeur > 20:
+            if nb_touche == stupeur and stupeur < 30 and stupeur > 19:
                 couleur = BLEU
             else:
                 couleur = VERT     
