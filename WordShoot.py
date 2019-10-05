@@ -694,7 +694,7 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                    self.max = 455     # On termine la boucle
 
 class Gestion_Ev_config():
-    """ Gestion des évennement clavier sur page de configuration """
+    """ Gestion des évennements clavier sur page de configuration """
     unedeplus = True
     c = True
     def __init__(self):
@@ -868,7 +868,7 @@ class Gestion_Config():
         Gestion_Ev_menu.c = True               
 class Gestion_Quit():
     def __init__(self):
-        """ """
+        """ Gestion du méssage de fin et de la sortie du programme"""
         # Création d'un rectangle noir pour le fond
         pygame.draw.rect(fenetre, NOIR , (0, 0, a.current_w , a.current_h ))
         bye = "A BientOt"
@@ -887,7 +887,8 @@ class Gestion_Quit():
 
 class Gestion_jeux(Gestion_Ev_jeux):
     def __init__(self,objet):
-        """ """
+        """ Classe principale de gestion du nom du joueur et du déroulement
+            de la partie """
         if musique == 0: 
             ######### Démarage de la musique de fond
             pygame.mixer.music.set_volume(0.5) 
