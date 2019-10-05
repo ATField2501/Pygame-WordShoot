@@ -915,7 +915,7 @@ class Gestion_jeux(Gestion_Ev_jeux):
             long_nickname = Gestion_Ev_nickname.long_nickname  
             nickname = bidule.nickname
             pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1000 ))
-            stone = font.render(''.join(bidule.nickname),2,(80,241,0))
+            stone = font4.render(''.join(bidule.nickname),2,(80,241,0))
             fenetre.blit(stone,(450,350))
             pygame.display.flip()
             
