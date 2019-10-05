@@ -94,6 +94,7 @@ clockout = pygame.mixer.Sound(clock)
 font=pygame.font.Font(None, 29) 
 font2=pygame.font.Font(None, 55)
 font22=pygame.font.Font(None, 35)
+font222=pygame.font.Font(None, 30)
 font3=pygame.font.Font(path+'/Quantum.otf', 125)
 font4=pygame.font.Font(path+'/Quantum.otf', 81)
 font5=pygame.font.Font(path+'/Quantum.otf', 82)
@@ -884,7 +885,7 @@ class Gestion_Quit():
         time.sleep(0.5)
         sys.exit(0)
 
-class Gestion_jeux():
+class Gestion_jeux(Gestion_Ev_jeux):
     def __init__(self,objet):
         """ """
         if musique == 0: 
@@ -986,7 +987,7 @@ class Gestion_jeux():
                 fenetre.blit(vie, (x+50,550))
                 fenetre.blit(ping,(x+325,550))
 
-                # Clavier virtuel
+                # Clavier virtuel auquel on passe en paramètre la position de la lettres
                 Clavier_virtuel()
                 #  pygame.draw.line (fenetre, (156,175,175), (802, 604), (100, 100), 1)
                 # Appel Gestionnaire d'èvennement
@@ -1027,33 +1028,90 @@ class Gestion_jeux():
             son_vitesse(score, supra)        
             pygame.display.flip() # Rafraichissement
 
-class Clavier_virtuel():
+
+class Clavier_virtuel(Gestion_Ev_jeux):
+
     def __init__(self, position = 0):
         """ Clavier Virtuel, Accepte en paramètre un nombre entier représentant la position de la lettre
-            dans l'alphabet pour mettre en évidence la touche concernée """
-        
-        
+            dans l'alphabet pour mettre en évidence la touche concernée """        
         # un trapeze positionné sous la base de l'ecran supèrieur
-#        angle = 0.436332
+        angle = 0.436332
         # clavier
 #        pygame.draw.line(fenetre, (156, 175, 175), (800,600),  ( 800, 600 ))
-#        pygame.draw.line(fenetre, (156, 175, 175), (550,600),  ( 400, 800 ))
+#   pygame.draw.line(fenetre, (156, 175, 175), (550,600),  ( 400, 800 ))
         
+        position = Lettre.index
+        couleur = VERT
+        yoyo = 'a'
+        sturm = font.render(yoyo,2,( 80, 241, 0 ))
         # initialisation d'un compteur
-        nb_touche = 1 
+        nb_touche = 0 
+        nnb = 0
+        stupeur = 0
         # initialisation coordonnée de la première touche
-        a , b, c, d =  500, 650, 50, 10
-        # Dix groupes de trois touches
-        while nb_touche < 11:
-            # rangées de touches
-            pygame.draw.rect(fenetre, ROUGE, (a, b, c, d))
-            pygame.draw.rect(fenetre, ROUGE, (a, b+50, c, d))
-            pygame.draw.rect(fenetre, ROUGE, (a, b+100, c, d))
+        a , b, c, d =  480, 650, 90, 20
+        # Construction de la lettre à colorer
+        sample1 = Lettre.mot[Lettre.index]               
+        # Comparaison de la lettre avec sa position dans la liste
+        # alphabeta afin de récup index
+        for i,e in enumerate(alphabeta):
+            if e == sample1:
+                stupeur = i
+        # Première rangée de dix touches
+        while nb_touche < 10:   
+            # Vérification de la prsésence de la lettre dans la sequence
+            if nb_touche == stupeur and stupeur < 10:
+                couleur = BLEU
+            else:
+                couleur = VERT     
+            # Rectangles
+            pygame.draw.rect(fenetre, couleur, (a, b, c, d))    
+            # Caractère alphabétique
+            lettreAAAA = alphabeta[nb_touche] 
+            tic = font222.render(lettreAAAA,2,(ROUGE))
+            fenetre.blit(tic,(a+30,b))
+            a += 100
+            nb_touche +=1
+        # Réinitialisation    
+#        nb_touche = 0 
+        a = 480
+        couleur = VERT    
+        # Deuxième rangée de dix touches
+        while nb_touche < 20:   
+            if nb_touche == stupeur and stupeur < 20 and stupeur > 10:
+                couleur = BLEU
+            else:
+                couleur = VERT     
+            pygame.draw.rect(fenetre, couleur, (a+10, b+25, c, d))           
+            lettreAAAA = alphabeta[nb_touche] 
+            tic = font222.render(lettreAAAA,2,(ROUGE))
+            fenetre.blit(tic,(a+30,b+25))
             a += 100
             nb_touche +=1
 
+#        nb_touche = 0 
+        a = 480
+        couleur = VERT   
+        # Troisième rangée de dic touches
+        while nb_touche < 30:             
+            if nb_touche == stupeur and stupeur < 30 and stupeur > 20:
+                couleur = BLEU
+            else:
+                couleur = VERT     
+            pygame.draw.rect(fenetre, couleur, (a+20, b+50, c, d))  
+            lettreAAAA = alphabeta[nb_touche] 
+            tic = font222.render(lettreAAAA,2,(ROUGE))
+            fenetre.blit(tic,(a+30,b+50))
+            a += 100
+            nb_touche +=1
+        print(' stupeur: {}'.format(stupeur))   
+        print(' sample: {}'.format(sample1))
 
 
+#        for i,e in enumerate(alphabeta):
+#             oxo = font.render(str(e),2,(80,241,0))
+#             fenetre.blit(oxo,(a-i*2,b+i*2))
+       
 
 #                pygame.draw.polygon(fenetre, ((100,100),(300,200),(300,500),(100,300)), 0, 0)
 #                pygame.draw.polygon (fenetre, (156,175,175), ((100,100),(802,802),(300,500),(100,300)))
@@ -1141,5 +1199,4 @@ if __name__ == '__main__':
     WordShoot()
     # terminer le thread
     thread1.join()
-  
-
+ 

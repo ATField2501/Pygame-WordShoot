@@ -174,7 +174,7 @@ class Vitesse(Score):
         if Score.score >= 100:
              Vitesse.vitesse = 100
         if Score.score >= 200:
-            Vitesse.vitesse = 150
+            Vitesse.vitesse = 149
         if Score.score >= 300:
             Vitesse.vitesse = 200
         if Score.score >= 400:
