@@ -1079,7 +1079,7 @@ class Clavier_virtuel(Gestion_Ev_jeux):
         couleur = VERT    
         # Deuxième rangée de dix touches
         while nb_touche < 20:   
-            if nb_touche == stupeur and stupeur < 20 and stupeur > 10:
+            if nb_touche == stupeur and stupeur < 20 and stupeur > 9:
                 couleur = BLEU
             else:
                 couleur = VERT     
