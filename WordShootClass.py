@@ -233,7 +233,7 @@ class Selecteur():
 class Deplacement_config():
     """ Déplacement dans la fenêtre de configuration"""
     index = 0
-    chakazulu = [(775,145),(775,175),(775,205),(775,235)]
+    chakazulu = [(775,145),(775,175),(775,205),(775,235),(775,265)]
     zulu = chakazulu[0]
 
     def __init__(self):
@@ -243,12 +243,12 @@ class Deplacement_config():
         """ Methode de modification positive de l'index du selecteur  """
         Deplacement_config.index -= 1
         if Deplacement_config.index < 0:
-            Deplacement_config.index = 3
+            Deplacement_config.index = 4 
         Deplacement_config.zulu = Deplacement_config.chakazulu[Deplacement_config.index]
     def deplace_down(self):
         """ Methode de modification négative de l'index du selecteur  """
         Deplacement_config.index += 1
-        if Deplacement_config.index > 3:
+        if Deplacement_config.index > 4:
             Deplacement_config.index = 0 
         Deplacement_config.zulu = Deplacement_config.chakazulu[Deplacement_config.index]
     def deplace_d(self):
@@ -260,14 +260,15 @@ class Deplacement_config():
 class Memoire(Deplacement_config):
     """ Garde en mémoire les règlages du jeu """
     # Elements de réglage    
-    elem_tab1 = ['1','2','3']
+    elem_tab1 = ['1','2','3','4','5','6','7','8','9','10']
     elem_tab2 = ["on","off"]
     elem_tab3 = ["Normal","Difficile"]
-    elem_tab4 = ["Musique ","effet audio","Niveau","Piste"]  
+    elem_tab4 = ["Musique ","effet audio","Niveau","Piste","volume"]  
     indice1 = 0 # musique
     indice2 = 0 # son
-    indice3 = 0 # niveau
+    indice3 = 0 # niveau difficulté
     indice4 = 0 # piste
+    indice5 = 0 # volume
 
     def __init__(self):
         """ """
@@ -278,7 +279,7 @@ class Memoire(Deplacement_config):
         self.son = Memoire.elem_tab2[Memoire.indice2]
         self.niveau = Memoire.elem_tab3[Memoire.indice3]
         self.piste = Memoire.elem_tab1[Memoire.indice4]
-
+        self.volume = Memoire.elem_tab1[Memoire.indice5]
    
     def maj_index(self):
         """ Gestion depassement d'index """
@@ -299,24 +300,34 @@ class Memoire(Deplacement_config):
             Memoire.indice4 = 0
         if Memoire.indice4 < 0:
             Memoire.indice4 = 2
+        if Memoire.indice5 > 9:
+            Memoire.indice5 = 0 
+        if Memoire.indice5 < 0:
+            Memoire.indice5 = 9
+
         # Pour logs    
         print('indice1 = '+str(self.indice1))
         print('indice2 = '+str(self.indice2))
         print('indice3 = '+str(self.indice3))
         print('indice4 = '+str(self.indice4))
+        print('indice5 = '+str(self.indice5))
+
 #        print('musique: '+str(Memoire.musique))
+    
     def modificateur_plus(self):        
         print(str(self.index)+'   '+str(Deplacement_config.index))
 
   
-        if Deplacement_config.index == 0: # musique
+        if Deplacement_config.index == 0: 
             Memoire.indice1 -= 1
-        if Deplacement_config.index == 1: # son
+        if Deplacement_config.index == 1: 
             Memoire.indice2 -= 1
-        if Deplacement_config.index == 2: # niveau
+        if Deplacement_config.index == 2: 
             Memoire.indice3 -= 1
-        if Deplacement_config.index == 3: # piste
+        if Deplacement_config.index == 3: 
             Memoire.indice4 -= 1
+        if Deplacement_config.index == 4: 
+            Memoire.indice5 -= 1
         self.maj_index()
  
  
@@ -331,5 +342,8 @@ class Memoire(Deplacement_config):
             Memoire.indice3 += 1
         if Deplacement_config.index == 3: # piste
             Memoire.indice4 += 1
+        if Deplacement_config.index == 4: # volume
+            Memoire.indice5 += 1
+
         self.maj_index()
   

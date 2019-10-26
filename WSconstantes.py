@@ -18,7 +18,7 @@ ecran_jeu= path+"/Caglio-WShoot_images/linux2.jpg"
 
 # Musiques du jeu
 music1= path+"/WorldShoot-Musik/atfield05.ogg"
-music2= path+"/WorldShoot-Musik/afx02.ogg"
+music2= path+"/WorldShoot-Musik/4dimension1.mp3"
 
 
 # Bruitages du jeu
@@ -49,6 +49,7 @@ VERT = (0, 55, 0)
 ORANGE = (255, 100, 0)
 BLEU = (0, 200, 255)
 
+# Liste alphabeta représentant les touches du clavier virtuel.
 alphabeta=['a','z','e','r','t','y','u','i','o','p','q','s','d','f','g','h','j','k','l','m','w','x','c','v','b','n',',',';',':','!']
 
 ## Mes ptits booléens
