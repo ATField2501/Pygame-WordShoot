@@ -269,7 +269,7 @@ class Memoire(Deplacement_config):
     indice3 = 0 # niveau difficulté
     indice4 = 0 # piste
     indice5 = 0 # volume
-
+    titre = ' (;,,;)'
     def __init__(self):
         """ """
         self.index = Deplacement_config.index
@@ -296,15 +296,22 @@ class Memoire(Deplacement_config):
             Memoire.indice3 = 0
         if Memoire.indice3 < 0:
             Memoire.indice3 = 1
-        if Memoire.indice4 > 2:
+        if Memoire.indice4 > 3:
             Memoire.indice4 = 0
         if Memoire.indice4 < 0:
-            Memoire.indice4 = 2
+            Memoire.indice4 = 3
         if Memoire.indice5 > 9:
             Memoire.indice5 = 0 
         if Memoire.indice5 < 0:
             Memoire.indice5 = 9
-
+        if Memoire.indice4 == 0:
+            Memoire.titre = ATF1
+        if Memoire.indice4 == 1:
+            Memoire.titre = aaa1
+        if Memoire.indice4 == 2:
+            Memoire.titre = Cets1
+        if Memoire.indice4 == 3:
+            Memoire.titre = Cets2
         # Pour logs    
         print('indice1 = '+str(self.indice1))
         print('indice2 = '+str(self.indice2))

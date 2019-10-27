@@ -19,7 +19,14 @@ ecran_jeu= path+"/Caglio-WShoot_images/linux2.jpg"
 # Musiques du jeu
 music1= path+"/WorldShoot-Musik/atfield05.ogg"
 music2= path+"/WorldShoot-Musik/4dimension1.mp3"
-
+music3= path+"/WorldShoot-Musik/impro-acid120.mp3"
+music4= path+"/WorldShoot-Musik/Cets1.mp3"
+ 
+# titres
+ATF1="AT Field - Mystere et Boule de Gomme."
+aaa1 ='Quatrieme Dimension - Attaches ta cravate.'
+Cets1='Cets - Impro-Acid 120'
+Cets2='Cets - Crazy Alarm Clock v01'
 
 # Bruitages du jeu
 umi_no_koto = path+"/WorldShoot-Musik/Umi_no_Koto.wav"

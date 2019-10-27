@@ -70,6 +70,8 @@ pygame.display.flip()
 # Chargement des bruitage de jeu
 pygame.mixer_music.load(music1)
 pygame.mixer_music.queue(music2)
+pygame.mixer_music.queue(music3)
+pygame.mixer_music.queue(music4)
 pygame.mixer_music.set_volume(0.8)
 
 victoire = pygame.mixer.Sound(umi_no_koto)
@@ -162,19 +164,47 @@ class Gestion_volumetrik(Thread):
 class Gestion_Parametres():
     """ Gère les paramètres du jeu """
     def __init__(self):
+        self.objet_volume = 1
         if Memoire.indice1 == 0:
             pygame.mixer_music.play()
-            
+            # Selection piste
             if Memoire.indice4 == 0:
                 pygame.mixer_music.load(music1)
                 pygame.mixer_music.play()
             if Memoire.indice4 == 1:
                 pygame.mixer_music.load(music2)
                 pygame.mixer_music.play()
+            if Memoire.indice4 == 2:
+                pygame.mixer_music.load(music3)
+                pygame.mixer_music.play()
+            if Memoire.indice4 == 3:
+                pygame.mixer_music.load(music4)
+                pygame.mixer_music.play()
 
-
+            # reglage volume
+            if Memoire.indice5 > self.objet_volume:
+                vol = Memoire.indice5-self.objet_volume
+                supra = Memoire.indice5 * 0.1
+                print(supra)
+                pygame.mixer_music.stop()
+                pygame.mixer_music.set_volume(supra+0.1)
+                pygame.mixer_music.play()
+                a = pygame.mixer_music.get_volume()
+                print("volume:{}".format(str(a)))
+            if Memoire.indice5 < self.objet_volume:
+                vol = self.objet_volume - Memoire.indice5
+                supra = Memoire.indice5 * 0.1
+                print(supra)
+                pygame.mixer_music.stop()
+                pygame.mixer_music.set_volume(supra+0.1) 
+                pygame.mixer_music.play()
+                a = pygame.mixer_music.get_volume()
+                print("volume:{}".format(str(a)))
         if Memoire.indice1 == 1:
             pygame.mixer_music.stop()
+
+
+
 class Gestion_Ev_menu():
     """ Gestion des évennement au menu principale """
     c=True
@@ -332,7 +362,6 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
     """ Gère la capture des touches pendant le jeux  """
     def __init__(self,sujet,objA,objet,aaaa,max,destruct,aleph):
        """ """
-       victoire.play()
        self.sujet = sujet
        self.aaaa = aaaa
        self.max = max
@@ -860,7 +889,8 @@ class Gestion_Config():
             element3 = font.render(Memoire.elem_tab4[2],2,(155,255,5)) # niveau
             element4 = font.render(Memoire.elem_tab4[3],2,(155,255,5)) # piste
             element5 = font.render(Memoire.elem_tab4[4],2,(155,255,5)) # volume 
-
+            titre = font22.render("Titre: {}".format(Memoire.titre),2,(155,255,5))
+            ## Collage des éléments
             fenetre.blit(depart,(x-150,10))
             fenetre.blit(separ,(x1,150))
             fenetre.blit(element1,(x2,150))
@@ -872,7 +902,7 @@ class Gestion_Config():
             fenetre.blit(element4,(x2,240))
             fenetre.blit(separ,(x1,270)) 
             fenetre.blit(element5,(x2,270))
-            
+            fenetre.blit(titre,(555,555))
             ## Valeur des éléments
             elem_val1 = font.render(tt.musique,2,(35,252,255)) 
             elem_val2 = font.render(tt.son,2,(35,252,255)) 
@@ -925,7 +955,7 @@ class Gestion_jeux(Gestion_Ev_jeux):
             de la partie """
 
         Gestion_Parametres() 
-
+        victoire.play()
         # Ligne de fin de chute des mots
         ligne1 = font.render(ligne,2,( 251, 8, 8 )) 
         score= Score.score
