@@ -22,8 +22,8 @@ from WordShootClass import *
 ################################ Initialisation de la bibliothèque Pygame
 # Initialisation du buffer
 pygame.mixer.pre_init(44100, -16, 2, 2048)
-#pygame.mixer.init()
 pygame.init()
+pygame.mixer.init()
 
 # info
 a = pygame.display.Info()
@@ -358,6 +358,7 @@ class Gestion_Ev_nickname(Gestion_Ev_menu):
 #                    self.nickname.append('A')
 #                    Gestion_Ev_nickname.long_nickname += 1
 #
+
 class Gestion_Ev_jeux(Gestion_Ev_nickname):
     """ Gère la capture des touches pendant le jeux  """
     def __init__(self,sujet,objA,objet,aaaa,max,destruct,aleph):
@@ -368,26 +369,44 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
        self.destruct = destruct
        self.aleph = aleph
        self.Pause = False
-       #On parcours la liste de tous les événements reçus
+       # Procédure test
+       if Memoire.test == True:
+           time.sleep(0.1)
+           click.play() 
+           objA.tetris(sujet.lettre)
+           self.sujet = Lettre()
+           sujet.lettre = self.sujet.lettre
+           print(Lettre.index)
+           print(Mot.maximum)
+#           if hard == True:
+#            sujet.destructiveKomando()
+       # On parcours la liste de tous les événements reçus
        for event in pygame.event.get():   
 #           if event.type == pygame.VIDEORESIZE: # Redimentionnement de la fenetre
 #               size, x, y = event.size, event.w, event.h
 #               #fond = pygame.transform.scale(fond, (x, y)) ## SUPER TRANSFORMATION IMAGE
 #               print size, x, y
-#
+
+
            # Si un de ces éléments est de type clavier
            if event.type == KEYDOWN:       
+               # Sortie du jeu
                if event.key == K_ESCAPE:
                    bipp.play()
-                   # Reinit  de l'index pour detruire le sujet
-                   self.sujet.reinit()
-                   self.destruct = True
-                   self.max = 455
-                   self.aleph = True
-                   print('ok')
-                   Gestion_Ev_menu.c = True
-
-
+                   pygame.mixer_music.stop()
+                   a , b, c, d =  0, 0, 900, 666
+                   pygame.draw.rect(fenetre, BLEU, (a, b, c, d))  
+                   if event.type == KEYDOWN:
+                       if event.key == K_o:
+                           # Reinit  de l'index pour detruire le sujet
+                           self.sujet.reinit()
+                           self.destruct = True
+                           self.max = 455
+                           self.aleph = True
+                           print('ok')
+                           Gestion_Ev_menu.c = True
+                       
+               # Pause
                if event.key == K_SPACE:
                    bipp.play()
                    self.Pause = True  
@@ -395,6 +414,7 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                if event.key == K_a:
                    if 'a' == sujet.lettre:
                        print '** UP **'
+                       click.play() 
                        # Methode tetris qui modifie la liste artefact
                        objA.tetris(sujet.lettre)
                        # On passe à la lettre suivante
@@ -972,19 +992,24 @@ class Gestion_jeux(Gestion_Ev_jeux):
         formalite = True
         # je limite la longueur du self.nickname 12
         while formalite == True and long_nickname < 12:
-            ## Appel du gestionnaire d'evennement
-            bidule = Gestion_Ev_nickname(nickname)
-            formalite = Gestion_Ev_nickname.formalite       
-            long_nickname = Gestion_Ev_nickname.long_nickname  
-            nickname = bidule.nickname
-            pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1000 ))
-            stone = font4.render(''.join(bidule.nickname),2,(80,241,0))
-            fenetre.blit(stone,(450,350))
-            pygame.display.flip()
-            
+            ## Procedure Test
+            if Memoire.test == True:
+                formalite == False
+                long_nickname = 12
+            else:    
+                ## Appel du gestionnaire d'evennement
+                bidule = Gestion_Ev_nickname(nickname)
+                formalite = Gestion_Ev_nickname.formalite       
+                long_nickname = Gestion_Ev_nickname.long_nickname  
+                nickname = bidule.nickname
+                pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1000 ))
+                stone = font4.render(''.join(bidule.nickname),2,(80,241,0))
+                fenetre.blit(stone,(450,350))
+                pygame.display.flip()
+                
         pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, 2000 , 1000 ))
         pygame.draw.rect(fenetre, (156, 175, 175), (550, 0 , 802 , 604 ))
-       
+        # Lancement du jeu 
         aleph = False    
         while aleph == False:
             # on cree une instance de la class Mot
@@ -1007,7 +1032,10 @@ class Gestion_jeux(Gestion_Ev_jeux):
             fenetre.blit(text, (aaaa,5))
             objet.score_forme()
             sCore = font.render(str(objet.score_en_forme),2,( 80, 241, 0 ))
-            nick = font.render(str(''.join(nickname[1:])),2,(255,162,0))    
+            if Memoire.test == True:
+                nick = font.render('WordShoot Test',2,(255,162,0))    
+            else:    
+                nick = font.render(str(''.join(nickname[1:])),2,(255,162,0))    
             vie = font2.render(str(supra.vue_sur_vie_joueur),2,( 120, 94, 246 ))
             ### LOGs
             print "le mot est: {}".format(mot)
@@ -1053,10 +1081,9 @@ class Gestion_jeux(Gestion_Ev_jeux):
 
                 # Clavier virtuel auquel on passe en paramètre la position de la lettres
                 Clavier_virtuel()
-                #  pygame.draw.line (fenetre, (156,175,175), (802, 604), (100, 100), 1)
                 # Appel Gestionnaire d'èvennement
                 escargot = Gestion_Ev_jeux(sujet,objA,objet,aaaa,max,destruct,aleph)
-#                # Procedure d'appel de pause pour config
+                # Procedure d'appel de pause pour config
                 if escargot.Pause == True:
                     Gestion_Config()
                 max = escargot.max
@@ -1103,9 +1130,7 @@ class Clavier_virtuel(Gestion_Ev_jeux):
             dans l'alphabet pour mettre en évidence la touche concernée """        
         # un trapeze positionné sous la base de l'ecran supèrieur
         angle = 0.436332
-        # clavier
-#        pygame.draw.line(fenetre, (156, 175, 175), (800,600),  ( 800, 600 ))
-#   pygame.draw.line(fenetre, (156, 175, 175), (550,600),  ( 400, 800 ))
+
         
         position = Lettre.index
         couleur = VERT
@@ -1140,7 +1165,6 @@ class Clavier_virtuel(Gestion_Ev_jeux):
             a += 100
             nb_touche +=1
         # Réinitialisation    
-#        nb_touche = 0 
         a = 480
         couleur = VERT    
         # Deuxième rangée de dix touches
@@ -1159,7 +1183,7 @@ class Clavier_virtuel(Gestion_Ev_jeux):
 #        nb_touche = 0 
         a = 480
         couleur = VERT   
-        # Troisième rangée de dic touches
+        # Troisième rangée de dix touches
         while nb_touche < 30:             
             if nb_touche == stupeur and stupeur < 30 and stupeur > 19:
                 couleur = BLEU
@@ -1173,15 +1197,6 @@ class Clavier_virtuel(Gestion_Ev_jeux):
             nb_touche +=1
         print(' stupeur: {}'.format(stupeur))   
         print(' sample: {}'.format(sample1))
-
-
-#        for i,e in enumerate(alphabeta):
-#             oxo = font.render(str(e),2,(80,241,0))
-#             fenetre.blit(oxo,(a-i*2,b+i*2))
-       
-
-#                pygame.draw.polygon(fenetre, ((100,100),(300,200),(300,500),(100,300)), 0, 0)
-#                pygame.draw.polygon (fenetre, (156,175,175), ((100,100),(802,802),(300,500),(100,300)))
 
 
 
@@ -1224,7 +1239,7 @@ class WordShoot():
     son = Memoire.indice2
     niveau = Memoire.indice3
     piste = Memoire.indice4
-    
+    test = Memoire.test 
     
     while continuer:
         pygame.draw.rect(fenetre, (0, 0, 0), (0, 0, a.current_w,a.current_h ))
@@ -1262,7 +1277,10 @@ class WordShoot():
         # menu quit 
         if selection == Selecteur.tableau[4]:
             Gestion_Quit()
-
+        # menu Test 
+        if selection == Selecteur.tableau[5]:
+            Memoire.test = True
+            Gestion_jeux(objet)
 
 if __name__ == '__main__':
     WordShoot()

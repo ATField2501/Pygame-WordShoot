@@ -214,14 +214,14 @@ class Vie_Joueur():
 
 class Selecteur():
     """ Class utilisée pour selectionner l'entrée utilisateur au menu principale."""
-    tableau=['  Start','Scores','Credits',' config','   quit']
+    tableau=['  Start','Scores','Credits',' config','   quit', '  Test']
     index = 0
     def __init__(self):
         # En fonction du nombre d'éléments du tableau
-        if Selecteur.index > 4:   
+        if Selecteur.index > 5:   
             Selecteur.index = 0
         if Selecteur.index < 0:
-            Selecteur.index = 4
+            Selecteur.index = 5
         self.selecteur = Selecteur.tableau[Selecteur.index]
     def deplace_plus(self):
         """ Methode de modification positive de l'index du selecteur  """
@@ -270,6 +270,8 @@ class Memoire(Deplacement_config):
     indice4 = 0 # piste
     indice5 = 0 # volume
     titre = ' (;,,;)'
+    # Element test
+    test = False
     def __init__(self):
         """ """
         self.index = Deplacement_config.index
@@ -281,6 +283,9 @@ class Memoire(Deplacement_config):
         self.piste = Memoire.elem_tab1[Memoire.indice4]
         self.volume = Memoire.elem_tab1[Memoire.indice5]
    
+    def Test():
+        Memoire.test = True
+
     def maj_index(self):
         """ Gestion depassement d'index """
         # gestion des index
