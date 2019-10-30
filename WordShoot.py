@@ -67,13 +67,15 @@ pygame.display.set_caption(titre_fenetre)
 #Rafraîchissement de l'écran
 pygame.display.flip()
 
-# Chargement des bruitage de jeu
-pygame.mixer_music.load(music1)
-pygame.mixer_music.queue(music2)
-pygame.mixer_music.queue(music3)
-pygame.mixer_music.queue(music4)
-pygame.mixer_music.set_volume(0.8)
-
+try:
+    # Chargement des bruitage de jeu
+    pygame.mixer_music.load(music1)
+    pygame.mixer_music.queue(music2)
+    pygame.mixer_music.queue(music3)
+    pygame.mixer_music.queue(music4)
+    pygame.mixer_music.set_volume(0.8)
+except:
+    pass
 victoire = pygame.mixer.Sound(umi_no_koto)
 excelent = pygame.mixer.Sound(son01)
 loose = pygame.mixer.Sound(son02)
