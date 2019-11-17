@@ -20,7 +20,7 @@ from WordShootClass import *
 
 
 ################################ Initialisation de la bibliothèque Pygame
-# Initialisation du buffer
+# Initialisation du buffer audio
 pygame.mixer.pre_init(44100, -16, 2, 2048)
 pygame.init()
 pygame.mixer.init()
@@ -67,8 +67,8 @@ pygame.display.set_caption(titre_fenetre)
 #Rafraîchissement de l'écran
 pygame.display.flip()
 
+# Chargement de la playlist
 try:
-    # Chargement des bruitage de jeu
     pygame.mixer_music.load(music1)
     pygame.mixer_music.queue(music2)
     pygame.mixer_music.queue(music3)
@@ -76,6 +76,9 @@ try:
     pygame.mixer_music.set_volume(0.8)
 except:
     pass
+
+
+# Chargement des bruitage de jeu
 victoire = pygame.mixer.Sound(umi_no_koto)
 excelent = pygame.mixer.Sound(son01)
 loose = pygame.mixer.Sound(son02)
@@ -395,19 +398,19 @@ class Gestion_Ev_jeux(Gestion_Ev_nickname):
                # Sortie du jeu
                if event.key == K_ESCAPE:
                    bipp.play()
-                   pygame.mixer_music.stop()
-                   a , b, c, d =  0, 0, 900, 666
-                   pygame.draw.rect(fenetre, BLEU, (a, b, c, d))  
-                   if event.type == KEYDOWN:
-                       if event.key == K_o:
+#                   pygame.mixer_music.stop()
+#                   a , b, c, d =  0, 0, 900, 666
+#                   pygame.draw.rect(fenetre, BLEU, (a, b, c, d))  
+#                   if event.type == KEYDOWN:
+#                       if event.key == K_o:
                            # Reinit  de l'index pour detruire le sujet
-                           self.sujet.reinit()
-                           self.destruct = True
-                           self.max = 455
-                           self.aleph = True
-                           print('ok')
-                           Gestion_Ev_menu.c = True
-                       
+                   self.sujet.reinit()
+                   self.destruct = True
+                   self.max = 455
+                   self.aleph = True
+                   print('ok')
+                   Gestion_Ev_menu.c = True
+               
                # Pause
                if event.key == K_SPACE:
                    bipp.play()
@@ -816,7 +819,7 @@ class Gestion_Score():
         like=200
         score = 'Scores'
         titre = font5.render(score,1,(255,124,5))
-        fenetre.blit(titre,(x+270,10))
+        fenetre.blit(titre,(x/1.3,10))
         unedeplus = True
         while unedeplus:
             for event in pygame.event.get():   
@@ -828,7 +831,7 @@ class Gestion_Score():
             try:
                 for e in babylone:
                     nervure=font.render(e,2,(250,250,0))
-                    fenetre.blit(nervure,(x+310,like))
+                    fenetre.blit(nervure,(x/1.2,like))
                     pygame.display.flip()   
                     click.play()
                     like += 45         
@@ -840,6 +843,7 @@ class Gestion_Score():
             time.sleep(10)
             Gestion_Ev_menu.c = True
             unedeplus = False
+
 class Gestion_Credit():
     def __init__(self):
         """ """
@@ -863,7 +867,7 @@ class Gestion_Credit():
                     yin = i.strip()
                     credit = font.render(yin,2,( B, 255, G ))
                     longg= len(ether[index])
-                    balthazar=(x+400)-(longg*5)
+                    balthazar=(x)-(longg*5)
                     fenetre.blit(credit, (balthazar,max)) 
                     pygame.display.flip() # Rafraichissement
                     max += 35
@@ -876,7 +880,7 @@ class Gestion_Credit():
                     yin = i.strip()
                     credit = font.render(yin,2,( B, 255, G ))
                     longg= len(ether[index])
-                    balthazar=(x+400)-(longg*5)
+                    balthazar=(x)-(longg*5)
                     fenetre.blit(credit, (balthazar,max)) 
                     pygame.display.flip() # Rafraichissement
                     max += 35
@@ -952,6 +956,9 @@ class Gestion_Config():
             if oulaoups > 35:
                 oulaoups = 29
         Gestion_Ev_menu.c = True               
+
+
+
 class Gestion_Quit():
     def __init__(self):
         """ Gestion du méssage de fin et de la sortie du programme"""
@@ -1031,7 +1038,6 @@ class Gestion_jeux(Gestion_Ev_jeux):
             x = 550
             # On tire au hasard le point d'apparition du mot sur l'axe horizontale
             aaaa=random.randint(x,720)  
-            fenetre.blit(text, (aaaa,5))
             objet.score_forme()
             sCore = font.render(str(objet.score_en_forme),2,( 80, 241, 0 ))
             if Memoire.test == True:
@@ -1071,7 +1077,7 @@ class Gestion_jeux(Gestion_Ev_jeux):
                     destruct = True
                 pygame.display.flip() # Rafraichissement
 
-                # Affichage chaine de charactère contenue dans la liste 'artefact"
+                # Affichage chaine de charactère contenue dans la liste 'artefact'
                 simbad= ''.join(artefact)
                 ping = font2.render(simbad,22,( 240, 240, 4 )) 
                 fenetre.blit(neo, (x+1,2))
@@ -1256,13 +1262,13 @@ class WordShoot():
             # # # #  
 #            x , y = x/2 , y/2 
             ## Ecran de depart
-            fenetre.blit(ecran1,((x/2)+150,0))
+            fenetre.blit(ecran1,(x/2,y/5))
             ## Element du tableau Selecteur 
             select=font22.render(selection,2,( 80, 241, 0 ))
-            fenetre.blit(select,(x-50,y+150))
+            fenetre.blit(select,(x-50,y+250))
             ## Titre du Jeu
             titre=font3.render(logo1,2,(241,255,68))
-            fenetre.blit(titre,(x-370,y-50)) 
+            fenetre.blit(titre,(x/2.4,y+100)) 
             pygame.display.flip()
         # Menu jeux          
         if  selection == Selecteur.tableau[0]:      
